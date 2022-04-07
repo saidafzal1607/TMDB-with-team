@@ -1,0 +1,19 @@
+/* Error: expected "{".
+ *    ,
+ * 24 | @import "buttons";
+ *    |                  ^
+ *    '
+ *   node_modules\bootstrap\scss\bootstrap.scss 24:18  @import
+ *   scss\_custom.scss 20:9                            @use
+ *   style.scss 1:1                                    root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: 'Error: expected "{".\a    \2577 \a 24 \2502  @import "buttons";\a    \2502                   ^\a    \2575 \a   node_modules\\bootstrap\\scss\\bootstrap.scss 24:18  @import\a   scss\\_custom.scss 20:9                            @use\a   style.scss 1:1                                    root stylesheet';
+}

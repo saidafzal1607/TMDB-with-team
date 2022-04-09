@@ -11151,50 +11151,54 @@ a {
   border-radius: 10px;
 }
 
-footer {
-  height: 326px;
+#footer {
   background: #031e36;
-  padding: 12px 0px 12px 0px;
+  padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
 }
-footer .row {
+#footer nav {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding-top: 80px;
+  padding-bottom: 80px;
 }
-footer .row .footer__links {
-  width: 165px;
+#footer nav .footer__links {
+  margin-right: 40px;
 }
-footer .row .footer__links .footer__logo {
-  width: 130px;
-  margin-top: -33px;
-}
-footer .row .footer__links .footer__title {
-  margin-bottom: 2px;
-  color: white;
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: 700;
-}
-footer .row .footer__links a {
-  display: inline-block;
-  text-decoration: none;
-  color: white;
-  font-size: 17px;
-}
-footer .row .footer__links ul {
-  padding-left: 0;
-}
-footer .row .footer__links .footer__btn {
-  margin-top: 43px;
+#footer nav .footer__links .footer__btn {
   color: #01b4e4;
   background-color: white;
   padding: 10px 10px;
   border-radius: 5px;
   font-style: 19px;
   font-weight: 700;
+  position: relative;
+  top: 50px;
+}
+#footer nav .footer__links:first-of-type {
+  position: relative;
+  top: -36px;
+}
+#footer nav .footer__links .footer__logo {
+  width: 130px;
+}
+#footer nav .footer__links .footer__title {
+  margin-bottom: 2px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 700;
+}
+#footer nav .footer__links a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+}
+#footer nav .footer__links ul {
+  padding-left: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

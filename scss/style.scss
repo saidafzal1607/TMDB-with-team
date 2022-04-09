@@ -1,6 +1,9 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
 
 @import "utils/variables";
 @import "base/reset";
+@import "utils/utilities";
+@import "components/dropdown";
 @import "layout/navigation";
 @import "layout/footer";
+
+@import "../node_modules/bootstrap/scss/bootstrap";

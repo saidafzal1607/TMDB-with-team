@@ -11126,7 +11126,8 @@ textarea.form-control-lg {
   box-sizing: border-box;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
 }
 
@@ -11139,6 +11140,61 @@ a {
   width: 100%;
   margin: 0 auto;
   padding: 0 16px;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #cecece;
+  border-radius: 10px;
+}
+
+footer {
+  height: 326px;
+  background: #031e36;
+  padding: 12px 0px 12px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+footer .row {
+  display: flex;
+  justify-content: center;
+}
+footer .row .footer__links {
+  width: 165px;
+}
+footer .row .footer__links .footer__logo {
+  width: 130px;
+  margin-top: -33px;
+}
+footer .row .footer__links .footer__title {
+  margin-bottom: 2px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 700;
+}
+footer .row .footer__links a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  font-size: 17px;
+}
+footer .row .footer__links ul {
+  padding-left: 0;
+}
+footer .row .footer__links .footer__btn {
+  margin-top: 43px;
+  color: #01b4e4;
+  background-color: white;
+  padding: 10px 10px;
+  border-radius: 5px;
+  font-style: 19px;
+  font-weight: 700;
 }
 
 /*# sourceMappingURL=style.css.map */

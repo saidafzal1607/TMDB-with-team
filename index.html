@@ -1,15 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TMDB</title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
 
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TMDB</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="shortcut icon" href="./assets/shorticon/favicon.ico">
+</head>
+
+<body>
+  <div class="container">
+    <div class="wrapper" style="margin-top: 20px;">
+  <h3 class="" style="display: inline-block; padding-right: 20px;">What's Popular  </h3>
+  <div class="card" style="width: 384px; display: inline-block; height: 35px; border: 1px solid; border-radius: 20px;">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active"  id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" style="border-radius: 20px ; height: 35px;" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Streaming</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile"style="border-radius: 20px ; height: 35px;" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">On TV</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" style="border-radius: 20px ; height: 35px;" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">For Rent</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" style="border-radius: 20px ; height: 35px;" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">In Theaters</button>
+      </li>
+    </ul>
+  </div>
+</div>
+  
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"><img src="https://cdn.pixabay.com/photo/2022/01/12/14/46/dusky-leaf-monkeys-6933043__340.jpg" alt=""></div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">...</div>
+  </div>
+  <div class="wrapper" style="margin-top: 20px;">
+    <h3 class="" style="display: inline-block; padding-right: 20px;">Free To Watch  </h3>
+    <div class="card" style="width: 200px; display: inline-block; height: 35px; border: 1px solid; border-radius: 20px;">
+      <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active "  id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pill-home" style="border-radius: 20px ; height: 35px;" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Movies</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link"  id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pill-profile"style="border-radius: 20px ; height: 35px;" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">TV</button>
+        </li>
+      
+      </ul>
+    </div>
+  </div>
     
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pill-home" role="tabpanel" aria-labelledby="pills-home-tab">...</div>
+      <div class="tab-pane fade" id="pill-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
+    </div>
+</div>
+
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer__links">
+          <img class="footer__logo" src="./assets/images/logos/TMDB footer logo.png" alt="brand" /> <br>
+          <a href="./profile.html" class="footer__btn">
+            Hi Your name!
+          </a>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">the basics</p>
+          <ul class="footer__list">
+            <li>
+              <a href="https://www.themoviedb.org/about">About TMDB</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/about/staying-in-touch">Contact Us</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/talk">Support Forums </a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/documentation/api">API</a>
+            </li>
+            <li>
+              <a href="https://status.themoviedb.org/" target="_blank">System Status</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">get involved</p>
+          <ul class="footer__list">
+            <li>
+              <a href="https://www.themoviedb.org/bible">Contribution Bible</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/movie/new">Add New Movie</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/tv/new">Add New TV Show</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">community</p>
+          <ul class="footer__list">
+            <li>
+              <a href="https://www.themoviedb.org/documentation/community/guidelines">Guidelines</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/discuss">Discussions</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/leaderboard">Leaderboard</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/themoviedb" target="_blank">Twitter</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">legal</p>
+          <ul class="footer__list">
+            <li>
+              <a href="https://www.themoviedb.org/terms-of-use">Terms of Use</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/documentation/api/terms-of-use">API Terms of Use</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/privacy-policy">Privacy Policy</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
   <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
+
 </html>

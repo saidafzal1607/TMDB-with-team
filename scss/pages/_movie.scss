@@ -1,0 +1,205 @@
+.header-movie {
+  background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg");
+  border-bottom: 1px solid rgb(2, 2, 88);
+  background-position: right -200px top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  .custom-bg {
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(
+      to right,
+      rgba(31.5, 31.5, 31.5, 1) 150px,
+      rgba(31.5, 31.5, 31.5, 0.84) 100%
+    );
+    z-index: 1;
+  }
+  .main-movie {
+    padding: 52px;
+    .movie-posterimg {
+      img {
+        height: 480px;
+        object-fit: cover;
+        border-radius: 10px;
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+    }
+    .col-8 {
+      color: #fff;
+      .movie-title {
+        color: #fff;
+        text-decoration: none;
+        text-transform: capitalize;
+        &:hover {
+          color: rgb(189, 204, 216);
+        }
+      }
+      .row {
+        .movie-character {
+          color: #fff;
+          text-decoration: none;
+          text-transform: capitalize;
+          font-size: 1.2rem;
+          &:hover {
+            color: rgb(189, 204, 216);
+          }
+        }
+        p {
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}
+
+.card-actors {
+  .row {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow: scroll;
+  }
+  .card {
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    .card-img {
+      img {
+        width: 150px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px;
+        &:hover {
+          transform: scale(1.01);
+        }
+      }
+    }
+    .card-body {
+      padding: 0;
+      // text-align: center;
+
+      .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #000;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+      }
+      .card-text {
+        font-size: 1rem;
+        color: #000;
+        text-transform: capitalize;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+.card-reviews {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+  .card-img-left {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+  .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #000;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+  }
+}
+
+.collection-card {
+  .card {
+    border: 0px solid !important;
+    border-radius: 15px !important;
+    .card-img {
+    }
+    .card-img-overlay {
+      background: linear-gradient(
+        to right,
+        rgba(#032440, 1) 0%,
+        rgba(#032440, 0.6) 100%
+      );
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .card-title {
+        font-size: 30px;
+        font-weight: 600;
+      }
+      .btn,
+      btn-dark {
+        background-color: rgb(22, 20, 20);
+        color: #fff;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-radius: 10px;
+        padding: 10px;
+        &:hover {
+          background-color: #000;
+        }
+      }
+    }
+  }
+}
+
+.card-movies {
+  .row {
+    display: flex;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow: scroll;
+  }
+  .card {
+    border: 0px !important;
+    width: 250px;
+    &:hover .card-overlay {
+       visibility: visible;
+       cursor: pointer!important;
+    }
+  }
+  .card-img-top {
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 141px;
+    border-radius: 7px;
+  }
+  .card-img-overlay {
+    display: flex;
+    align-items: flex-end;
+    .card-overlay {
+        visibility: hidden;
+      padding-left: 10px;
+      padding-right: 10px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 5px;
+      height: 45px;
+      width: 100%;
+      position: relative;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+  .card-body {
+    padding: 3px !important;
+    display: flex;
+    justify-content: space-between;
+  }
+}

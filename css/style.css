@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Lato:ital,wght@1,300&family=Manrope:wght@700&family=Open+Sans&family=Oswald:wght@600&family=Source+Sans+Pro:ital,wght@0,600;1,400&family=Work+Sans&display=swap");
-
 *,
 *::before,
 *::after {
@@ -218,6 +217,64 @@ footer .row .footer__links .footer__btn {
   border-radius: 5px;
   font-style: 19px;
   font-weight: 700;
+}
+
+.hero {
+  min-height: 300px;
+  height: 40vh;
+  max-height: 360px;
+  padding: 40px;
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to right, rgba(3, 37, 65, 0.8) 0%, rgba(3, 37, 65, 0) 100%), url(../assets/img/bg.jfif);
+  color: #fff;
+  font-size: 15px;
+}
+
+.hero__content span:nth-child(1) {
+  font-size: 45px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.search__form {
+  margin-top: 50px;
+  position: relative;
+}
+
+.search__input {
+  width: 100%;
+  height: 46px;
+  padding: 10px 20px;
+  font-size: 17px;
+  color: #b3b3b3;
+  line-height: 46px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+}
+
+.submit__btn {
+  position: absolute;
+  top: 50%;
+  right: -1px;
+  height: 100%;
+  padding: 10px 26px;
+  background: linear-gradient(to right, #1ed5a9 0%, #01b4e4 100%);
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 30px;
+  color: #fff;
+  border: 0;
+  outline: none;
+  text-transform: capitalize;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.submit__btn:hover {
+  color: #032541;
 }
 
 .movie__title {

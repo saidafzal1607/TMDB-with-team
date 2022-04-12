@@ -1,47 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Persons</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" href="./assets/shorticon/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Persons</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="shortcut icon" href="./assets/shorticon/favicon.ico" />
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
-</head>
-
-<body>
-
-  <div class="container">
-
-    <h2 style="    font-weight: 700;
-    margin-bottom: 1.8rem;margin-top: 1.8rem; font-size: 1.5em;">Popular People</h2>
-    <div class="row ">
-      <div class="col col-sm-6 col-md-4 col-lg-3">
-
-        <div class="card shadow p-3 mb-5 bg-white rounded"  style="border: none;">
-          <img class="card-img-top" src="./assets/images/persons_img/grey anatom.jpg" alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title"><a style="text-decoration: none;  margin-top: 0;   font-weight: 600;
-              font-size: 1.1em;color: #000;" href="./">Ed Lauter</a> </h5>
-            <p style="font-size: 0.9em;
-            font-weight: 400;
-            color: rgba(0,0,0,0.6);
-            display: block;
-            margin-top: 0;white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            padding: 0;
-            width: 100%;
-            line-height: 1.2em;" class="card-text">Grey's Anatomy, The Artist, The Number 23</p>
+  <body>
+    <div class="container">
+      <h2
+        style="
+          font-weight: 700;
+          margin-bottom: 1.8rem;
+          margin-top: 1.8rem;
+          font-size: 1.5em;
+        "
+      >
+        Popular People
+      </h2>
+      <div class="row">
+        <div class="col col-sm-6 col-md-4 col-lg-3">
+          <div
+            class="card shadow p-3 mb-5 bg-white rounded"
+            style="border: none"
+          >
+            <img
+              class="card-img-top"
+              src="./assets/images/persons_img/grey anatom.jpg"
+              alt="Card image cap"
+            />
+            <div class="card-body">
+              <h5 class="card-title">
+                <a
+                  style="
+                    text-decoration: none;
+                    margin-top: 0;
+                    font-weight: 600;
+                    font-size: 1.1em;
+                    color: #000;
+                  "
+                  href="./"
+                  >Ed Lauter</a
+                >
+              </h5>
+              <p
+                style="
+                  font-size: 0.9em;
+                  font-weight: 400;
+                  color: rgba(0, 0, 0, 0.6);
+                  display: block;
+                  margin-top: 0;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  padding: 0;
+                  width: 100%;
+                  line-height: 1.2em;
+                "
+                class="card-text"
+              >
+                Grey's Anatomy, The Artist, The Number 23
+              </p>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
-  </div>
-
-</body>
-
+    <script src="./js/router.js"></script>
+  </body>
 </html>

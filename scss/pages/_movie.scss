@@ -1,12 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Lato:ital,wght@1,300&family=Manrope:wght@700&family=Open+Sans&family=Oswald:wght@600&family=Source+Sans+Pro:ital,wght@0,600;1,400&family=Work+Sans&display=swap');
 
 
+.top__movies-wrapper{
+  margin: 0 50px;
+}
+
 .movie__title {
   font-size: 1.6em;
   color: #000;
   
   font-family: 'Source Sans Pro', Arial, sans-serif;
 
+}
+
+.aside{
+  padding-right: 20px;
 }
 
 .accordion-name {
@@ -24,4 +32,9 @@ p {
 .list-group-item{
   font-size: 1em;
 
+}
+.block__btn{
+  font-weight: 900;
+  margin-top: 20px ;
+  margin-bottom: 20px;
 }

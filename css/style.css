@@ -277,10 +277,18 @@ footer .row .footer__links .footer__btn {
   color: #032541;
 }
 
+.top__movies-wrapper {
+  margin: 0 50px;
+}
+
 .movie__title {
   font-size: 1.6em;
   color: #000;
   font-family: "Source Sans Pro", Arial, sans-serif;
+}
+
+.aside {
+  padding-right: 20px;
 }
 
 .accordion-name {
@@ -297,6 +305,12 @@ p {
 
 .list-group-item {
   font-size: 1em;
+}
+
+.block__btn {
+  font-weight: 900;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 /*!

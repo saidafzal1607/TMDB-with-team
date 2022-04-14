@@ -9,13 +9,18 @@
 
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="shortcut icon" href="./assets/shorticon/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+    />
 
 </head>
 
 <body>
 
   
-  <section class="container">
+  <section class="top__movies-wrapper">
     <div class="row mb-3 mt-4">
       <div class="col">
         <h2 movie__title>Popular Movies</h2>
@@ -24,7 +29,7 @@
     <div class="row">
       <div class="col col-sm-6 col-md-4 col-lg-3">
 
-        <div class="accordion  row" id="accordionExample">
+        <div class="accordion aside  row" id="accordionExample">
           <div class="accordion-item shadow bg-white rounded">
             <h2 class="accordion-header" id="headingOne">
               <button class="accordion-button accordion-name" type="button" data-bs-toggle="collapse"
@@ -185,25 +190,187 @@
       </div>
 
     
-
-    <div class="col col-sm-6 col-md-8 col-lg-9">
-
-
-
       <!-- *************** FOR CARDS **************** -->
+      
+      <div class="col col-sm-6 col-md-8 col-lg-9">
+        <div class="row top__movies">
+      
+          <div class="col col-md-6 col-lg-4 col-xl-3">
+            <card class="card">
+            <a href="#" class="card-img-btn">
+              <img
+              class="card-img img-fluid"
+                  src="./assets/images/halo movie.jpg"
+                  alt="something movie"
+                />
+              </a>
+              <div class="card-img-overlay">
+                <a class="threedot-btn">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </a>
+              </div>
+              <div class="card-body">
+                <div class="card-click">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-list"></i>
+                        Add to list</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-heart"></i>
+                        Favourite</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        Watchlist
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-star"></i>
+                        Your rating</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+                <div class="circle-progressbar">
+                  <div
+                    role="progressbar"
+                    aria-valuenow="88"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="--value: 88"
+                  ></div>
+                </div>
+                <a href="#" class="card-title"> Halo </a>
+                <p class="card-text">Mar 24, 2022</p>
+              </div>
+            </card>
+          </div>
 
+        </div>
+        <div class="row block__btn">
 
+          <button class="btn btn-primary btn-lg btn-block ">Load More</button>
+        </div>
+      </div>
 
-    </div>
 
 
     </div>
   </section>
 
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer__links">
+          <img
+            class="footer__logo"
+            src="./assets/images/logos/TMDB footer logo.png"
+            alt="brand"
+          />
+          <br />
+          <a href="./profile.html" class="footer__btn"> Hi Your name! </a>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">the basics</p>
+          <ul class="footer__list">
+            <li>
+              <a href="https://www.themoviedb.org/about">About TMDB</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/about/staying-in-touch"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/talk">Support Forums </a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/documentation/api">API</a>
+            </li>
+            <li>
+              <a href="https://status.themoviedb.org/" target="_blank"
+                >System Status</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">get involved</p>
+          <ul class="footer__list">
+            <li>
+              <a href="https://www.themoviedb.org/bible"
+                >Contribution Bible</a
+              >
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/movie/new">Add New Movie</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/tv/new">Add New TV Show</a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">community</p>
+          <ul class="footer__list">
+            <li>
+              <a
+                href="https://www.themoviedb.org/documentation/community/guidelines"
+                >Guidelines</a
+              >
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/discuss">Discussions</a>
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/leaderboard">Leaderboard</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/themoviedb" target="_blank"
+                >Twitter</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="footer__links">
+          <p class="footer__title">legal</p>
+          <ul class="footer__list">
+            <li>
+              <a href="https://www.themoviedb.org/terms-of-use"
+                >Terms of Use</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.themoviedb.org/documentation/api/terms-of-use"
+                >API Terms of Use</a
+              >
+            </li>
+            <li>
+              <a href="https://www.themoviedb.org/privacy-policy"
+                >Privacy Policy</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
     crossorigin="anonymous"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    
+  <script type="module" src="./js/router.js"></script>
+
 </body>
 
 </html>

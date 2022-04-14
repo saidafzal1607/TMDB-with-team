@@ -65,7 +65,9 @@
                       <li>
                         <a class="dropdown-item" href="#">Another action</a>
                       </li>
-                      <li><hr class="dropdown-divider" /></li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
                       <li>
                         <a class="dropdown-item" href="#"
                           >Something else here</a
@@ -95,6 +97,33 @@
           </div>
         </div>
       </nav>
+      <div class="hero">
+        <h1 class="hero__content">
+          <span>welcome.</span> <br />
+          <span
+            >Millions of movies, TV shows and people to discover. Explore
+            now.</span
+          ><br />
+        </h1>
+        <form
+          id="search__form"
+          class="search__form"
+          method="GET"
+          accept-charset="utf-8"
+        >
+          <label for="search__movie">
+            <input
+              type="month"
+              id="search__movie"
+              name="query"
+              class="search__input"
+              placeholder="Search for a movie, tv show, person......"
+              value
+            />
+          </label>
+          <input class="submit__btn" type="submit" value="search" />
+        </form>
+      </div>
     </header>
     <div class="container">
       <div class="wrapper" style="margin-top: 20px">
@@ -276,30 +305,61 @@
     
     <section>
       <div class="container">
-        <div class="row overflow-scroll" style="min-width: 150px">
+        <div class="row overflow-scroll popular-tv-movies">
           <div class="col">
             <card class="card">
-              <img
-                class="card-img"
-                src="https://cdn.pixabay.com/photo/2022/01/12/14/46/dusky-leaf-monkeys-6933043__340.jpg"
-                alt=""
-              />
+              <a href="#" class="card-img-btn">
+                <img
+                  class="card-img img-fluid"
+                  src="./assets/images/halo movie.jpg"
+                  alt="something movie"
+                />
+              </a>
               <div class="card-img-overlay">
-                <i class="fas fa-solid fa-ellipsis"></i>
+                <a class="threedot-btn">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </a>
               </div>
               <div class="card-body">
-                <div class="circle-wrap">
-                  <div class="circle">
-                 
-                  </div>
+                <div class="card-click">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-list"></i>
+                        Add to list</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-heart"></i>
+                        Favourite</a
+                      >
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                        Watchlist
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa-solid fa-star"></i>
+                        Your rating</a
+                      >
+                    </li>
+                  </ul>
                 </div>
-                <p>
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Aliquam tenetur, repellat commodi eveniet repellendus,
-                  sapiente nemo explicabo obcaecati magni quod aspernatur
-                  numquam molestiae quam pariatur cumque dolores itaque vitae
-                  velit?
-                </p>
+                <div class="circle-progressbar">
+                  <div
+                    role="progressbar"
+                    aria-valuenow="88"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                    style="--value: 88"
+                  ></div>
+                </div>
+                <a href="#" class="card-title"> Halo </a>
+                <p class="card-text">Mar 24, 2022</p>
               </div>
             </card>
           </div>
@@ -420,5 +480,6 @@
       </div>
     </footer>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script type="module" src="./js/router.js"></script>
   </body>
 </html>

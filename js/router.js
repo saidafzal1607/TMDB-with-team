@@ -1,11 +1,17 @@
 import * as home from "./home.js";
+import * as card from "./card.js";
+let { circleBtn, cardList, body, switchOn } = card;
+
+
+ 
 
 document.addEventListener("DOMContentLoaded", function (e) {
+  // switchOn()
   if (location.pathname === "/index.html" || location.pathname === "/") {
     home
-      .getPopularTvMovies()
+      .getPopularMovies()
       .then((data) => {
-        home.displayPopularTvMovies(data);
+        home.displayPopularMovies(data);
       })
       .catch((err) => {
         console.log(err);
@@ -15,3 +21,4 @@ document.addEventListener("DOMContentLoaded", function (e) {
     console.log("Bu person page");
   }
 });
+

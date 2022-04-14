@@ -28,7 +28,7 @@
       }
     }
     .col-8 {
-      color: #fff;
+      color: #ffffff;
       .movie-title {
         color: #fff;
         text-decoration: none;
@@ -37,19 +37,93 @@
           color: rgb(189, 204, 216);
         }
       }
-      .row {
-        .movie-character {
-          color: #fff;
-          text-decoration: none;
-          text-transform: capitalize;
-          font-size: 1.2rem;
-          &:hover {
-            color: rgb(189, 204, 216);
+      .rating {
+        display: flex;
+        align-items: center;
+        .circle-progressbar {
+          position: relative;
+          margin-top: -30px;
+          @keyframes growProgressBar {
+            0%,
+            33% {
+              --pgPercentage: 0;
+            }
+            100% {
+              --pgPercentage: var(--value);
+            }
+          }
+          @property --pgPercentage {
+            syntax: "<number>";
+            inherits: false;
+            initial-value: 0;
+          }
+
+          div[role="progressbar"] {
+            --size: 3.8rem;
+            --bg: #081c22;
+            --fg: rgba(20, 193, 20, 0.757);
+            --pgPercentage: var(--value);
+            animation: growProgressBar 3s 1 forwards;
+            width: var(--size);
+            height: var(--size);
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(
+                closest-side,
+                #081c22 80%,
+                transparent 0 99.9%,
+                white 0
+              ),
+              conic-gradient(
+                var(--fg) calc(var(--pgPercentage) * 1%),
+                var(--bg) 0
+              );
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: calc(var(--size) / 3.5);
+            color: white;
+          }
+
+          div[role="progressbar"]::before {
+            counter-reset: percentage var(--value);
+            content: counter(percentage) "%";
           }
         }
-        p {
-          margin-top: 10px;
+        ul {
+          display: flex;
+          align-items: center;
+          li {
+            margin-right: 20px;
+            a {
+              color: #fff;
+              text-decoration: none;
+              i {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: #032440;
+                margin-right: 5px;
+              }
+            }
+          }
         }
+      }
+    }
+    .row {
+      .movie-character {
+        color: #fff;
+        text-decoration: none;
+        text-transform: capitalize;
+        font-size: 1.2rem;
+        &:hover {
+          color: rgb(189, 204, 216);
+        }
+      }
+      p {
+        margin-top: 10px;
       }
     }
   }
@@ -98,27 +172,30 @@
   }
 }
 
-.card-reviews {
-  display: flex;
-  flex-direction: row !important;
-  justify-content: center;
-  padding: 15px;
-  background-color: #fff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+.container {
+  .card-reviews {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: center !important;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: auto !important;
 
-  .card-img-left {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    object-fit: cover;
-    display: block;
-  }
-  .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #000;
-    text-transform: capitalize;
-    margin-bottom: 10px;
+    .card-img-left {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #000;
+      text-transform: capitalize;
+      margin-bottom: 10px;
+    }
   }
 }
 
@@ -126,6 +203,7 @@
   .card {
     border: 0px solid !important;
     border-radius: 15px !important;
+    width: auto !important;
     .card-img {
     }
     .card-img-overlay {
@@ -168,8 +246,8 @@
     border: 0px !important;
     width: 250px;
     &:hover .card-overlay {
-       visibility: visible;
-       cursor: pointer!important;
+      visibility: visible;
+      cursor: pointer !important;
     }
   }
   .card-img-top {
@@ -183,7 +261,7 @@
     display: flex;
     align-items: flex-end;
     .card-overlay {
-        visibility: hidden;
+      visibility: hidden;
       padding-left: 10px;
       padding-right: 10px;
       background-color: rgba(255, 255, 255, 0.9);
@@ -191,7 +269,8 @@
       height: 45px;
       width: 100%;
       position: relative;
-      margin-bottom: 20px;
+      margin-bottom: 40px;
+      right: 0px;
       display: flex;
       align-items: center;
       justify-content: space-between;

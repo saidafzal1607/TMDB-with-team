@@ -1,3 +1,10 @@
+.overflow-scroll{
+  display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap !important;
+    overflow: scroll !important;
+}
+
 .hero {
   min-height: 300px;
   height: calc(100vh / 2.5);

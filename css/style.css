@@ -1,5 +1,8 @@
 @charset "UTF-8";
+<<<<<<< HEAD
+=======
 @import url("https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Lato:ital,wght@1,300&family=Manrope:wght@700&family=Open+Sans&family=Oswald:wght@600&family=Source+Sans+Pro:ital,wght@0,600;1,400&family=Work+Sans&display=swap");
+>>>>>>> 453ec739be945906e48f21aa6a8a7dd6c79f862d
 *,
 *::before,
 *::after {
@@ -8,8 +11,12 @@
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
+ul, li {
+=======
 ul,
 li {
+>>>>>>> 453ec739be945906e48f21aa6a8a7dd6c79f862d
   list-style: none;
 }
 
@@ -24,6 +31,15 @@ a {
   padding: 0 16px;
 }
 
+<<<<<<< HEAD
+.header {
+  background-color: #032541;
+  padding: 0 40px;
+}
+
+.nav-logo {
+  width: 154px;
+=======
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -304,6 +320,7 @@ p {
 
 .list-group-item {
   font-size: 1em;
+>>>>>>> 453ec739be945906e48f21aa6a8a7dd6c79f862d
 }
 
 .header-movie {

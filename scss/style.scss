@@ -1,4 +1,15 @@
+<<<<<<< HEAD
 @import './utils/variables';
 @import './base/reset';
 @import './layout/header';
 @import '../node_modules/bootstrap/scss/bootstrap';
+=======
+@import "utils/variables";
+@import "base/reset";
+@import "components/dropdown";
+@import "components/card";
+@import "layout/navigation";
+@import "layout/footer";
+@import "pages/index";
+@import "../node_modules/bootstrap/scss/bootstrap";
+>>>>>>> 453ec739be945906e48f21aa6a8a7dd6c79f862d

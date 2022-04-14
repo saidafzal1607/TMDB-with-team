@@ -15,3 +15,5 @@ document.addEventListener("DOMContentLoaded", function (e) {
     console.log("Bu person page");
   }
 });
+
+

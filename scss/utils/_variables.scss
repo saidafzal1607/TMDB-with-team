@@ -14,4 +14,17 @@ $gray-900: #212529 ;
 $black:    #000 ;
 
 $primary: $dark-blue     ;
+$bg-primary: $dark-blue;
 $secondary: $light-blue    ;
+
+// $custome-theme-colors: (
+//   "primary":    $primary,
+//   "secondary":  $secondary,
+//   "success":    $success,
+//   "info":       $info,
+//   "warning":    $warning,
+//   "danger":     $danger,
+//   "light":      $light,
+//   "dark":       $dark
+// ) !default;
+// map-merge($custome-theme-colors, $theme-colors)

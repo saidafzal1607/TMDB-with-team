@@ -134,7 +134,14 @@
     display: flex;
     flex-direction: row !important;
     flex-wrap: nowrap;
-    overflow: scroll;
+    overflow: scroll;    
+  }
+  .row::-webkit-scrollbar {
+    height: 6px !important;
+  }
+  .row::-webkit-scrollbar-thumb {
+    background-color: rgb(206, 206, 206);
+    border-radius: 5px;
   }
   .card {
     border-radius: 10px;

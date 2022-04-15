@@ -1,12 +1,12 @@
 import * as home from "./home.js";
 import * as card from "./card.js";
-let { circleBtn, cardList, body, switchOn } = card;
+let { switchOn } = card;
 
 
  
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  // switchOn()
+  switchOn(document);
   if (location.pathname === "/index.html" || location.pathname === "/") {
     home
       .getPopularMovies()

@@ -28,7 +28,7 @@ export function displayTopMovies(data) {
     html += `
     <div class="col col-md-6 col-lg-4 col-xl-3">
       <card data-id=${id} class="card ">
-      <a href="#" class="card-img-btn">
+      <a href="detailsmovie.html" class="card-img-btn">
         <img
           class="card-img img-fluid"
           src="${poster}"
@@ -75,7 +75,7 @@ export function displayTopMovies(data) {
             style="--value: ${vote_average * 10}"
           ></div>
         </div>
-        <a href="#" class="card-title">${title}</a>
+        <a href="detailsmovie.html" class="card-title">${title}</a>
         <p class="card-text">${moment(release_date).format("ll")}</p>
       </div>
       </card>

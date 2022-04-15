@@ -18,7 +18,7 @@ export async function getMovie(movie_id) {
 export function displayMovie(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
-  const { title, poster_path, release_date, vote_average, id } = data;
+  const { title, poster_path,overview,backdrop_path, release_date, vote_average, id } = data;
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
@@ -33,7 +33,7 @@ export function displayMovie(data) {
           <div class="col-8">
             <a href="#" class="movie-title my-2">
               <h1>
-                spider-man no way home (2021)
+              ${title}
               </h1>
             </a>
             <p class="my-2">
@@ -43,7 +43,7 @@ export function displayMovie(data) {
             </p>
             <div class="rating mt-5">
               <div class="circle-progressbar">
-                <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+                <div role="progressbar" style="--value: ${vote_average * 10}">
                 </div>
               </div>
               <h6 class="pb-4 mx-2">User Score</h6>
@@ -75,10 +75,7 @@ export function displayMovie(data) {
               <h3 class="py-2">
                 Overview
               </h3>
-              <p class="text">
-                Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a
-                super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him
-                to discover what it truly means to be Spider-Man.
+              <p> ${overview}
               </p>
             </div>
             <div class="row">
@@ -121,5 +118,6 @@ export function displayMovie(data) {
             </div>
           </div>
     `;
+
   movieContent.innerHTML = html;
 }

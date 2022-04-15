@@ -2,9 +2,6 @@ import * as home from "./home.js";
 import * as card from "./card.js";
 let { switchOn } = card;
 
-
- 
-
 document.addEventListener("DOMContentLoaded", function (e) {
   switchOn(document);
   if (location.pathname === "/index.html" || location.pathname === "/") {
@@ -21,4 +18,3 @@ document.addEventListener("DOMContentLoaded", function (e) {
     console.log("Bu person page");
   }
 });
-

@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
 });
 
-import * as topmovies from "./topmovies.js";
+import * as topmovies from "./favmovies.js";
 
 document.addEventListener("DOMContentLoaded", function (e) {
   if (location.pathname === "/favmovie.html" || location.pathname === "/") {

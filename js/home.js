@@ -2,7 +2,7 @@ import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
-export async function getPopularTvMovies(page = 1) {
+export async function getPopularMovies(page = 1) {
   try {
     const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     const res = await fetch(url);
@@ -13,7 +13,8 @@ export async function getPopularTvMovies(page = 1) {
   }
 }
 
-export function displayPopularTvMovies(data) {
+
+export function displayPopularMovies(data) {
   const { results } = data;
   const popularTvMovies = document.querySelector(".popular-tv-movies");
   let html = "";
@@ -73,23 +74,12 @@ export function displayPopularTvMovies(data) {
             style="--value: ${vote_average * 10}"
           ></div>
         </div>
-        <a href="#" class="card-title">${title}</a>
+        <a href="/detailsmovie.html?id=${id}" class="card-title">${title}</a>
         <p class="card-text">${moment(release_date).format("ll")}</p>
       </div>
       </card>
     </div>
     `;
     popularTvMovies.innerHTML = html;
-    // const movieEl = document.createElement("div");
-    // movieEl.classList.add("movie");
-    // movieEl.innerHTML = `
-    //   <img src="${poster}" alt="${title}" />
-    //   <div class="movie-info">
-    //     <h2>${title}</h2>
-    //     <p>${vote_average}</p>
-    //     <button class="btn" data-movie-id="${id}">More Info</button>
-    //   </div>
-    // `;
-    // popularTvMovies.appendChild(movieEl);
   });
 }

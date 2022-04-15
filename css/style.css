@@ -49,6 +49,9 @@ a {
   border-radius: 8px;
   width: 160px;
 }
+.card .card-img-overlay {
+  display: none;
+}
 .card .card-img-overlay .threedot-btn {
   display: flex;
   flex-direction: column;
@@ -219,6 +222,13 @@ footer .row .footer__links .footer__btn {
   font-weight: 700;
 }
 
+.overflow-scroll {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap !important;
+  overflow: scroll !important;
+}
+
 .hero {
   min-height: 300px;
   height: 40vh;
@@ -307,10 +317,253 @@ p {
   font-size: 1em;
 }
 
-.block__btn {
-  font-weight: 900;
-  margin-top: 20px;
-  margin-bottom: 20px;
+.header-movie {
+  background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg");
+  border-bottom: 1px solid #020258;
+  background-position: right -200px top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 500px;
+}
+.header-movie .custom-bg {
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, #202020 150px, rgba(32, 32, 32, 0.84) 100%);
+  z-index: 1;
+}
+.header-movie .main-movie {
+  padding: 52px;
+}
+.header-movie .main-movie .movie-posterimg img {
+  height: 480px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.header-movie .main-movie .movie-posterimg img:hover {
+  transform: scale(1.01);
+}
+.header-movie .main-movie .col-8 {
+  color: #ffffff;
+}
+.header-movie .main-movie .col-8 .movie-title {
+  color: #fff;
+  text-decoration: none;
+  text-transform: capitalize;
+}
+.header-movie .main-movie .col-8 .movie-title:hover {
+  color: #bdccd8;
+}
+.header-movie .main-movie .col-8 .rating {
+  display: flex;
+  align-items: center;
+}
+.header-movie .main-movie .col-8 .rating .circle-progressbar {
+  position: relative;
+  margin-top: -30px;
+}
+@keyframes growProgressBar {
+  0%, 33% {
+    --pgPercentage: 0;
+  }
+  100% {
+    --pgPercentage: var(--value);
+  }
+}
+@property --pgPercentage {
+  .header-movie .main-movie .col-8 .rating .circle-progressbar {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+  }
+}
+.header-movie .main-movie .col-8 .rating .circle-progressbar div[role=progressbar] {
+  --size: 3.8rem;
+  --bg: #081c22;
+  --fg: rgba(20, 193, 20, 0.757);
+  --pgPercentage: var(--value);
+  animation: growProgressBar 3s 1 forwards;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(closest-side, #081c22 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(var(--size) / 3.5);
+  color: white;
+}
+.header-movie .main-movie .col-8 .rating .circle-progressbar div[role=progressbar]::before {
+  counter-reset: percentage var(--value);
+  content: counter(percentage) "%";
+}
+.header-movie .main-movie .col-8 .rating ul {
+  display: flex;
+  align-items: center;
+}
+.header-movie .main-movie .col-8 .rating ul li {
+  margin-right: 20px;
+}
+.header-movie .main-movie .col-8 .rating ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+.header-movie .main-movie .col-8 .rating ul li a i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #032440;
+  margin-right: 5px;
+}
+.header-movie .main-movie .row .movie-character {
+  color: #fff;
+  text-decoration: none;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+}
+.header-movie .main-movie .row .movie-character:hover {
+  color: #bdccd8;
+}
+.header-movie .main-movie .row p {
+  margin-top: 10px;
+}
+
+.card-actors .row {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  overflow: scroll;
+}
+.card-actors .card {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+.card-actors .card .card-img img {
+  width: 150px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.card-actors .card .card-img img:hover {
+  transform: scale(1.01);
+}
+.card-actors .card .card-body {
+  padding: 0;
+}
+.card-actors .card .card-body .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+.card-actors .card .card-body .card-text {
+  font-size: 1rem;
+  color: #000;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.container .card-reviews {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: center !important;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  width: auto !important;
+}
+.container .card-reviews .card-img-left {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+.container .card-reviews .card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+  text-transform: capitalize;
+  margin-bottom: 10px;
+}
+
+.collection-card .card {
+  border: 0px solid !important;
+  border-radius: 15px !important;
+  width: auto !important;
+}
+.collection-card .card .card-img-overlay {
+  background: linear-gradient(to right, #032440 0%, rgba(3, 36, 64, 0.6) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.collection-card .card .card-img-overlay .card-title {
+  font-size: 30px;
+  font-weight: 600;
+}
+.collection-card .card .card-img-overlay .btn,
+.collection-card .card .card-img-overlay btn-dark {
+  background-color: #161414;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  padding: 10px;
+}
+.collection-card .card .card-img-overlay .btn:hover,
+.collection-card .card .card-img-overlay btn-dark:hover {
+  background-color: #000;
+}
+
+.card-movies .row {
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: nowrap;
+  overflow: scroll;
+}
+.card-movies .card {
+  border: 0px !important;
+  width: 250px;
+}
+.card-movies .card:hover .card-overlay {
+  visibility: visible;
+  cursor: pointer !important;
+}
+.card-movies .card-img-top {
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 141px;
+  border-radius: 7px;
+}
+.card-movies .card-img-overlay {
+  display: flex;
+  align-items: flex-end;
+}
+.card-movies .card-img-overlay .card-overlay {
+  visibility: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 5px;
+  height: 45px;
+  width: 100%;
+  position: relative;
+  margin-bottom: 40px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-movies .card-body {
+  padding: 3px !important;
+  display: flex;
+  justify-content: space-between;
 }
 
 /*!

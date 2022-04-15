@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 import * as topmovies from "./topmovies.js";
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  if (location.pathname === "/movie.html" || location.pathname === "/") {
+  if (location.pathname === "/favmovie.html" || location.pathname === "/") {
     topmovies
       .getTopMovies()
       .then((data) => {
@@ -32,19 +32,4 @@ document.addEventListener("DOMContentLoaded", function (e) {
   // if (location.pathname === "/person.html" || location.pathname === "/person") {
   //   console.log("Bu person page");
   // }
-});
-import * as person from "./person.js";
-
-document.addEventListener("DOMContentLoaded", function (e) {
-  if (location.pathname === "/person.html" || location.pathname === "/") {
-    person
-      .getTopMovies()
-      .then((data) => {
-        person.displayTopMovies(data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-  
 });

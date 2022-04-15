@@ -13,6 +13,7 @@ export async function getPopularMovies(page = 1) {
   }
 }
 
+
 export function displayPopularMovies(data) {
   const { results } = data;
   const popularTvMovies = document.querySelector(".popular-tv-movies");
@@ -73,7 +74,7 @@ export function displayPopularMovies(data) {
             style="--value: ${vote_average * 10}"
           ></div>
         </div>
-        <a href="#" class="card-title">${title}</a>
+        <a href="/detailsmovie.html?id=${id}" class="card-title">${title}</a>
         <p class="card-text">${moment(release_date).format("ll")}</p>
       </div>
       </card>

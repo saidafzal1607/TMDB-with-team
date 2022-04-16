@@ -3,7 +3,8 @@ import * as card from "./card.js";
 import { displayMovie, getMovie } from "./movie.js";
 import {displayFavMovie, getFavMovie} from "./favmovies.js";
 import * as favpersons from "./favperson.js";
-let { circleBtn, cardList, body, switchOn } = card;
+let { switchOn } = card;
+// switchOn(document);
 
 
 document.addEventListener("DOMContentLoaded", function (e){
@@ -23,7 +24,6 @@ document.addEventListener("DOMContentLoaded", function (e){
 
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  // switchOn()
   if (location.pathname === "/index.html" || location.pathname === "/") {
     home
       .getPopularMovies()

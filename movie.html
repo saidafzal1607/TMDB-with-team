@@ -2,155 +2,67 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Movies</title>
-
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TMDB | Movies</title>
+  <link rel="stylesheet" href="./css/style.css" />
   <link rel="shortcut icon" href="./assets/shorticon/favicon.ico" />
-    <link
-      rel="stylesheet"
-      href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
-    />
-
+  <link rel="stylesheet" href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css" />
 </head>
 
 <body>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#offcanvasScrolling"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="navbar-collapse" id="navbarSupportedContent">
-        <!-- *************** -->
-        <div class="offcanvas offcanvas-start" id="offcanvasScrolling">
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Offcanvas with backdrop</h5>
-            <button
-              type="button"
-              class="btn-close text-reset"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="offcanvas-body">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  >Home</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  data-bs-hover="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li>
-                    <a class="dropdown-item" href="#">Another action</a>
-                  </li>
-                  <li>
-                    <hr class="dropdown-divider" />
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#"
-                      >Something else here</a
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-              </li>
-            </ul>
-            <form class="d-flex">
-              <input
-                class="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button class="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          </div>
-        </div>
-
-        <!-- *************** -->
-      </div>
-    </div>
-  </nav>
-  
-  <section class="top__movies-wrapper">
-    <div class="row mb-3 mt-4">
-      <div class="col">
-        <h2 movie__title>Popular Movies</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col col-sm-6 col-md-4 col-lg-3">
-
-        <div class="accordion aside  row" id="accordionExample">
-          <div class="accordion-item shadow bg-white rounded">
-            <h2 class="accordion-header" id="headingOne">
-              <button class="accordion-button accordion-name" type="button" data-bs-toggle="collapse"
-                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Sort
-              </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-              data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <hr>
-                <p>
-                  Sort Results By
-                </p>
-                <div class="accordion-item">
-                  <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                      data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                      Popularity Descanding
-                    </button>
-                  </h2>
-                  <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
-                    data-bs-parent="#accordionFlushExample">
-                    <div class="accordion-body">
-
-                      <div class="list-group shadow p-3 mb-5 bg-white rounded">
-
-                        <button type="button" class="list-group-item list-group-item-action">Popularity
-                          Descanding</button>
-                        <button type="button" class="list-group-item list-group-item-action">Popularity
-                          Ascanding</button>
-                        <button type="button" class="list-group-item list-group-item-action">Rating Descanding</button>
-                        <button type="button" class="list-group-item list-group-item-action">Rating Ascanding</button>
-                        <button type="button" class="list-group-item list-group-item-action">Title A-Z</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse" id="navbarSupportedContent">
+          <!-- *************** -->
+          <div class="offcanvas offcanvas-start" id="offcanvasScrolling">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title">Offcanvas with backdrop</h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-bs-toggle="dropdown" data-bs-hover="dropdown" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Action</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider" />
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled">Disabled</a>
+                </li>
+              </ul>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
             </div>
           </div>
 
@@ -160,77 +72,55 @@
     </nav>
   </header>
 
-    
-      <!-- *************** FOR CARDS **************** -->
-      
-      <div class="col col-sm-6 col-md-8 col-lg-9">
-        <div class="row top__movies main-movie">
-      
-          <div class="col col-md-6 col-lg-4 col-xl-3">
-            <card class="card">
-            <a href="#" class="card-img-btn">
-              <img
-              class="card-img img-fluid"
-                  src="./assets/images/halo movie.jpg"
-                  alt="something movie"
-                />
-              </a>
-              <div class="card-img-overlay">
-                <a class="threedot-btn">
-                  <i class="fa-solid fa-ellipsis"></i>
-                </a>
-              </div>
-              <div class="card-body">
-                <div class="card-click">
-                  <ul>
-                    <li>
-                      <a href="#">
-                        <i class="fa-solid fa-list"></i>
-                        Add to list</a
-                      >
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa-solid fa-heart"></i>
-                        Favourite</a
-                      >
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa-solid fa-clipboard-list"></i>
-                        Watchlist
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <i class="fa-solid fa-star"></i>
-                        Your rating</a
-                      >
-                    </li>
-                  </ul>
-                </div>
-                <div class="circle-progressbar">
-                  <div
-                    role="progressbar"
-                    aria-valuenow="88"
-                    aria-valuemin="0"
-                    aria-valuemax="100"
-                    style="--value: 88"
-                  ></div>
-                </div>
-                <a href="detailsmovie.html" class="card-title"> Halo </a>
-                <p class="card-text">Mar 24, 2022</p>
-              </div>
-            </card>
+  <section class="header-movie">
+    <div class="custom-bg">
+      <div class="container">
+        <div class="row main-movie">
+          <div class="col-4">
+            <a href="" class="movie-posterimg">
+              <img class="img-fluid "
+                src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" alt="brand" />
+            </a>
           </div>
-
-        </div>
-        <div class="row block__btn">
-
-          <button class="btn btn-primary btn-lg btn-block ">Load More</button>
-        </div>
-      </div>
-
+          <div class="col-8">
+            <a href="#" class="movie-title my-2">
+              <h1>
+                spider-man no way home (2021)
+              </h1>
+            </a>
+            <p class="my-2">
+              12/17/2021 (US)
+              Action, Adventure, Science Fiction
+              2h 28m
+            </p>
+            <div class="rating mt-5">
+              <div class="circle-progressbar">
+                <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+                </div>
+              </div>
+              <h6 class="pb-4 mx-2">User Score</h6>
+              <ul>
+                <li>
+                  <a href="#" title="Add to list">
+                    <i class="fa-solid fa-list"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" title="Mark as favorite">
+                    <i class="fa-solid fa-heart"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" title="Mark as favorite">
+                    <i class="fa-solid fa-clipboard-list"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" title="Rate It">
+                    <i class="fa-solid fa-star"></i>
+                  </a>
+                </li>
+              </ul>
 
             </div>
             <div class="movie-overview my-2">
@@ -289,7 +179,7 @@
   <section class="card-actors my-5">
     <div class="container">
       <h2 class="text-capitalize pb-4">Top Billed Cast</h2>
-      <div class="row overflow-scroll">
+      <div class="row">
         <div class="col">
           <div class="card">
             <a href="" class="card-img">
@@ -307,15 +197,183 @@
     </div>
   </section>
 
+  <section class="container border-bottom mb-4">
+    <div class="border-bottom py-4">
+      <a class="fullcastt-link text-capitalize pb-4 fs-5 text-decoration-none text-black">Full Cast & Crew</a>
+    </div>
+
+    <div class="wrapper" style="margin-top: 20px">
+      <h3 class="" style="display: inline-block; padding-right: 20px">
+        Social
+      </h3>
+      <div class="card my-3" style="
+          width: auto;
+          display: block;
+          height: 35px;
+          border: 1px solid;
+          border-radius: 20px;
+        ">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pill-home"
+              style="border-radius: 20px; height: 35px" type="button" role="tab" aria-controls="pills-home"
+              aria-selected="true">
+              Reviews
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pill-profile"
+              style="border-radius: 20px; height: 35px" type="button" role="tab" aria-controls="pills-profile"
+              aria-selected="false">
+              Discussions
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="pill-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="card  card-reviews ">
+          <img class="card-img-left card-img"
+            src="https://www.gravatar.com/avatar/e158a9a4352c90f00b85051896c53f70.jpg?s=64" alt="Card image cap">
+          <div class=" card-body">
+            <a href="" class="card-title text-decoration-none text-dark">A review by Adriano <br></a>
+            <p class="card-text"><small class="text-muted">Written by Adriano on January 7, 2022</small></p>
+            <p class="card-text">This is the perfect Marvel movie that isn't an Avengers film. It pays off everything
+              thing it builds up, corrects previous misgivings and really gets the character of Spider-Man right. All
+              while setting things up in an interesting way that it's bound to be fresh next time out. Absolutely loved
+              this.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-pane fade" id="pill-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="card  card-reviews ">
+          <img class="card-img-left card-img"
+            src="https://www.gravatar.com/avatar/e158a9a4352c90f00b85051896c53f70.jpg?s=64" alt="Card image cap">
+          <div class=" card-body">
+            <a href="" class="card-title text-decoration-none text-dark">
+              The choice of villains (spoilers)</a>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">open</p>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">6</p>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">
+              Apr 12, 2022 at 10:57 AM
+              by <a href="#" class="text-decoration-none fw-300 "> BaronOfHair</a>
+            </p>
+          </div>
+        </div>
+        <div class="card  card-reviews ">
+          <img class=" card-img-left card-img"
+            src="https://www.themoviedb.org/t/p/w45_and_h45_face/5U5amYZQ5TD9628GWvmjXtgZygT.jpg" alt="Card image cap">
+          <div class=" card-body">
+            <a href="" class="card-title text-decoration-none text-dark">
+
+              Death Scene Realism [Spoilers]</a>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">open</p>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">11</p>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">
+              Mar 31, 2022 at 9:11 PM
+              by
+              <a href="#" class="text-decoration-none fw-300 "> Innovator</a>
+            </p>
+          </div>
+        </div>
+        <div class="card  card-reviews mb-3">
+          <img class=" card-img-left card-img"
+            src="https://www.themoviedb.org/t/p/w45_and_h45_face/uEAkyTcAazQR8JFyPjqQ1425iZp.jpg" alt="Card image cap">
+          <div class=" card-body">
+            <a href="" class="card-title text-decoration-none text-dark">
+
+              Comfortably boring</a>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">open</p>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">2</p>
+          </div>
+          <div class=" card-body">
+            <p class="text-muted">
+              Mar 25, 2022 at 7:16 PM
+              by <a href="#" class="text-decoration-none fw-300 ">J</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container collection-card  mb-3">
+    <div class="card bg-dark text-white">
+      <img class="card-img"
+        src="https://www.themoviedb.org/t/p/w1440_and_h320_multi_faces/AvnqpRwlEaYNVL6wzC4RN94EdSd.jpg"
+        alt="Card image">
+      <div class="card-img-overlay">
+        <h5 class="card-title">Part of the Spider-Man (Avengers) Collection</h5>
+        <p class="card-text">Includes Spider-Man: Homecoming, Spider-Man: Far From Home, Spider-Man: No Way Home</p>
+        <div>
+          <a href="#" class="btn btn-dark text-uppercase p-2">view collection</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="card-movies my-5">
+    <div class="container">
+      <h2 class="text-capitalize pb-4">Recommendations</h2>
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <a href="" class="card-img">
+              <img class="card-img-top"
+                src="https://www.themoviedb.org/t/p/w250_and_h141_face/nvxrQQspxmSblCYDtvDAbVFX8Jt.jpg"
+                alt="Card image cap">
+            </a>
+            <div class="card-img-overlay">
+              <div class="card-overlay">
+                <div class="movie-data">
+                  <i class="fa-solid fa-calendar-days"></i> 12/07/2021
+                </div>
+                <div class="lists">
+                  <a href="#" class="text-decoration-none pe-2">
+                    <i class="fa-solid fa-heart"></i>
+                  </a>
+                  <a href="#" class="text-decoration-none pe-2">
+                    <i class="fa-solid fa-list-ol"></i>
+                  </a>
+                  <a href="#" class="text-decoration-none">
+                    <i class="fa-solid fa-star"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-black text-capitalize">don't look up</h5>
+              <p class="card-text">72%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer id="footer">
     <div class="container">
       <div class="row">
         <div class="footer__links">
-          <img
-            class="footer__logo"
-            src="./assets/images/logos/TMDB footer logo.png"
-            alt="brand"
-          />
+          <img class="footer__logo" src="./assets/images/logos/TMDB footer logo.png" alt="brand" />
           <br />
           <a href="./profile.html" class="footer__btn"> Hi Your name! </a>
         </div>
@@ -326,9 +384,7 @@
               <a href="https://www.themoviedb.org/about">About TMDB</a>
             </li>
             <li>
-              <a href="https://www.themoviedb.org/about/staying-in-touch"
-                >Contact Us</a
-              >
+              <a href="https://www.themoviedb.org/about/staying-in-touch">Contact Us</a>
             </li>
             <li>
               <a href="https://www.themoviedb.org/talk">Support Forums </a>
@@ -337,9 +393,7 @@
               <a href="https://www.themoviedb.org/documentation/api">API</a>
             </li>
             <li>
-              <a href="https://status.themoviedb.org/" target="_blank"
-                >System Status</a
-              >
+              <a href="https://status.themoviedb.org/" target="_blank">System Status</a>
             </li>
           </ul>
         </div>
@@ -347,9 +401,7 @@
           <p class="footer__title">get involved</p>
           <ul class="footer__list">
             <li>
-              <a href="https://www.themoviedb.org/bible"
-                >Contribution Bible</a
-              >
+              <a href="https://www.themoviedb.org/bible">Contribution Bible</a>
             </li>
             <li>
               <a href="https://www.themoviedb.org/movie/new">Add New Movie</a>
@@ -363,10 +415,7 @@
           <p class="footer__title">community</p>
           <ul class="footer__list">
             <li>
-              <a
-                href="https://www.themoviedb.org/documentation/community/guidelines"
-                >Guidelines</a
-              >
+              <a href="https://www.themoviedb.org/documentation/community/guidelines">Guidelines</a>
             </li>
             <li>
               <a href="https://www.themoviedb.org/discuss">Discussions</a>
@@ -375,9 +424,7 @@
               <a href="https://www.themoviedb.org/leaderboard">Leaderboard</a>
             </li>
             <li>
-              <a href="https://twitter.com/themoviedb" target="_blank"
-                >Twitter</a
-              >
+              <a href="https://twitter.com/themoviedb" target="_blank">Twitter</a>
             </li>
           </ul>
         </div>
@@ -385,34 +432,22 @@
           <p class="footer__title">legal</p>
           <ul class="footer__list">
             <li>
-              <a href="https://www.themoviedb.org/terms-of-use"
-                >Terms of Use</a
-              >
+              <a href="https://www.themoviedb.org/terms-of-use">Terms of Use</a>
             </li>
             <li>
-              <a
-                href="https://www.themoviedb.org/documentation/api/terms-of-use"
-                >API Terms of Use</a
-              >
+              <a href="https://www.themoviedb.org/documentation/api/terms-of-use">API Terms of Use</a>
             </li>
             <li>
-              <a href="https://www.themoviedb.org/privacy-policy"
-                >Privacy Policy</a
-              >
+              <a href="https://www.themoviedb.org/privacy-policy">Privacy Policy</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-    crossorigin="anonymous">
-  </script>
-    
+  
+  <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
   <script type="module" src="./js/router.js"></script>
-
 </body>
 
 </html>

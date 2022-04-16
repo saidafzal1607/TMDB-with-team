@@ -8,7 +8,7 @@ let { switchOn } = card;
 
 
 document.addEventListener("DOMContentLoaded", function (e){
-  if (location.pathname === "/favperson.html" || location.pathname === "/"){
+  if (location.pathname === "/people.html" || location.pathname === "/"){
     // console.log(data);
     favpersons
     .getFavPerson()
@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   // }
 
   // switchOn()
-  if (location.pathname === "/favmovie.html" || location.pathname === "/") {
+  if (location.pathname === "/popularmovie.html" || location.pathname === "/") {
     topmovies
       .getTopMovies()
       .then((data) => {
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
             const id = card.dataset.id;
-            history.pushState({ id }, null, `/detailsmovie.html`);
+            history.pushState({ id }, null, `/movie.html`);
             location.reload();
           });
         });
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
   
   if (
-    location.pathname === "/detailsmovie.html" ||
+    location.pathname === "/movie.html" ||
     location.pathname === "/movie"
   ) {
     // let searchParams = new URLSearchParams(location.search);

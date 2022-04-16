@@ -1,8 +1,95 @@
 import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
+
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
-export async function getMovie(movie_id) {
+export async function getTopMovies(page = 1) {
+  try {
+    const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(url);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export function displayTopMovies(data) {
+  const { results } = data;
+  const topMovies = document.querySelector(".top__movies");
+  let html = "";
+  results.forEach((movie) => {
+    const { title, poster_path, release_date, vote_average, id } = movie;
+    const poster = poster_path
+      ? `${BASE_IMG_URL}${poster_path}`
+      : DEFAULT_IMG_URL;
+
+    html += `
+    <div class="col col-md-6 col-lg-4 col-xl-3">
+      <card data-id=${id} class="card ">
+      <a href="detailsmovie.html" class="card-img-btn">
+        <img
+          class="card-img img-fluid"
+          src="${poster}"
+          alt="something movie"
+        />
+      </a>
+      <div class="card-img-overlay">
+        <a class="threedot-btn">
+          <i class="fa-solid fa-ellipsis"></i>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-click">
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-list"></i>
+                Add to list</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-heart"></i>
+                Favourite</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Watchlist
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-star"></i>
+                Your rating</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="circle-progressbar">
+          <div
+            role="progressbar"
+            style="--value: ${vote_average * 10}"
+          ></div>
+        </div>
+        <a href="detailsmovie.html" class="card-title">${title}</a>
+        <p class="card-text">${moment(release_date).format("ll")}</p>
+      </div>
+      </card>
+      
+      </div>
+    `;
+    topMovies.innerHTML = html;
+   
+  });
+}
+
+
+
+export async function getFavMovie(movie_id) {
   try {
     const url = `${BASE_URL}movie/${movie_id}?api_key=${API_KEY}&language=en-US`;
     const res = await fetch(url);
@@ -15,7 +102,7 @@ export async function getMovie(movie_id) {
 
 
 
-export function displayMovie(data) {
+export function displayFavMovie(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
   const { title, poster_path,overview,backdrop_path, release_date, vote_average, id } = data;
@@ -37,9 +124,9 @@ export function displayMovie(data) {
               </h1>
             </a>
             <p class="my-2">
-             ${moment(release_date).format("L")} 
-              ${genres.map((genre) => genre.name).join(", ")}
-             ${Math.floor(runtime / 60)}h ${runtime % 60}m
+              12/17/2021 (US)
+              Action, Adventure, Science Fiction
+              2h 28m
             </p>
             <div class="rating mt-5">
               <div class="circle-progressbar">
@@ -72,10 +159,6 @@ export function displayMovie(data) {
 
             </div>
             <div class="movie-overview my-2">
-            <p class="tagline-text">
-            ${tagline}
-            
-            </p>
               <h3 class="py-2">
                 Overview
               </h3>
@@ -125,3 +208,4 @@ export function displayMovie(data) {
 
   movieContent.innerHTML = html;
 }
+

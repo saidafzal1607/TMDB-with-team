@@ -1,7 +1,26 @@
 import * as home from "./home.js";
 import * as card from "./card.js";
 import { displayMovie, getMovie } from "./movie.js";
+import {displayFavMovie, getFavMovie} from "./favmovies.js";
+import * as favpersons from "./favperson.js";
 let { circleBtn, cardList, body, switchOn } = card;
+
+
+document.addEventListener("DOMContentLoaded", function (e){
+  if (location.pathname === "/favperson.html" || location.pathname === "/"){
+    // console.log(data);
+    favpersons
+    .getFavPerson()
+    .then((data)=>{
+      favpersons.displayFavPerson(data)
+      console.log(data);
+    })
+    .catch((err) =>{
+      console.log(err);
+    })
+  }
+});
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
   // switchOn()
@@ -44,17 +63,49 @@ document.addEventListener("DOMContentLoaded", function (e) {
 import * as topmovies from "./favmovies.js";
 
 document.addEventListener("DOMContentLoaded", function (e) {
+  // if (location.pathname === "/favmovie.html" || location.pathname === "/") {
+  //   topmovies
+  //     topmovies
+  //     .then((data) => {
+  //       topmovies.displayTopMovies(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // switchOn()
   if (location.pathname === "/favmovie.html" || location.pathname === "/") {
     topmovies
       .getTopMovies()
       .then((data) => {
         topmovies.displayTopMovies(data);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/detailsmovie.html`);
+            location.reload();
+          });
+        });
       })
       .catch((err) => {
         console.log(err);
       });
   }
-  // if (location.pathname === "/person.html" || location.pathname === "/person") {
-  //   console.log("Bu person page");
-  // }
+  
+  if (
+    location.pathname === "/detailsmovie.html" ||
+    location.pathname === "/movie"
+  ) {
+    // let searchParams = new URLSearchParams(location.search);
+    // searchParams.get("id")
+    const id = history.state.id;
+    console.log(history.state);
+    getFavMovie(id).then((data) => {
+      displayFavMovie(data);
+      console.log(data);
+    });
+  }
 });
+

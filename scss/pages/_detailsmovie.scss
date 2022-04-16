@@ -17,16 +17,6 @@
   }
   .main-movie {
     padding: 52px;
-    .movie-posterimg {
-      img {
-        height: 480px;
-        object-fit: cover;
-        border-radius: 10px;
-        &:hover {
-          transform: scale(1.01);
-        }
-      }
-    }
     .col-8 {
       color: #ffffff;
       .movie-title {
@@ -135,6 +125,13 @@
     flex-direction: row !important;
     flex-wrap: nowrap;
     overflow: scroll;
+  }
+  .row::-webkit-scrollbar {
+    height: 5px !important;
+  }
+  .row::-webkit-scrollbar-thumb {
+    background-color: rgb(206, 206, 206);
+    border-radius: 5px;
   }
   .card {
     border-radius: 10px;
@@ -280,5 +277,16 @@
     padding: 3px !important;
     display: flex;
     justify-content: space-between;
+  }
+}
+
+.movie-posterimg {
+  img {
+    height: 480px;
+    object-fit: cover;
+    border-radius: 10px;
+    &:hover {
+      transform: scale(1.01);
+    }
   }
 }

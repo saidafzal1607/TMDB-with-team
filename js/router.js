@@ -2,9 +2,9 @@ import * as home from "./home.js";
 import * as card from "./card.js";
 import { displayMovie, getMovie } from "./movie.js";
 let { switchOn } = card;
+// switchOn(document);
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  switchOn(document);
   if (location.pathname === "/index.html" || location.pathname === "/") {
     home
       .getPopularMovies()

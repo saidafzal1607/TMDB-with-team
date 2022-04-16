@@ -4,75 +4,314 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Persons</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <title>TMDB | Person</title>
+    <link rel="stylesheet" href="./css/style.css" />
     <link rel="shortcut icon" href="./assets/shorticon/favicon.ico" />
     <link
       rel="stylesheet"
-      href="./node_modules/bootstrap/dist/css/bootstrap.min.css"
+      href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
     />
   </head>
 
   <body>
-    <div class="container">
-      <h2
-        style="
-          font-weight: 700;
-          margin-bottom: 1.8rem;
-          margin-top: 1.8rem;
-          font-size: 1.5em;
-        "
-      >
-        Popular People
-      </h2>
-      <div class="row">
-        <div class="col col-sm-6 col-md-4 col-lg-3">
-          <div
-            class="card shadow p-3 mb-5 bg-white rounded"
-            style="border: none"
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasScrolling"
           >
-            <img
-              class="card-img-top"
-              src="./assets/images/persons_img/grey anatom.jpg"
-              alt="Card image cap"
-            />
-            <div class="card-body">
-              <h5 class="card-title">
-                <a
-                  style="
-                    text-decoration: none;
-                    margin-top: 0;
-                    font-weight: 600;
-                    font-size: 1.1em;
-                    color: #000;
-                  "
-                  href="./"
-                  >Ed Lauter</a
-                >
-              </h5>
-              <p
-                style="
-                  font-size: 0.9em;
-                  font-weight: 400;
-                  color: rgba(0, 0, 0, 0.6);
-                  display: block;
-                  margin-top: 0;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  padding: 0;
-                  width: 100%;
-                  line-height: 1.2em;
-                "
-                class="card-text"
-              >
-                Grey's Anatomy, The Artist, The Number 23
-              </p>
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="navbar-collapse" id="navbarSupportedContent">
+            <!-- *************** -->
+            <div class="offcanvas offcanvas-start" id="offcanvasScrolling">
+              <div class="offcanvas-header">
+                <h5 class="offcanvas-title">Offcanvas with backdrop</h5>
+                <button
+                  type="button"
+                  class="btn-close text-reset"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="offcanvas-body">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#"
+                      >Home</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      data-bs-hover="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <hr class="dropdown-divider" />
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button class="btn btn-outline-success" type="submit">
+                    Search
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            <!-- *************** -->
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section id="person" class="my-4">
+      <div class="container">
+        <div class="row main-person">
+          <div class="col-sm-7 col-md-4">
+            <a href="" class="movie-posterimg">
+              <img
+                class="img-fluid"
+                src="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/a7rgJl8TYUWAfJuM4fxbLHgD7BL.jpg"
+                alt="brand"
+              />
+            </a>
+            <ul class="person-social-links my-4">
+              <li>
+                <a href="" title="Visit Facebook">
+                  <i class="fa-brands fa-facebook-square"></i>
+                </a>
+              </li>
+              <li>
+                <a href="" title="Visit Insgagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+              </li>
+            </ul>
+
+            <h3>Personal Info</h3>
+            <p class="py-1">
+              <strong class="fw-bold">Known For</strong> <br />
+              Acting
+            </p>
+            <p class="py-1">
+              <strong class="fw-bold"> Known Credits</strong> <br />
+              128
+            </p>
+            <p class="py-1">
+              <strong class="fw-bold">Gender</strong> <br />
+              Male
+            </p>
+            <p class="py-1">
+              <strong class="fw-bold">Birthday</strong> <br />
+              1970-11-06 (51 years old)
+            </p>
+            <p class="py-1">
+              <strong class="fw-bold">Place of Birth</strong> <br />
+              Austin, Texas, USA
+            </p>
+            <p class="py-1">
+              <strong class="fw-bold">Also Known As</strong> <br />
+              Ethan Green Hawke
+            </p>
+          </div>
+          <div class="col-sm-5 col-md-8 py-1">
+            <h1>
+              <strong class="fw-bold">Ethan Hawke</strong>
+            </h1>
+            <h5 class="py-4">
+              <strong class="fw-bold">Biography</strong>
+            </h5>
+            <p class="text-dark fw-normal">
+              Ethan Green Hawke (born November 6, 1970) is an American actor,
+              writer and director. He made his feature film debut in 1985 with
+              the science fiction movie Explorers, before making a supporting
+              appearance in the 1989 drama Dead Poets Society which is
+              considered his breakthrough role. He then appeared in such films
+              as White Fang (1991), A Midnight Clear (1992), and Alive (1993)
+              before taking a role in the 1994 Generation X drama Reality Bites,
+              for which he gained critical acclaim. In 1995, he starred in the
+              romantic drama Before Sunrise, and later in its sequel Before
+              Sunset (2004 <p class="text-dark fw-normal">
+
+              In 2001, Hawke was cast as a rookie police officer
+              in Training Day, for which he received a Screen Actors Guild and
+              Academy Award nomination in the Best Supporting Actor category.
+              Other films have included the science fiction feature Gattaca
+              (1997), the title role in Michael Almereyda's Hamlet (2000), the
+              action thriller Assault on Precinct 13 (2005), and the crime drama
+              Before the Devil Knows You're Dead (2007). </p > <p class="text-dark fw-normal">
+             Hawke has appeared in
+              many theater productions including The Seagull, Henry IV,
+              Hurlyburly, The Cherry Orchard, The Winter's Tale and The Coast of
+              Utopia, for which he earned a Tony Award nomination. He made his
+              directorial debut with the 2002 independent feature Chelsea Walls.
+              In November 2007 Hawke directed his first play, Jonathan Marc
+              Sherman's Things We Want. Aside from acting, he has written two
+              novels, The Hottest State (1996) and Ash Wednesday (2002). Between
+              1998 and 2004, Hawke was married to actress Uma Thurman.</p>
+            </p>
+            <h5 class="py-4">
+                <strong class="fw-bold">Known For</strong>
+            </h5>
+            <div class="card-person mt-1">
+           <div class="row overflow-scroll">
+            <div class="col">
+                <div class="card">
+                  <a href="" class="card-img">
+                    <img class="card-img-top"
+                      src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/ai40gM7SUaGA6fthvsd87o8IQq4.jpg"
+                      alt="Card image cap">
+                  </a>
+                  <div class="card-body py-3">
+                    <a class="card-text text-capitalize">
+                        Dead Poets Society
+                    </a>
+                  </div>
+                </div>
+              </div>      
+           </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <script src="./js/router.js"></script>
+    </section>
+
+    <footer id="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer__links">
+            <img
+              class="footer__logo"
+              src="./assets/images/logos/TMDB footer logo.png"
+              alt="brand"
+            />
+            <br />
+            <a href="./profile.html" class="footer__btn"> Hi Your name! </a>
+          </div>
+          <div class="footer__links">
+            <p class="footer__title">the basics</p>
+            <ul class="footer__list">
+              <li>
+                <a href="https://www.themoviedb.org/about">About TMDB</a>
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/about/staying-in-touch"
+                  >Contact Us</a
+                >
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/talk">Support Forums </a>
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/documentation/api">API</a>
+              </li>
+              <li>
+                <a href="https://status.themoviedb.org/" target="_blank"
+                  >System Status</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer__links">
+            <p class="footer__title">get involved</p>
+            <ul class="footer__list">
+              <li>
+                <a href="https://www.themoviedb.org/bible"
+                  >Contribution Bible</a
+                >
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/movie/new">Add New Movie</a>
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/tv/new">Add New TV Show</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer__links">
+            <p class="footer__title">community</p>
+            <ul class="footer__list">
+              <li>
+                <a
+                  href="https://www.themoviedb.org/documentation/community/guidelines"
+                  >Guidelines</a
+                >
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/discuss">Discussions</a>
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/leaderboard">Leaderboard</a>
+              </li>
+              <li>
+                <a href="https://twitter.com/themoviedb" target="_blank"
+                  >Twitter</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="footer__links">
+            <p class="footer__title">legal</p>
+            <ul class="footer__list">
+              <li>
+                <a href="https://www.themoviedb.org/terms-of-use"
+                  >Terms of Use</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.themoviedb.org/documentation/api/terms-of-use"
+                  >API Terms of Use</a
+                >
+              </li>
+              <li>
+                <a href="https://www.themoviedb.org/privacy-policy"
+                  >Privacy Policy</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script type="module" src="./js/router.js"></script>
   </body>
 </html>

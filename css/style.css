@@ -312,6 +312,12 @@ p {
   font-size: 1em;
 }
 
+.block__btn {
+  font-weight: 900;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
 .header-movie {
   background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg");
   border-bottom: 1px solid #020258;
@@ -560,7 +566,6 @@ p {
   justify-content: space-between;
 }
 
-<<<<<<< HEAD
 .overflow-scroll::-webkit-scrollbar {
   height: 6px !important;
 }
@@ -575,14 +580,6 @@ p {
   font-style: italic;
   color: #fff;
   opacity: 0.8;
-=======
-.movie-posterimg img {
-  height: 480px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-.movie-posterimg img:hover {
-  transform: scale(1.01);
 }
 
 #person .person-social-links {
@@ -611,7 +608,6 @@ p {
 }
 #person .card .card-body a:hover {
   color: #01b4e4;
->>>>>>> b458261bf1b38af859e750d7659f27efa637912f
 }
 
 /*!

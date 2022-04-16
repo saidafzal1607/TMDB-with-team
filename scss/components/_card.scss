@@ -9,7 +9,7 @@
     }
   }
   .card-img-overlay {
-    display: none;
+
     .threedot-btn {
       display: flex;
       flex-direction: column;
@@ -94,8 +94,7 @@
   }
   .card-click {
     border-radius: 10px !important;
-    visibility: hidden;
-    position: absolute;
+    display: none;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
@@ -138,7 +137,6 @@
     }
   }
   .on {
-    visibility: visible;
-    opacity: 1;
+    display: flex !important;
   }
 }

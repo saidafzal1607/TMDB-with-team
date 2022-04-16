@@ -1,5 +1,5 @@
 import configs from "../config.js";
-// import moment from "../node_modules/moment/dist/moment.js";
+import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 export async function getMovie(movie_id) {
@@ -18,7 +18,7 @@ export async function getMovie(movie_id) {
 export function displayMovie(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
-  const { title, poster_path, release_date, vote_average, id } = data;
+  const { title, poster_path,overview, genres, runtime, release_date, vote_average,tagline, id } = data;
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
@@ -33,17 +33,17 @@ export function displayMovie(data) {
           <div class="col-8">
             <a href="#" class="movie-title my-2">
               <h1>
-                spider-man no way home (2021)
+               ${title} (${release_date.split("-")[0]})
               </h1>
             </a>
             <p class="my-2">
-              12/17/2021 (US)
-              Action, Adventure, Science Fiction
-              2h 28m
+             ${moment(release_date).format("L")} 
+              ${genres.map((genre) => genre.name).join(", ")}
+             ${Math.floor(runtime / 60)}h ${runtime % 60}m
             </p>
             <div class="rating mt-5">
               <div class="circle-progressbar">
-                <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+                <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: ${vote_average * 10}">
                 </div>
               </div>
               <h6 class="pb-4 mx-2">User Score</h6>
@@ -72,13 +72,15 @@ export function displayMovie(data) {
 
             </div>
             <div class="movie-overview my-2">
+            <p class="tagline-text">
+            ${tagline}
+            
+            </p>
               <h3 class="py-2">
                 Overview
               </h3>
               <p class="text">
-                Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a
-                super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him
-                to discover what it truly means to be Spider-Man.
+                ${overview}
               </p>
             </div>
             <div class="row">

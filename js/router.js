@@ -2,9 +2,9 @@ import * as home from "./home.js";
 import * as card from "./card.js";
 import { displayMovie, getMovie } from "./movie.js";
 let { switchOn } = card;
+// switchOn(document);
 
 document.addEventListener("DOMContentLoaded", function (e) {
-  switchOn(document);
   if (location.pathname === "/index.html" || location.pathname === "/") {
     home
       .getPopularMovies()
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
             const id = card.dataset.id;
-            history.pushState({ id }, null, `/detailsmovie.html`);
+            history.pushState({ id }, null, `/movie.html`);
             location.reload();
           });
         });
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     console.log("Bu person page");
   }
   if (
-    location.pathname === "/detailsmovie.html" ||
+    location.pathname === "/movie.html" ||
     location.pathname === "/movie"
   ) {
     // let searchParams = new URLSearchParams(location.search);

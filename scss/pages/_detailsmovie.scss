@@ -136,13 +136,6 @@
     flex-wrap: nowrap;
     overflow: scroll;
   }
-  .row::-webkit-scrollbar {
-    height: 6px !important;
-  }
-  .row::-webkit-scrollbar-thumb {
-    background-color: rgb(206, 206, 206);
-    border-radius: 5px;
-  }
   .card {
     border-radius: 10px;
     background-color: #fff;
@@ -288,4 +281,21 @@
     display: flex;
     justify-content: space-between;
   }
+}
+
+
+
+.overflow-scroll::-webkit-scrollbar {
+  height: 6px !important;
+}
+.overflow-scroll::-webkit-scrollbar-thumb {
+  background-color: rgb(206, 206, 206);
+  border-radius: 5px;
+}
+
+.tagline-text{
+  font-size: 18px;
+  font-style: italic;
+  color: #fff;
+  opacity: 0.8;
 }

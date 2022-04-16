@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
             const id = card.dataset.id;
-            history.pushState({ id }, null, `/detailsmovie.html`);
+            history.pushState({ id }, null, `/movie.html`);
             location.reload();
           });
         });
@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
         console.log(err);
       });
   }
-  if (location.pathname === "/person.html" || location.pathname === "/person") {
-    console.log("Bu person page");
-  }
+  // if (location.pathname === "/person.html" || location.pathname === "/person") {
+  //   console.log("Bu person pagee");
+  // }
   if (
-    location.pathname === "/detailsmovie.html" ||
+    location.pathname === "/movie.html" ||
     location.pathname === "/movie"
   ) {
     // let searchParams = new URLSearchParams(location.search);

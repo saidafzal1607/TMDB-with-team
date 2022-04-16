@@ -49,9 +49,6 @@ a {
   border-radius: 8px;
   width: 160px;
 }
-.card .card-img-overlay {
-  display: none;
-}
 .card .card-img-overlay .threedot-btn {
   display: flex;
   flex-direction: column;
@@ -128,8 +125,7 @@ a {
 }
 .card .card-click {
   border-radius: 10px !important;
-  visibility: hidden;
-  position: absolute;
+  display: none;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -172,8 +168,7 @@ a {
   text-decoration: none;
 }
 .card .on {
-  visibility: visible;
-  opacity: 1;
+  display: flex !important;
 }
 
 footer {
@@ -565,6 +560,22 @@ p {
   justify-content: space-between;
 }
 
+<<<<<<< HEAD
+.overflow-scroll::-webkit-scrollbar {
+  height: 6px !important;
+}
+
+.overflow-scroll::-webkit-scrollbar-thumb {
+  background-color: #cecece;
+  border-radius: 5px;
+}
+
+.tagline-text {
+  font-size: 18px;
+  font-style: italic;
+  color: #fff;
+  opacity: 0.8;
+=======
 .movie-posterimg img {
   height: 480px;
   object-fit: cover;
@@ -600,6 +611,7 @@ p {
 }
 #person .card .card-body a:hover {
   color: #01b4e4;
+>>>>>>> b458261bf1b38af859e750d7659f27efa637912f
 }
 
 /*!

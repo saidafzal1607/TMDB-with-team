@@ -1,5 +1,5 @@
 import configs from "../config.js";
-// import moment from "../node_modules/moment/dist/moment.js";
+import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 export async function getMovie(movie_id) {
@@ -37,9 +37,9 @@ export function displayMovie(data) {
               </h1>
             </a>
             <p class="my-2">
-              12/17/2021 (US)
-              Action, Adventure, Science Fiction
-              2h 28m
+             ${moment(release_date).format("L")} 
+              ${genres.map((genre) => genre.name).join(", ")}
+             ${Math.floor(runtime / 60)}h ${runtime % 60}m
             </p>
             <div class="rating mt-5">
               <div class="circle-progressbar">
@@ -72,6 +72,10 @@ export function displayMovie(data) {
 
             </div>
             <div class="movie-overview my-2">
+            <p class="tagline-text">
+            ${tagline}
+            
+            </p>
               <h3 class="py-2">
                 Overview
               </h3>

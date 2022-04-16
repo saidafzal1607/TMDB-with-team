@@ -23,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
         console.log(err);
       });
   }
-  if (location.pathname === "/person.html" || location.pathname === "/person") {
-    console.log("Bu person page");
-  }
+  // if (location.pathname === "/person.html" || location.pathname === "/person") {
+  //   console.log("Bu person pagee");
+  // }
   if (
     location.pathname === "/movie.html" ||
     location.pathname === "/movie"

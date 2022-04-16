@@ -1,5 +1,5 @@
 import configs from "../config.js";
-import moment from "../node_modules/moment/dist/moment.js";
+// import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 export async function getPerson(person_id) {
@@ -16,7 +16,7 @@ export async function getPerson(person_id) {
 
 
 export function displayPerson(data) {
-  const movieContent = document.querySelector(".main-person");
+  const personContent = document.querySelector(".main-person");
   let html = "";
   const { biography, profile_path, name, place_of_birth, birthday, gender, } = data;
   const poster = profile_path
@@ -104,5 +104,5 @@ export function displayPerson(data) {
   </div>
 </div>
     `;
-  movieContent.innerHTML = html;
+  personContent.innerHTML = html;
 }

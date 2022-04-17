@@ -8,7 +8,7 @@ let { switchOn } = card;
 
 
 document.addEventListener("DOMContentLoaded", function (e){
-  if (location.pathname === "/favperson.html" || location.pathname === "/"){
+  if (location.pathname === "/people.html" || location.pathname === "/"){
     // console.log(data);
     favpersons
     .getFavPerson()
@@ -60,4 +60,52 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
 });
 
+import * as topmovies from "./favmovies.js";
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  // if (location.pathname === "/favmovie.html" || location.pathname === "/") {
+  //   topmovies
+  //     topmovies
+  //     .then((data) => {
+  //       topmovies.displayTopMovies(data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // switchOn()
+  if (location.pathname === "/popularmovie.html" || location.pathname === "/") {
+    topmovies
+      .getTopMovies()
+      .then((data) => {
+        topmovies.displayTopMovies(data);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  
+  if (
+    location.pathname === "/movie.html" ||
+    location.pathname === "/movie"
+  ) {
+    // let searchParams = new URLSearchParams(location.search);
+    // searchParams.get("id")
+    const id = history.state.id;
+    console.log(history.state);
+    getFavMovie(id).then((data) => {
+      displayFavMovie(data);
+      console.log(data);
+    });
+  }
+});
 

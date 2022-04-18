@@ -15,10 +15,10 @@ export async function getMovie(movie_id) {
 
 
 
-export function displayMovie(data) {
+export function displayMovies(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
-  const { title, poster_path,overview,backdrop_path, release_date, vote_average, id } = data;
+  const { title, poster_path,overview,backdrop_path,runtime,tagline, genres, release_date, vote_average, id } = data;
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
@@ -37,9 +37,9 @@ export function displayMovie(data) {
               </h1>
             </a>
             <p class="my-2">
-             ${moment(release_date).format("L")} 
+            sanasi
               ${genres.map((genre) => genre.name).join(", ")}
-             ${Math.floor(runtime / 60)}h ${runtime % 60}m
+            
             </p>
             <div class="rating mt-5">
               <div class="circle-progressbar">

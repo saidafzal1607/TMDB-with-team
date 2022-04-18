@@ -15,7 +15,7 @@ export async function getMovie(movie_id) {
 
 
 
-export function displayMovies(data) {
+export function displayMovie(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
   const { title, poster_path,overview,backdrop_path,runtime,tagline, genres, release_date, vote_average, id } = data;

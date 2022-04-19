@@ -11,7 +11,7 @@ profile and favorite
 Saidafzal----header 
 Orziqul aka---tabs
 Asror----footer
-Islom----card
+Islom----card, <!-- sort declanding and ascanding -->
 
 
 ***** UI  must finished until tuesday ****** 

@@ -318,6 +318,32 @@ p {
   margin-bottom: 20px;
 }
 
+#tags {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 5px auto;
+}
+
+.tag {
+  color: #000;
+  background-color: transparent;
+  padding: 5px 10px;
+  border-radius: 45px;
+  outline: 1px solid #696868;
+  margin: 5px;
+  display: inline-block;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+.tag:hover {
+  background-color: #59e7f9;
+  outline: 1px solid #59e7f9;
+  color: white;
+}
+
 .header-movie {
   background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg");
   border-bottom: 1px solid #020258;

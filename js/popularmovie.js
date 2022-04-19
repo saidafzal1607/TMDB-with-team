@@ -3,7 +3,6 @@ import moment from "../node_modules/moment/dist/moment.js";
 
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
-
 // const SORT_URL =  BASE_URL + '/discover/movie?sort_by=popularity.desc&api_key='+API_KEY;
 // const  genres = [
 //   {
@@ -86,7 +85,6 @@ const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 // const tagEl = document.getElementById('tags');
 
-
 // var selectedGenre = []
 // setGenre();
 // function setGenre(){
@@ -125,7 +123,21 @@ const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 //     displayTopMovies(data);
 //   })
 // }
-
+export function discoveryFilterHandler(query) {
+  let url = `${BASE_URL}discover/movie?api_key=${API_KEY}`;
+  for (const key in query) {
+    if (query[key]) {
+      url += `&${key}=${query[key]}`;
+    }
+  }
+  return url;
+}
+export async function discoverPopularMovie(query) {
+  const url = this.discoveryFilterHandler(query);
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+}
 
 export async function getTopMovies(page = 1) {
   try {
@@ -138,8 +150,6 @@ export async function getTopMovies(page = 1) {
     throw error;
   }
 }
-
-
 
 export function displayTopMovies(data) {
   const { results } = data;
@@ -209,11 +219,8 @@ export function displayTopMovies(data) {
       </div>
     `;
     topMovies.innerHTML = html;
-   
   });
 }
-
-
 
 export async function getFavMovie(movie_id) {
   try {
@@ -226,11 +233,19 @@ export async function getFavMovie(movie_id) {
   }
 }
 
-
-export function displayFavMovie (data) {
+export function displayFavMovie(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
-  const { title, poster_path,overview,runtime,tagline, genres, release_date, vote_average,} = data;
+  const {
+    title,
+    poster_path,
+    overview,
+    runtime,
+    tagline,
+    genres,
+    release_date,
+    vote_average,
+  } = data;
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
@@ -249,7 +264,7 @@ export function displayFavMovie (data) {
               </h1>
             </a>
             <p class="my-2">
-            ${moment(release_date).format('L')}
+            ${moment(release_date).format("L")}
               ${genres.map((genre) => genre.name).join(", ")}
               ${Math.floor(runtime / 60)}h ${runtime % 60}min
             
@@ -338,4 +353,3 @@ export function displayFavMovie (data) {
 
   movieContent.innerHTML = html;
 }
-

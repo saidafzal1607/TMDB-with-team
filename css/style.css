@@ -349,6 +349,51 @@ p {
   color: white;
 }
 
+.profile-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.circle-progressbar {
+  position: relative;
+  margin-top: -30px;
+}
+@keyframes growProgressBar {
+  0%, 33% {
+    --pgPercentage: 0;
+  }
+  100% {
+    --pgPercentage: var(--value);
+  }
+}
+@property --pgPercentage {
+  .circle-progressbar {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+  }
+}
+.circle-progressbar div[role=progressbar] {
+  --size: 2.5rem;
+  --bg: #081c22;
+  --fg: rgba(20, 193, 20, 0.757);
+  --pgPercentage: var(--value);
+  animation: growProgressBar 3s 1 forwards;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(closest-side, #081c22 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(var(--size) / 3.5);
+  color: white;
+}
+.circle-progressbar div[role=progressbar]::before {
+  counter-reset: percentage var(--value);
+  content: counter(percentage) "%";
+}
+
 .header-movie {
   background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg");
   border-bottom: 1px solid #020258;
@@ -643,6 +688,51 @@ p {
 }
 #person .card .card-body a:hover {
   color: #01b4e4;
+}
+
+.profile-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.circle-progressbar {
+  position: relative;
+  margin-top: -30px;
+}
+@keyframes growProgressBar {
+  0%, 33% {
+    --pgPercentage: 0;
+  }
+  100% {
+    --pgPercentage: var(--value);
+  }
+}
+@property --pgPercentage {
+  .circle-progressbar {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+  }
+}
+.circle-progressbar div[role=progressbar] {
+  --size: 2.5rem;
+  --bg: #081c22;
+  --fg: rgba(20, 193, 20, 0.757);
+  --pgPercentage: var(--value);
+  animation: growProgressBar 3s 1 forwards;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(closest-side, #081c22 80%, transparent 0 99.9%, white 0), conic-gradient(var(--fg) calc(var(--pgPercentage) * 1%), var(--bg) 0);
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: calc(var(--size) / 3.5);
+  color: white;
+}
+.circle-progressbar div[role=progressbar]::before {
+  counter-reset: percentage var(--value);
+  content: counter(percentage) "%";
 }
 
 /*!

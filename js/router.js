@@ -1,8 +1,8 @@
 import * as home from "./home.js";
 import * as card from "./card.js";
 import { displayMovie, getMovie } from "./movie.js";
-import {displayFavMovie, getFavMovie} from "./favmovies.js";
-import * as favpersons from "./favperson.js";
+import {displayFavMovie, getFavMovie} from "./popularmovie.js";
+import * as favpersons from "./people.js";
 let { switchOn } = card;
 // switchOn(document);
 
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
 });
 
-import * as topmovies from "./favmovies.js";
+import * as topmovies from "./popularmovie.js";
 
 document.addEventListener("DOMContentLoaded", function (e) {
   // if (location.pathname === "/favmovie.html" || location.pathname === "/") {

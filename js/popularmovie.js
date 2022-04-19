@@ -3,6 +3,130 @@ import moment from "../node_modules/moment/dist/moment.js";
 
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
+
+// const SORT_URL =  BASE_URL + '/discover/movie?sort_by=popularity.desc&api_key='+API_KEY;
+// const  genres = [
+//   {
+//     "id": 28,
+//     "name": "Action"
+//   },
+//   {
+//     "id": 12,
+//     "name": "Adventure"
+//   },
+//   {
+//     "id": 16,
+//     "name": "Animation"
+//   },
+//   {
+//     "id": 35,
+//     "name": "Comedy"
+//   },
+//   {
+//     "id": 80,
+//     "name": "Crime"
+//   },
+//   {
+//     "id": 99,
+//     "name": "Documentary"
+//   },
+//   {
+//     "id": 18,
+//     "name": "Drama"
+//   },
+//   {
+//     "id": 10751,
+//     "name": "Family"
+//   },
+//   {
+//     "id": 14,
+//     "name": "Fantasy"
+//   },
+//   {
+//     "id": 36,
+//     "name": "History"
+//   },
+//   {
+//     "id": 27,
+//     "name": "Horror"
+//   },
+//   {
+//     "id": 10402,
+//     "name": "Music"
+//   },
+//   {
+//     "id": 9648,
+//     "name": "Mystery"
+//   },
+//   {
+//     "id": 10749,
+//     "name": "Romance"
+//   },
+//   {
+//     "id": 878,
+//     "name": "Science Fiction"
+//   },
+//   {
+//     "id": 10770,
+//     "name": "TV Movie"
+//   },
+//   {
+//     "id": 53,
+//     "name": "Thriller"
+//   },
+//   {
+//     "id": 10752,
+//     "name": "War"
+//   },
+//   {
+//     "id": 37,
+//     "name": "Western"
+//   }
+// ]
+
+// const tagEl = document.getElementById('tags');
+
+
+// var selectedGenre = []
+// setGenre();
+// function setGenre(){
+//   tagEl.innerHTML = '';
+//   genres.forEach(genre => {
+//     const t = document.createElement('div');
+//     t.classList.add('tag');
+//     t.id=genre.id;
+//     t.innerText = genre.name;
+//     t.addEventListener('click', ()=>{
+//       if(selectedGenre.length == 0){
+//         selectedGenre.push(genre.id);
+
+//       }else{
+//         if(selectedGenre.includes(genre.id)){
+//           selectedGenre.forEach((id, idx) => {
+//             if(id == genre.id){
+//               selectedGenre.splice(idx, 1);
+
+//             }
+//           })
+//         }else{
+//           selectedGenre.push(genre.id);
+//         }
+//       }
+//       console.log(selectedGenre)
+//       getTopMovies(SORT_URL + '&with_genres='+encodeURI(selectedGenre.join(',')))
+//     })
+//     tagEl.append(t);
+//   })
+// }
+// getGenreMovie(SORT_URL);
+// function getGenreMovie(url){
+//   fetch(url).then(res => res.json()).then(data => {
+//     console.log(data)
+//     displayTopMovies(data);
+//   })
+// }
+
+
 export async function getTopMovies(page = 1) {
   try {
     const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
@@ -14,6 +138,8 @@ export async function getTopMovies(page = 1) {
     throw error;
   }
 }
+
+
 
 export function displayTopMovies(data) {
   const { results } = data;

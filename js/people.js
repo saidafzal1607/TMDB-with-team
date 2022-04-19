@@ -30,7 +30,7 @@ export function displayFavPerson(data) {
 
       html += `
       <div class="col col-sm-6 col-md-4 col-lg-3">
-          <div
+          <div data-id=${id}
             class="card shadow p-3 mb-5 bg-white rounded"
             style="border: none"
           ><a href="">

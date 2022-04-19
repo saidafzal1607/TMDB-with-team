@@ -227,11 +227,10 @@ export async function getFavMovie(movie_id) {
 }
 
 
-
-export function displayFavMovie(data) {
+export function displayFavMovie (data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
-  const { title, poster_path,overview,backdrop_path, release_date, vote_average, id } = data;
+  const { title, poster_path,overview,runtime,tagline, genres, release_date, vote_average,} = data;
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
@@ -246,13 +245,14 @@ export function displayFavMovie(data) {
           <div class="col-8">
             <a href="#" class="movie-title my-2">
               <h1>
-              ${title}
+              ${title}(${release_date.split("-")[0]})
               </h1>
             </a>
             <p class="my-2">
-              12/17/2021 (US)
-              Action, Adventure, Science Fiction
-              2h 28m
+            ${moment(release_date).format('L')}
+              ${genres.map((genre) => genre.name).join(", ")}
+              ${Math.floor(runtime / 60)}h ${runtime % 60}min
+            
             </p>
             <div class="rating mt-5">
               <div class="circle-progressbar">
@@ -285,6 +285,10 @@ export function displayFavMovie(data) {
 
             </div>
             <div class="movie-overview my-2">
+            <p class="tagline-text">
+            ${tagline}
+            
+            </p>
               <h3 class="py-2">
                 Overview
               </h3>

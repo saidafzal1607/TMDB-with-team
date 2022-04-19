@@ -13,7 +13,6 @@ export async function getPopularMovies(page = 1) {
   }
 }
 
-
 export function displayPopularMovies(data) {
   const { results } = data;
   const popularTvMovies = document.querySelector(".popular-tv-movies");

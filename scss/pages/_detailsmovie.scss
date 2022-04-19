@@ -17,6 +17,12 @@
   }
   .main-movie {
     padding: 52px;
+    .col-4{
+      img{
+        height: 500px;
+        object-fit: cover;
+      }
+    }
     .col-8 {
       color: #ffffff;
       .movie-title {

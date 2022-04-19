@@ -1,5 +1,6 @@
 import * as home from "./home.js";
 import * as card from "./card.js";
+import * as profile from "./profile.js";
 import { displayMovie, getMovie } from "./movie.js";
 import {displayPerson, getPerson} from "./person.js";
 import {displayPersonOfMovies, getPersonOfMovies} from "./personofmovies.js";
@@ -96,6 +97,78 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     getFavMovie(popid).then((data) => {
       displayFavMovie(data);
+      console.log(data);
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function (e) {
+ 
+  if (location.pathname === "/index.html" || location.pathname === "/") {
+    profile
+      .getPopularTVMovies()
+      .then((data) => {
+        profile.displayPopularTVMovies(data);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  
+  if (
+    location.pathname === "/movie.html" ||
+    location.pathname === "/movie"
+  ) {
+    // let searchParams = new URLSearchParams(location.search);
+    // searchParams.get("id")
+    const id = history.state.id;
+    console.log(history.state);
+    getPopularTVMovies(id).then((data) => {
+      displayPopularTVMovies(data);
+      console.log(data);
+    });
+  }
+});
+import * as home1 from "./profile.js"
+
+document.addEventListener("DOMContentLoaded", function (e) {
+ 
+  if (location.pathname === "/index.html" || location.pathname === "/") {
+    home1.getLatestMovies()
+      .then((data) => {
+        home1.displayLatestMovies(data);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+  
+  if (
+    location.pathname === "/movie.html" ||
+    location.pathname === "/movie"
+  ) {
+    // let searchParams = new URLSearchParams(location.search);
+    // searchParams.get("id")
+    const id = history.state.id;
+    console.log(history.state);
+    getLatestMovies(id).then((data) => {
+      displayLatestMovies(data);
       console.log(data);
     });
   }

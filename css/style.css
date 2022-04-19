@@ -340,6 +340,10 @@ p {
 .header-movie .main-movie {
   padding: 52px;
 }
+.header-movie .main-movie .col-4 img {
+  height: 500px;
+  object-fit: cover;
+}
 .header-movie .main-movie .col-8 {
   color: #ffffff;
 }

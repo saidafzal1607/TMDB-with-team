@@ -1,6 +1,6 @@
 import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
-const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
+const { API_KEY,SESSION_ID, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 export async function getMovie(movie_id) {
   try {
@@ -12,13 +12,55 @@ export async function getMovie(movie_id) {
     throw error;
   }
 }
-
+export async function putFavourite(id, favorite) {
+  const FavouriteUrl = `${BASE_URL}account/${id}/favorite?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+  const bodyData = {
+    media_type: "movie",
+    media_id: id,
+    favorite,
+  };
+  const response = await fetch(FavouriteUrl, {
+    method: "POST",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+  const data = await response.json();
+  return data;
+}
+export async function putWatchlist(id, watchlist) {
+  const addToWatchlistUrl = `${BASE_URL}account/${id}/watchlist?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+  const bodyData = {
+    media_type: "movie",
+    media_id: id,
+    watchlist,
+  };
+  const response = await fetch(addToWatchlistUrl, {
+    method: "POST",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+  const data = await response.json();
+  return data;
+}
 
 
 export function displayMovie(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
-  const { title, poster_path,overview,backdrop_path,runtime,tagline, genres, release_date, vote_average, id } = data;
+  const {
+    title,
+    poster_path,
+    overview,
+    runtime,
+    tagline,
+    genres,
+    release_date,
+    vote_average,
+  } = data;
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
@@ -33,12 +75,14 @@ export function displayMovie(data) {
           <div class="col-8">
             <a href="#" class="movie-title my-2">
               <h1>
-              ${title}
+              
+              ${title}(${release_date.split("-")[0]})
               </h1>
             </a>
             <p class="my-2">
-            sanasi
+            ${moment(release_date).format("L")}
               ${genres.map((genre) => genre.name).join(", ")}
+              ${Math.floor(runtime / 60)}h ${runtime % 60}min
             
             </p>
             <div class="rating mt-5">

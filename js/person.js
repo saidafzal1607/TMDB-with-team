@@ -13,16 +13,23 @@ export async function getPerson(person_id) {
   }
 }
 
-
-
 export function displayPerson(data) {
   const personContent = document.querySelector(".main-person");
   let html = "";
-  const { biography, profile_path, name, place_of_birth, birthday, gender, } = data;
+  const {
+    biography,
+    profile_path,
+    name,
+    place_of_birth,
+    also_known_as,
+    birthday,
+    gender,
+  } = data;
   const poster = profile_path
     ? `${BASE_IMG_URL}${profile_path}`
     : DEFAULT_IMG_URL;
- const gen = gender =  1 ? 'Female': 'Male'
+  const gen = gender == 1 ? "Female" : "Male";
+  const nowDate = new Date();
   html += `
   <div class="col-sm-7 col-md-4">
   <a href="" class="movie-posterimg">
@@ -60,7 +67,7 @@ export function displayPerson(data) {
   </p>
   <p class="py-1">
     <strong class="fw-bold">Birthday</strong> <br />
-   ${birthday} 
+   ${birthday} (${Math.floor(nowDate.getFullYear()-birthday.split('-')[0])} years old)
   </p>
   <p class="py-1">
     <strong class="fw-bold">Place of Birth</strong> <br />
@@ -68,7 +75,7 @@ export function displayPerson(data) {
   </p>
   <p class="py-1">
     <strong class="fw-bold">Also Known As</strong> <br />
-    Ethan Green Hawke
+    ${also_known_as.map((item) =>  `${item}<br /> `)}
   </p>
 </div>
 <div class="col-sm-5 col-md-8 py-1">
@@ -84,23 +91,8 @@ export function displayPerson(data) {
   <h5 class="py-4">
       <strong class="fw-bold">Known For</strong>
   </h5>
-  <div class="card-person mt-1">
- <div class="row overflow-scroll">
-  <div class="col">
-      <div class="card">
-        <a href="" class="card-img">
-          <img class="card-img-top"
-            src="https://www.themoviedb.org/t/p/w150_and_h225_bestv2/ai40gM7SUaGA6fthvsd87o8IQq4.jpg"
-            alt="Card image cap">
-        </a>
-        <div class="card-body py-3">
-          <a class="card-text text-capitalize">
-              Dead Poets Society
-          </a>
-        </div>
-      </div>
-    </div>      
- </div>
+  <div class="personOfMovies row overflow-scroll">
+  </div>
   </div>
 </div>
     `;

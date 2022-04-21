@@ -1,13 +1,11 @@
 import * as home from "./home.js";
 import * as card from "./card.js";
 import * as profile from "./profile.js";
-import { displayMovie, getMovie } from "./movie.js";
-import { displayPerson } from "./person.js";
-import { displayPersonOfMovies } from "./personofmovies.js";
+import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
-import * as personofmovies from "./personofmovies.js";
+import { data } from "autoprefixer";
 let { switchOn } = card;
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
@@ -39,12 +37,29 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
   if (location.pathname === "/person.html" || location.pathname === "/person") {
     const personid = history.state.personid;
+    const actorId = history.state.actorId;
     person.getPerson(personid).then((data) => {
-      displayPerson(data);
+      person.displayPerson(data);
+      const cardListMovies = document.querySelectorAll(".card");
+      cardListMovies.forEach((card) => {
+        card.addEventListener("click", (e) => {
+          const personMovieId = card.dataset.id;
+          history.pushState({ personMovieId }, null, `/movie.html`);
+          location.reload();
+        });
+      });
     });
     // get Person of movies
-    personofmovies.getPersonOfMovies(personid).then((data) => {
-      displayPersonOfMovies(data);
+    person.getPersonOfMovies(personid).then((data) => {
+      person.displayPersonOfMovies(data);
+    });
+
+    movie.getMoviePerson(actorId).then((data) => {
+      movie.displayMoviePerson(data);
+    });
+      // get Person of movies
+    movie.getMoviePersonOfMovies(actorId).then((data) => {
+      movie.displayMoviePersonOfMovies(data);
     });
   }
   if (location.pathname === "/index.html" || location.pathname === "/") {
@@ -102,17 +117,63 @@ document.addEventListener("DOMContentLoaded", function (e) {
   if (location.pathname === "/movie.html" || location.pathname === "/movie") {
     const id = history.state.id;
     const popid = history.state.popid;
-    getMovie(id).then((data) => {
-      displayMovie(data);
+    const personMovieId = history.state.personMovieId;
+    const favBtn = document.querySelector(".favbtn");
+    const watchBtn = document.querySelector(".watchbtn");
+    movie.getMovie(id).then((data) => {
+      movie.displayMovie(data);
     });
+    movie.getMovieActors(id).then((data) => {
+      movie.displayMovieActors(data);
+      const cardListActors = document.querySelectorAll(".card-actor");
+      cardListActors.forEach((card) => {
+        card.addEventListener("click", (e) => {
+          const actorId = card.dataset.id;
+          history.pushState({ actorId }, null, `/person.html`);
+          location.reload();
+        });
+      });
+    });
+    movie.getMovieRecommendations(id).then((data) => {
+      movie.displayMovieRecommendations(data);
+    });
+
+    // favourite and watchlist 
+    favBtn.addEventListener("click", (e) => {
+      movie.AddFavourite((data)=>{
+          
+      })
+    });
+    watchBtn.addEventListener("click", (e) => {
+      movie.AddWatchlist((data)=>{
+
+      })
+    });
+         
+
+    //  adit from popular movie  
     topmovies.getFavMovie(popid).then((data) => {
       topmovies.displayFavMovie(data);
     });
+    topmovies.getFavMovieActors(popid).then((data) => {
+      topmovies.displayFavMovieActors(data);
+    });
+    topmovies.getFavMovieRecommendations(popid).then((data) => {
+      topmovies.displayFavMovieRecommendations(data);
+    });
+    //  adit from person
+    person.getMoviePerson(personMovieId).then((data) => {
+      person.displayMoviePerson(data);
+    });
+    person.getMovieActorsPerson(personMovieId).then((data) => {
+      person.displayMovieActorsPerson(data);
+    });
+    person.getMoviePersonRecommendations(personMovieId).then((data) => {
+      person.displayMoviePersonRecommendations(data);
+    });
+
   }
-  if (
-    location.pathname === "/popularmovie.html" ||
-    location.pathname === "/popularmovie"
-  ) {
+  if ( location.pathname === "/popularmovie.html" || location.pathname === "/popularmovie") {
     const popMovForm = document.querySelector(".popularMovieSort");
     popMovForm.addEventListener("submit", (e) => {
       e.preventDefault();

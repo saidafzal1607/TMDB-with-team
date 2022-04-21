@@ -419,29 +419,29 @@ p {
   background-image: linear-gradient(to right, #202020 150px, rgba(32, 32, 32, 0.84) 100%);
   z-index: 1;
 }
-.header-movie .main-movie {
+.header-movie .movie-item {
   padding: 52px;
 }
-.header-movie .main-movie .col-4 img {
+.header-movie .movie-item .col-4 img {
   height: 500px;
   object-fit: cover;
 }
-.header-movie .main-movie .col-8 {
+.header-movie .movie-item .col-8 {
   color: #ffffff;
 }
-.header-movie .main-movie .col-8 .movie-title {
+.header-movie .movie-item .col-8 .movie-title {
   color: #fff;
   text-decoration: none;
   text-transform: capitalize;
 }
-.header-movie .main-movie .col-8 .movie-title:hover {
+.header-movie .movie-item .col-8 .movie-title:hover {
   color: #bdccd8;
 }
-.header-movie .main-movie .col-8 .rating {
+.header-movie .movie-item .col-8 .rating {
   display: flex;
   align-items: center;
 }
-.header-movie .main-movie .col-8 .rating .circle-progressbar {
+.header-movie .movie-item .col-8 .rating .circle-progressbar {
   position: relative;
   margin-top: -30px;
 }
@@ -454,13 +454,13 @@ p {
   }
 }
 @property --pgPercentage {
-  .header-movie .main-movie .col-8 .rating .circle-progressbar {
+  .header-movie .movie-item .col-8 .rating .circle-progressbar {
     syntax: "<number>";
     inherits: false;
     initial-value: 0;
   }
 }
-.header-movie .main-movie .col-8 .rating .circle-progressbar div[role=progressbar] {
+.header-movie .movie-item .col-8 .rating .circle-progressbar div[role=progressbar] {
   --size: 3.8rem;
   --bg: #081c22;
   --fg: rgba(20, 193, 20, 0.757);
@@ -476,22 +476,22 @@ p {
   font-size: calc(var(--size) / 3.5);
   color: white;
 }
-.header-movie .main-movie .col-8 .rating .circle-progressbar div[role=progressbar]::before {
+.header-movie .movie-item .col-8 .rating .circle-progressbar div[role=progressbar]::before {
   counter-reset: percentage var(--value);
   content: counter(percentage) "%";
 }
-.header-movie .main-movie .col-8 .rating ul {
+.header-movie .movie-item .col-8 .rating ul {
   display: flex;
   align-items: center;
 }
-.header-movie .main-movie .col-8 .rating ul li {
+.header-movie .movie-item .col-8 .rating ul li {
   margin-right: 20px;
 }
-.header-movie .main-movie .col-8 .rating ul li a {
-  color: #fff;
+.header-movie .movie-item .col-8 .rating ul li a {
   text-decoration: none;
+  color: white;
 }
-.header-movie .main-movie .col-8 .rating ul li a i {
+.header-movie .movie-item .col-8 .rating ul li a i {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -501,16 +501,19 @@ p {
   background: #032440;
   margin-right: 5px;
 }
-.header-movie .main-movie .row .movie-character {
+.header-movie .movie-item .col-8 .rating ul li a [data-addlist=true], .header-movie .movie-item .col-8 .rating ul li [data-favlist=true], .header-movie .movie-item .col-8 .rating ul li [data-watchlist=true], .header-movie .movie-item .col-8 .rating ul li [data-addlist=true] {
+  color: #be0707 !important;
+}
+.header-movie .movie-item .row .movie-character {
   color: #fff;
   text-decoration: none;
   text-transform: capitalize;
   font-size: 1.2rem;
 }
-.header-movie .main-movie .row .movie-character:hover {
+.header-movie .movie-item .row .movie-character:hover {
   color: #bdccd8;
 }
-.header-movie .main-movie .row p {
+.header-movie .movie-item .row p {
   margin-top: 10px;
 }
 
@@ -617,26 +620,27 @@ p {
   flex-wrap: nowrap;
   overflow: scroll;
 }
-.card-movies .card {
+.card-movies .row .card {
   border: 0px !important;
   width: 250px;
 }
-.card-movies .card:hover .card-overlay {
+.card-movies .row .card:hover .card-overlay {
   visibility: visible;
   cursor: pointer !important;
 }
-.card-movies .card-img-top {
+.card-movies .row .card .card-img-top {
   top: 0;
   left: 0;
   width: 250px;
   height: 141px;
   border-radius: 7px;
+  object-fit: cover;
 }
-.card-movies .card-img-overlay {
+.card-movies .row .card .card-img-overlay {
   display: flex;
   align-items: flex-end;
 }
-.card-movies .card-img-overlay .card-overlay {
+.card-movies .row .card .card-img-overlay .card-overlay {
   visibility: hidden;
   padding-left: 10px;
   padding-right: 10px;
@@ -644,14 +648,14 @@ p {
   border-radius: 5px;
   height: 45px;
   width: 100%;
-  position: relative;
+  position: absolute;
   margin-bottom: 40px;
   right: 0px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.card-movies .card-body {
+.card-movies .row .card .card-body {
   padding: 3px !important;
   display: flex;
   justify-content: space-between;

@@ -1,12 +1,8 @@
 import * as home from "./home.js";
-import * as card from "./card.js";
-import * as profile from "./profile.js";
 import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
-import { data } from "autoprefixer";
-let { switchOn } = card;
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
 // );
@@ -15,7 +11,9 @@ let { switchOn } = card;
 // });
 
 // switchOn(document);
-
+window.addEventListener("popstate", (e) => {
+  location.reload();
+});
 document.addEventListener("DOMContentLoaded", function (e) {
   if (location.pathname === "/people.html" || location.pathname === "/people") {
     favpersons
@@ -57,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     movie.getMoviePerson(actorId).then((data) => {
       movie.displayMoviePerson(data);
     });
-      // get Person of movies
+    // get Person of movies
     movie.getMoviePersonOfMovies(actorId).then((data) => {
       movie.displayMoviePersonOfMovies(data);
     });
@@ -118,10 +116,21 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const id = history.state.id;
     const popid = history.state.popid;
     const personMovieId = history.state.personMovieId;
-    const favBtn = document.querySelector(".favbtn");
     const watchBtn = document.querySelector(".watchbtn");
     movie.getMovie(id).then((data) => {
       movie.displayMovie(data);
+      const favBtn = document.querySelector(".favbtn");
+      // favourite and watchlist
+      favBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const favoriteBtn = e.target.closest(".favbtn").dataset.favlist;
+        const favorite = favoriteBtn == "true" ? true : false;
+        movie.AddFavourite(id, favorite).then((data) => {
+          if (data.success) {
+            e.target.closest(".favbtn").dataset.favlist = !favorite;
+          }
+        });
+      });
     });
     movie.getMovieActors(id).then((data) => {
       movie.displayMovieActors(data);
@@ -138,42 +147,35 @@ document.addEventListener("DOMContentLoaded", function (e) {
       movie.displayMovieRecommendations(data);
     });
 
-    // favourite and watchlist 
-    favBtn.addEventListener("click", (e) => {
-      movie.AddFavourite((data)=>{
-          
-      })
-    });
-    watchBtn.addEventListener("click", (e) => {
-      movie.AddWatchlist((data)=>{
+    // watchBtn.addEventListener("click", (e) => {
+    //   movie.AddWatchlist((data) => {});
+    // });
 
-      })
-    });
-         
-
-    //  adit from popular movie  
-    topmovies.getFavMovie(popid).then((data) => {
-      topmovies.displayFavMovie(data);
-    });
-    topmovies.getFavMovieActors(popid).then((data) => {
-      topmovies.displayFavMovieActors(data);
-    });
-    topmovies.getFavMovieRecommendations(popid).then((data) => {
-      topmovies.displayFavMovieRecommendations(data);
-    });
+    //  adit from popular movie
+    // topmovies.getFavMovie(popid).then((data) => {
+    //   topmovies.displayFavMovie(data);
+    // });
+    // topmovies.getFavMovieActors(popid).then((data) => {
+    //   topmovies.displayFavMovieActors(data);
+    // });
+    // topmovies.getFavMovieRecommendations(popid).then((data) => {
+    //   topmovies.displayFavMovieRecommendations(data);
+    // });
     //  adit from person
-    person.getMoviePerson(personMovieId).then((data) => {
-      person.displayMoviePerson(data);
-    });
-    person.getMovieActorsPerson(personMovieId).then((data) => {
-      person.displayMovieActorsPerson(data);
-    });
-    person.getMoviePersonRecommendations(personMovieId).then((data) => {
-      person.displayMoviePersonRecommendations(data);
-    });
-
+    // person.getMoviePerson(personMovieId).then((data) => {
+    //   person.displayMoviePerson(data);
+    // });
+    // person.getMovieActorsPerson(personMovieId).then((data) => {
+    //   person.displayMovieActorsPerson(data);
+    // });
+    // person.getMoviePersonRecommendations(personMovieId).then((data) => {
+    //   person.displayMoviePersonRecommendations(data);
+    // });
   }
-  if ( location.pathname === "/popularmovie.html" || location.pathname === "/popularmovie") {
+  if (
+    location.pathname === "/popularmovie.html" ||
+    location.pathname === "/popularmovie"
+  ) {
     const popMovForm = document.querySelector(".popularMovieSort");
     popMovForm.addEventListener("submit", (e) => {
       e.preventDefault();
@@ -182,17 +184,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
       topmovies
         .discoverPopularMovie(query)
         .then((data) => {
-          
-            topmovies.sortMovies(data);
-            const cardList = document.querySelectorAll(".card");
-            cardList.forEach((card) => {
-              card.addEventListener("click", (e) => {
-                const popid = card.dataset.id;
-                history.pushState({ popid }, null, `/movie.html`);
-                location.reload();
-              });
+          topmovies.sortMovies(data);
+          const cardList = document.querySelectorAll(".card");
+          cardList.forEach((card) => {
+            card.addEventListener("click", (e) => {
+              const popid = card.dataset.id;
+              history.pushState({ popid }, null, `/movie.html`);
+              location.reload();
             });
-        
+          });
         })
         .catch((err) => {
           console.log(err);
@@ -214,7 +214,5 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
-
-     
   }
 });

@@ -121,7 +121,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
       topmovies
         .discoverPopularMovie(query)
         .then((data) => {
-          console.log(data);
+          
+            topmovies.sortMovies(data);
+            const cardList = document.querySelectorAll(".card");
+            cardList.forEach((card) => {
+              card.addEventListener("click", (e) => {
+                const popid = card.dataset.id;
+                history.pushState({ popid }, null, `/movie.html`);
+                location.reload();
+              });
+            });
+        
         })
         .catch((err) => {
           console.log(err);
@@ -143,5 +153,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
+
+     
   }
 });

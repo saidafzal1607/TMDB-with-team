@@ -3,126 +3,6 @@ import moment from "../node_modules/moment/dist/moment.js";
 
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
-// const SORT_URL =  BASE_URL + '/discover/movie?sort_by=popularity.desc&api_key='+API_KEY;
-// const  genres = [
-//   {
-//     "id": 28,
-//     "name": "Action"
-//   },
-//   {
-//     "id": 12,
-//     "name": "Adventure"
-//   },
-//   {
-//     "id": 16,
-//     "name": "Animation"
-//   },
-//   {
-//     "id": 35,
-//     "name": "Comedy"
-//   },
-//   {
-//     "id": 80,
-//     "name": "Crime"
-//   },
-//   {
-//     "id": 99,
-//     "name": "Documentary"
-//   },
-//   {
-//     "id": 18,
-//     "name": "Drama"
-//   },
-//   {
-//     "id": 10751,
-//     "name": "Family"
-//   },
-//   {
-//     "id": 14,
-//     "name": "Fantasy"
-//   },
-//   {
-//     "id": 36,
-//     "name": "History"
-//   },
-//   {
-//     "id": 27,
-//     "name": "Horror"
-//   },
-//   {
-//     "id": 10402,
-//     "name": "Music"
-//   },
-//   {
-//     "id": 9648,
-//     "name": "Mystery"
-//   },
-//   {
-//     "id": 10749,
-//     "name": "Romance"
-//   },
-//   {
-//     "id": 878,
-//     "name": "Science Fiction"
-//   },
-//   {
-//     "id": 10770,
-//     "name": "TV Movie"
-//   },
-//   {
-//     "id": 53,
-//     "name": "Thriller"
-//   },
-//   {
-//     "id": 10752,
-//     "name": "War"
-//   },
-//   {
-//     "id": 37,
-//     "name": "Western"
-//   }
-// ]
-
-// const tagEl = document.getElementById('tags');
-
-// var selectedGenre = []
-// setGenre();
-// function setGenre(){
-//   tagEl.innerHTML = '';
-//   genres.forEach(genre => {
-//     const t = document.createElement('div');
-//     t.classList.add('tag');
-//     t.id=genre.id;
-//     t.innerText = genre.name;
-//     t.addEventListener('click', ()=>{
-//       if(selectedGenre.length == 0){
-//         selectedGenre.push(genre.id);
-
-//       }else{
-//         if(selectedGenre.includes(genre.id)){
-//           selectedGenre.forEach((id, idx) => {
-//             if(id == genre.id){
-//               selectedGenre.splice(idx, 1);
-
-//             }
-//           })
-//         }else{
-//           selectedGenre.push(genre.id);
-//         }
-//       }
-//       console.log(selectedGenre)
-//       getTopMovies(SORT_URL + '&with_genres='+encodeURI(selectedGenre.join(',')))
-//     })
-//     tagEl.append(t);
-//   })
-// }
-// getGenreMovie(SORT_URL);
-// function getGenreMovie(url){
-//   fetch(url).then(res => res.json()).then(data => {
-//     console.log(data)
-//     displayTopMovies(data);
-//   })
-// }
 export function discoveryFilterHandler(query) {
   let url = `${BASE_URL}discover/movie?api_key=${API_KEY}`;
   for (const key in query) {
@@ -149,6 +29,78 @@ export async function getTopMovies(page = 1) {
   } catch (error) {
     throw error;
   }
+}
+
+
+export function sortMovies(data) {
+  const { results } = data;
+  const topMovies = document.querySelector(".top__movies");
+  let html = "";
+  results.forEach((movie) => {
+    const { title, poster_path, release_date, vote_average, id } = movie;
+    const poster = poster_path
+      ? `${BASE_IMG_URL}${poster_path}`
+      : DEFAULT_IMG_URL;
+
+    html += `
+    <div class="col col-md-6 col-lg-4 col-xl-3">
+      <card data-id=${id} class="card ">
+      <a href="movie.html" class="card-img-btn">
+        <img
+          class="card-img img-fluid"
+          src="${poster}"
+          alt="something movie"
+        />
+      </a>
+      <div class="card-img-overlay">
+        <a class="threedot-btn">
+          <i class="fa-solid fa-ellipsis"></i>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-click">
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-list"></i>
+                Add to list</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-heart"></i>
+                Favourite</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Watchlist
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-star"></i>
+                Your rating</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="circle-progressbar">
+          <div
+            role="progressbar"
+            style="--value: ${vote_average * 10}"
+          ></div>
+        </div>
+        <a href="movie.html" class="card-title">${title}</a>
+        <p class="card-text">${moment(release_date).format("ll")}</p>
+      </div>
+      </card>
+      
+      </div>
+    `;
+    topMovies.innerHTML = html;
+  });
 }
 
 export function displayTopMovies(data) {

@@ -6,15 +6,20 @@ const { API_KEY, SESSION_ID, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } =
 export async function getMovie(movie_id) {
   try {
     const url = `${BASE_URL}movie/${movie_id}?api_key=${API_KEY}&language=en-US`;
+    const accountStateUrl = `${BASE_URL}movie/${movie_id}/account_states?api_key=${API_KEY}&session_id=${SESSION_ID}`;
     const res = await fetch(url);
+    const resAccountState = await fetch(accountStateUrl);
     const data = await res.json();
-    return data;
+    const accountStateData = await resAccountState.json();
+    console.log(accountStateData, "isFav");
+    return { ...data, ...accountStateData };
   } catch (error) {
     throw error;
   }
 }
 
 export async function getMovieActors(movie_id) {
+  console.log(movie_id, "salom");
   try {
     const url = `${BASE_URL}movie/${movie_id}/credits?api_key=${API_KEY}&language=en-US`;
     const res = await fetch(url);
@@ -46,6 +51,9 @@ export async function displayMovie(data) {
     overview,
     runtime,
     tagline,
+    favorite,
+    rated,
+    watchlist,
     genres,
     release_date,
     vote_average,
@@ -76,7 +84,7 @@ export async function displayMovie(data) {
               </h1>
               </a>
               <p class="my-2">
-              ${moment(release_date).format("L")}
+               ${moment(release_date).format("L")}
               ${genres.map((genre) => genre.name).join(", ")}
               ${Math.floor(runtime / 60)}h ${runtime % 60}min
               
@@ -94,7 +102,7 @@ export async function displayMovie(data) {
               </a>
               </li>
               <li>
-              <a href="#" class="favbtn" data-favlist="false" title="Mark as favorite">
+              <a href="#" class="favbtn" data-favlist=${favorite} title="Mark as favorite">
               <i class="fa-solid fa-heart"></i>
               </a>
               </li>
@@ -171,17 +179,16 @@ export async function displayMovie(data) {
   movieContent.innerHTML = html;
 }
 
-
-export  function displayMovieActors(data) {
+export function displayMovieActors(data) {
   const { cast } = data;
-    const personOfMovies = document.querySelector(".movie-actors");
+  const personOfMovies = document.querySelector(".movie-actors");
   let html = "";
-    cast.forEach((actors) => {
-        const { profile_path, name, id ,character} = actors;
-        const poster = profile_path
-            ? `${BASE_IMG_URL}${profile_path}`
-            : DEFAULT_IMG_URL;
-        html += `
+  cast.forEach((actors) => {
+    const { profile_path, name, id, character } = actors;
+    const poster = profile_path
+      ? `${BASE_IMG_URL}${profile_path}`
+      : DEFAULT_IMG_URL;
+    html += `
     <div class="col">
     <div class="card card-actor"  data-id=${id}>
     <a href="" class="card-img">
@@ -195,22 +202,20 @@ export  function displayMovieActors(data) {
     </div>
   </div>   
     `;
-    });
-    personOfMovies.innerHTML = html;
-   
+  });
+  personOfMovies.innerHTML = html;
 }
 
-
-export  function displayMovieRecommendations(data) {
+export function displayMovieRecommendations(data) {
   const { results } = data;
-    const personOfMovies = document.querySelector(".movie-recommendations");
+  const personOfMovies = document.querySelector(".movie-recommendations");
   let html = "";
-    results.forEach((actors) => {
-        const { poster_path, title, id,vote_average,release_date} = actors;
-        const poster = poster_path
-            ? `${BASE_IMG_URL}${poster_path}`
-            : DEFAULT_IMG_URL;
-        html += `
+  results.forEach((actors) => {
+    const { poster_path, title, id, vote_average, release_date } = actors;
+    const poster = poster_path
+      ? `${BASE_IMG_URL}${poster_path}`
+      : DEFAULT_IMG_URL;
+    html += `
         <div class="col">
         <div class="card" data-id="${id}" >
           <a href="" class="card-img">
@@ -220,7 +225,9 @@ export  function displayMovieRecommendations(data) {
           <div class="card-img-overlay">
             <div class="card-overlay">
               <div class="movie-data">
-                <i class="fa-solid fa-calendar-days"></i>  ${moment(release_date).format('l')}
+                <i class="fa-solid fa-calendar-days"></i>  ${moment(
+                  release_date
+                ).format("l")}
               </div>
               <div class="lists">
                 <a href="#" class="text-decoration-none pe-2">
@@ -242,12 +249,11 @@ export  function displayMovieRecommendations(data) {
         </div>
       </div>
     `;
-    });
-    personOfMovies.innerHTML = html;
-   
+  });
+  personOfMovies.innerHTML = html;
 }
 
-// adit person.html 
+// adit person.html
 
 export async function getMoviePerson(person_id) {
   try {
@@ -270,7 +276,6 @@ export async function getMoviePersonOfMovies(person_id) {
     throw error;
   }
 }
-
 
 export function displayMoviePerson(data) {
   const personContent = document.querySelector(".main-person");
@@ -326,7 +331,9 @@ export function displayMoviePerson(data) {
   </p>
   <p class="py-1">
     <strong class="fw-bold">Birthday</strong> <br />
-   ${birthday} (${Math.floor(nowDate.getFullYear()-birthday.split('-')[0])} years old)
+   ${birthday} (${Math.floor(
+    nowDate.getFullYear() - birthday.split("-")[0]
+  )} years old)
   </p>
   <p class="py-1">
     <strong class="fw-bold">Place of Birth</strong> <br />
@@ -334,7 +341,7 @@ export function displayMoviePerson(data) {
   </p>
   <p class="py-1">
     <strong class="fw-bold">Also Known As</strong> <br />
-    ${also_known_as.map((item) =>  `${item}<br /> `)}
+    ${also_known_as.map((item) => `${item}<br /> `)}
   </p>
 </div>
 <div class="col-sm-5 col-md-8 py-1">
@@ -359,14 +366,14 @@ export function displayMoviePerson(data) {
 }
 export function displayMoviePersonOfMovies(data) {
   const { cast } = data;
-    const personOfMovies = document.querySelector(".personOfMovies");
+  const personOfMovies = document.querySelector(".personOfMovies");
   let html = "";
-    cast.forEach((person) => {
-        const { poster_path, title, id } = person;
-        const poster = poster_path
-            ? `${BASE_IMG_URL}${poster_path}`
-            : DEFAULT_IMG_URL;
-        html += `
+  cast.forEach((person) => {
+    const { poster_path, title, id } = person;
+    const poster = poster_path
+      ? `${BASE_IMG_URL}${poster_path}`
+      : DEFAULT_IMG_URL;
+    html += `
     <div class="col">
     <div class="card"  data-id=${id}>
       <a href="" class="card-img">
@@ -382,19 +389,18 @@ export function displayMoviePersonOfMovies(data) {
     </div>
   </div>   
     `;
-    });
-    personOfMovies.innerHTML = html;
-   
+  });
+  personOfMovies.innerHTML = html;
 }
 
-// Favorite List 
+// Favorite List
 
 export async function AddFavourite(id, favorite) {
   const FavouriteUrl = `${BASE_URL}account/${id}/favorite?api_key=${API_KEY}&session_id=${SESSION_ID}`;
   const bodyData = {
     media_type: "movie",
     media_id: id,
-    favorite,
+    favorite: !favorite,
   };
   const response = await fetch(FavouriteUrl, {
     method: "POST",

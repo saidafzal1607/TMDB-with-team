@@ -1,9 +1,9 @@
-@import "utils/variables";
-@import "base/reset";
-@import "components/dropdown";
-@import "components/card";
-@import "layout/navigation";
-@import "layout/footer";
-@import "pages/index";
-@import "pages/profile";
+@import "./utils/variables";
+@import "./base/reset";
+@import "./components/dropdown";
+@import "./components/card";
+@import "./layout/navigation";
+@import "./layout/footer";
+@import "./pages/index";
+@import "./pages/profile";
 @import "../node_modules/bootstrap/scss/bootstrap";

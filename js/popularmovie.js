@@ -191,6 +191,7 @@ export function displayFavMovie(data) {
   const {
     title,
     poster_path,
+    backdrop_path,
     overview,
     runtime,
     tagline,
@@ -201,229 +202,213 @@ export function displayFavMovie(data) {
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
+  const backdrop = backdrop_path
+    ? `${BASE_IMG_URL}${backdrop_path}`
+    : DEFAULT_IMG_URL;
 
   html += `
-    <div class="col-4">
-            <a href="" class="movie-posterimg">
-              <img class="img-fluid "
-                src="${poster}" alt="brand" />
-            </a>
-          </div>
-          <div class="col-8">
-            <a href="#" class="movie-title my-2">
-              <h1>
-              ${title}(${release_date.split("-")[0]})
+  <div class="header-movie" style="background-image: url(${backdrop});">
+   <div class="custom-bg">
+     <div class="container">
+        <div class="row movie-item">
+  <div class="col-4">
+  <a href="" class="movie-posterimg">
+  <img class="img-fluid "
+  src="${poster}" alt="brand" />
+  </a>
+  </div>
+  <div class="col-8">
+  <a href="#" class="movie-title my-2">
+  <h1>
+  
+  ${title}(${release_date.split("-")[0]})
               </h1>
-            </a>
-            <p class="my-2">
-            ${moment(release_date).format("L")}
+              </a>
+              <p class="my-2">
+              ${moment(release_date).format("L")}
               ${genres.map((genre) => genre.name).join(", ")}
               ${Math.floor(runtime / 60)}h ${runtime % 60}min
-            
-            </p>
-            <div class="rating mt-5">
+              
+              </p>
+              <div class="rating mt-5">
               <div class="circle-progressbar">
-                <div role="progressbar" style="--value: ${vote_average * 10}">
-                </div>
+              <div role="progressbar" style="--value: ${vote_average * 10}">
+              </div>
               </div>
               <h6 class="pb-4 mx-2">User Score</h6>
               <ul>
-                <li>
-                  <a href="#" title="Add to list">
-                    <i class="fa-solid fa-list"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Mark as favorite">
-                    <i class="fa-solid fa-heart"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Mark as favorite">
-                    <i class="fa-solid fa-clipboard-list"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Rate It">
-                    <i class="fa-solid fa-star"></i>
-                  </a>
-                </li>
+              <li>
+              <a href="#" title="Add to list">
+              <i class="fa-solid fa-list"></i>
+              </a>
+              </li>
+              <li>
+              <a href="#" title="Mark as favorite">
+              <i class="fa-solid fa-heart"></i>
+              </a>
+              </li>
+              <li>
+              <a href="#" title="Mark as favorite">
+              <i class="fa-solid fa-clipboard-list"></i>
+              </a>
+              </li>
+              <li>
+              <a href="#" title="Rate It">
+              <i class="fa-solid fa-star"></i>
+              </a>
+              </li>
               </ul>
-
-            </div>
-            <div class="movie-overview my-2">
-            <p class="tagline-text">
-            ${tagline}
+              
+              </div>
+              <div class="movie-overview my-2">
+              <p class="tagline-text">
+              ${tagline}
             
             </p>
-              <h3 class="py-2">
-                Overview
-              </h3>
-              <p> ${overview}
-              </p>
+            <h3 class="py-2">
+            Overview
+            </h3>
+            <p> ${overview}
+            </p>
             </div>
             <div class="row">
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  steve ditko
-                </a>
-                <p>
-                  characters
-                </p>
-              </div>
-              <div class="col-4">
-                <a href="" class="movie-character ">
-                  stan lee
-                </a>
-                <p>
-                  characters
-              </div>
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  jon watts
-                </a>
-                <p>
-                  directors
-              </div>
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  erik sommers
-                </a>
-                <p>
-                  writer
-              </div>
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  chris mckenna
-                </a>
-                <p>
-                  writer
-              </div>
+            <div class="col-4">
+            <a href="" class="movie-character">
+            steve ditko
+            </a>
+            <p>
+            characters
+            </p>
             </div>
-          </div>
-    `;
+            <div class="col-4">
+            <a href="" class="movie-character ">
+            stan lee
+            </a>
+            <p>
+            characters
+            </div>
+            <div class="col-4">
+            <a href="" class="movie-character">
+            jon watts
+            </a>
+            <p>
+            directors
+            </div>
+            <div class="col-4">
+            <a href="" class="movie-character">
+            erik sommers
+            </a>
+            <p>
+            writer
+            </div>
+            <div class="col-4">
+            <a href="" class="movie-character">
+            chris mckenna
+            </a>
+            <p>
+            writer
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            
+            </div>
+            `;
 
   movieContent.innerHTML = html;
 }
 
-
-const SORT_URL =  BASE_URL + '/discover/movie?sort_by=popularity.desc&api_key='+API_KEY;
-const  genres = [
-  {
-    "id": 28,
-    "name": "Action"
-  },
-  {
-    "id": 12,
-    "name": "Adventure"
-  },
-  {
-    "id": 16,
-    "name": "Animation"
-  },
-  {
-    "id": 35,
-    "name": "Comedy"
-  },
-  {
-    "id": 80,
-    "name": "Crime"
-  },
-  {
-    "id": 99,
-    "name": "Documentary"
-  },
-  {
-    "id": 18,
-    "name": "Drama"
-  },
-  {
-    "id": 10751,
-    "name": "Family"
-  },
-  {
-    "id": 14,
-    "name": "Fantasy"
-  },
-  {
-    "id": 36,
-    "name": "History"
-  },
-  {
-    "id": 27,
-    "name": "Horror"
-  },
-  {
-    "id": 10402,
-    "name": "Music"
-  },
-  {
-    "id": 9648,
-    "name": "Mystery"
-  },
-  {
-    "id": 10749,
-    "name": "Romance"
-  },
-  {
-    "id": 878,
-    "name": "Science Fiction"
-  },
-  {
-    "id": 10770,
-    "name": "TV Movie"
-  },
-  {
-    "id": 53,
-    "name": "Thriller"
-  },
-  {
-    "id": 10752,
-    "name": "War"
-  },
-  {
-    "id": 37,
-    "name": "Western"
+export async function getFavMovieActors(movie_id) {
+  try {
+    const url = `${BASE_URL}movie/${movie_id}/credits?api_key=${API_KEY}&language=en-US`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
   }
-]
-
-const tagEl = document.getElementById('tags');
-
-var selectedGenre = []
-setGenre();
-function setGenre(){
-  tagEl.innerHTML = '';
-  genres.forEach(genre => {
-    const t = document.createElement('div');
-    t.classList.add('tag');
-    t.id=genre.id;
-    t.innerText = genre.name;
-    t.addEventListener('click', ()=>{
-      if(selectedGenre.length == 0){
-        selectedGenre.push(genre.id);
-
-      }else{
-        if(selectedGenre.includes(genre.id)){
-          selectedGenre.forEach((id, idx) => {
-            if(id == genre.id){
-              selectedGenre.splice(idx, 1);
-
-            }
-          })
-        }else{
-          selectedGenre.push(genre.id);
-        }
-      }
-      console.log(selectedGenre)
-      getTopMovies(SORT_URL + '&with_genres='+encodeURI(selectedGenre.join(',')))
-    })
-    tagEl.append(t);
-  })
 }
-getGenreMovie(SORT_URL);
-function getGenreMovie(url){
-  fetch(url).then(res => res.json()).then(data => {
-    console.log(data)
-    displayTopMovies(data);
-  })
+export  function displayFavMovieActors(data) {
+  const { cast } = data;
+    const personOfMovies = document.querySelector(".movie-actors");
+  let html = "";
+    cast.forEach((actors) => {
+        const { profile_path, name, id ,character} = actors;
+        const poster = profile_path
+            ? `${BASE_IMG_URL}${profile_path}`
+            : DEFAULT_IMG_URL;
+        html += `
+    <div class="col">
+    <div class="card"  data-id=${id}>
+    <a href="" class="card-img">
+    <img class="card-img-top"
+      src="${poster}" alt="${name}" />
+  </a>
+  <div class="card-body py-3">
+    <h5 class="card-title text-black"> ${name} </h5>
+    <p class="card-text text-capitalize">${character}</p>
+  </div>
+    </div>
+  </div>   
+    `;
+    });
+    personOfMovies.innerHTML = html;
+   
+}
+export async function getFavMovieRecommendations(movie_id) {
+  try {
+    const url = `${BASE_URL}movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+export  function displayFavMovieRecommendations(data) {
+  const { results } = data;
+    const personOfMovies = document.querySelector(".movie-recommendations");
+  let html = "";
+    results.forEach((actors) => {
+        const { poster_path, title, id,vote_average,release_date} = actors;
+        const poster = poster_path
+            ? `${BASE_IMG_URL}${poster_path}`
+            : DEFAULT_IMG_URL;
+        html += `
+        <div class="col">
+        <div class="card" data-id="${id}" >
+          <a href="" class="card-img">
+            <img class="card-img-top"
+              src="${poster}" alt="${title}" />
+          </a>
+          <div class="card-img-overlay">
+            <div class="card-overlay">
+              <div class="movie-data">
+                <i class="fa-solid fa-calendar-days"></i>  ${moment(release_date).format('l')}
+              </div>
+              <div class="lists">
+                <a href="#" class="text-decoration-none pe-2">
+                  <i class="fa-solid fa-heart"></i>
+                </a>
+                <a href="#" class="text-decoration-none pe-2">
+                  <i class="fa-solid fa-list-ol"></i>
+                </a>
+                <a href="#" class="text-decoration-none">
+                  <i class="fa-solid fa-star"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title text-black text-capitalize">${title}</h5>
+            <p class="card-text">${Math.floor(vote_average * 10)} %</p>
+          </div>
+        </div>
+      </div>
+    `;
+    });
+    personOfMovies.innerHTML = html;
+   
 }

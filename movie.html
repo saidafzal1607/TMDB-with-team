@@ -13,10 +13,15 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling">
+        <a class="navbar-brand" href="#"><img style="width: 80%;" src="./assets/images/logos/blue_short-8e7b30f73a4020692ccca9c88bafe5dcb6f8a62a4c6bc55cd9ba82bb2cd95f6c.svg" alt=""></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasScrolling"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="navbar-collapse" id="navbarSupportedContent">
@@ -24,41 +29,98 @@
           <div class="offcanvas offcanvas-start" id="offcanvasScrolling">
             <div class="offcanvas-header">
               <h5 class="offcanvas-title">Offcanvas with backdrop</h5>
-              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
+              <button
+                type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+              ></button>
             </div>
             <div class="offcanvas-body">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-bs-toggle="dropdown" data-bs-hover="dropdown" aria-expanded="false">
-                    Dropdown
-                  </a>
+                  <a class="nav-link dropdown-toggle" id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  data-bs-hover="dropdown"
+                  aria-expanded="false"
+                  style="color: white;" aria-current="page" href="#"
+                    >Movies</a
+                  >
                   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li>
-                      <a class="dropdown-item" href="#">Another action</a>
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </li>
+                    <li><a class="dropdown-item" href="movie.html">Popular</a></li>
+                    <li><a class="dropdown-item" href="#">Now Playing</a></li>
+                    <li><a class="dropdown-item" href="#">Upcoming</a></li>
+                    <li><a class="dropdown-item" href="#">Top Rated</a></li>
+                    
+                    
                   </ul>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled">Disabled</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" style="color: white;" href="#"id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  data-bs-hover="dropdown"
+                  aria-expanded="false"
+                  style="color: white;" >TV Shows</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="#">Popular</a></li>
+                    <li><a class="dropdown-item" href="#">Airing Today</a></li>
+                    <li><a class="dropdown-item" href="#">On TV</a></li>
+                    <li><a class="dropdown-item" href="#">Top Rated</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    data-bs-hover="dropdown"
+                    aria-expanded="false"
+                    style="color: white;"
+                  >
+                    People
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="person.html">Popular People</a></li>
+                    
+                    
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  data-bs-hover="dropdown"
+                  aria-expanded="false"
+                  style="color: white;" aria-current="page" href="#"
+                    >More</a
+                  >
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="profile.html">Profile</a></li>
+                    
+                    
+                  </ul>
                 </li>
               </ul>
               <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                <a href="#">
+                  <i class="fa-solid fa-plus" style="color:white; padding: 15px;"></i>
+                </a>
+                <button type="button" class="btn btn-light" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="Language Preferences">
+                  EN 
+                </button>
+                <a href="#">
+                  <i class="fa-solid fa-bell" style="color: white; padding: 15px;"></i>
+                </a>
+                <input
+                  class="form-control me-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
                 <button class="btn btn-outline-success" type="submit">
                   Search
                 </button>
@@ -71,104 +133,105 @@
       </div>
     </nav>
   </header>
-
-  <section class="header-movie">
-    <div class="custom-bg">
-      <div class="container">
-        <div class="row main-movie">
-          <div class="col-4">
-            <a href="" class="movie-posterimg">
-              <img class="img-fluid"
-                src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" alt="brand" />
-            </a>
-          </div>
-          <div class="col-8">
-            <a href="#" class="movie-title my-2">
-              <h1>
-                spider-man no way home (2021)
-              </h1>
-            </a>
-            <p class="my-2">
-              12/17/2021 (US)
-              Action, Adventure, Science Fiction
-              2h 28m
-            </p>
-            <div class="rating mt-5">
-              <div class="circle-progressbar">
-                <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
-                </div>
-              </div>
-              <h6 class="pb-4 mx-2">User Score</h6>
-              <ul>
-                <li>
-                  <a href="#" title="Add to list">
-                    <i class="fa-solid fa-list"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Mark as favorite">
-                    <i class="fa-solid fa-heart"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Mark as favorite">
-                    <i class="fa-solid fa-clipboard-list"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="#" title="Rate It">
-                    <i class="fa-solid fa-star"></i>
-                  </a>
-                </li>
-              </ul>
-
+  <section class="main-movie" >
+    <div class="header-movie">
+      <div class="custom-bg">
+        <div class="container">
+          <div class="row movie-item">
+            <div class="col-4">
+              <a href="" class="movie-posterimg">
+                <img class="img-fluid"
+                  src="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" alt="brand" />
+              </a>
             </div>
-            <div class="movie-overview my-2">
-              <h3 class="py-2">
-                Overview
-              </h3>
-              <p class="text">
-                Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a
-                super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him
-                to discover what it truly means to be Spider-Man.
+            <div class="col-8">
+              <a href="#" class="movie-title my-2">
+                <h1>
+                  spider-man no way home (2021)
+                </h1>
+              </a>
+              <p class="my-2">
+                12/17/2021 (US)
+                Action, Adventure, Science Fiction
+                2h 28m
               </p>
-            </div>
-            <div class="row">
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  steve ditko
-                </a>
-                <p>
-                  characters
+              <div class="rating mt-5">
+                <div class="circle-progressbar">
+                  <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+                  </div>
+                </div>
+                <h6 class="pb-4 mx-2">User Score</h6>
+                <ul>
+                  <li>
+                    <a href="#" title="Add to list">
+                      <i class="fa-solid fa-list"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" title="Mark as favorite">
+                      <i class="fa-solid fa-heart"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" title="Mark as favorite">
+                      <i class="fa-solid fa-clipboard-list"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#" title="Rate It">
+                      <i class="fa-solid fa-star"></i>
+                    </a>
+                  </li>
+                </ul>
+  
+              </div>
+              <div class="movie-overview my-2">
+                <h3 class="py-2">
+                  Overview
+                </h3>
+                <p class="text">
+                  Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a
+                  super-hero. When he asks for help from Doctor Strange the stakes become even more dangerous, forcing him
+                  to discover what it truly means to be Spider-Man.
                 </p>
               </div>
-              <div class="col-4">
-                <a href="" class="movie-character ">
-                  stan lee
-                </a>
-                <p>
-                  characters
-              </div>
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  jon watts
-                </a>
-                <p>
-                  directors
-              </div>
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  erik sommers
-                </a>
-                <p>
-                  writer
-              </div>
-              <div class="col-4">
-                <a href="" class="movie-character">
-                  chris mckenna
-                </a>
-                <p>
-                  writer
+              <div class="row">
+                <div class="col-4">
+                  <a href="" class="movie-character">
+                    steve ditko
+                  </a>
+                  <p>
+                    characters
+                  </p>
+                </div>
+                <div class="col-4">
+                  <a href="" class="movie-character ">
+                    stan lee
+                  </a>
+                  <p>
+                    characters
+                </div>
+                <div class="col-4">
+                  <a href="" class="movie-character">
+                    jon watts
+                  </a>
+                  <p>
+                    directors
+                </div>
+                <div class="col-4">
+                  <a href="" class="movie-character">
+                    erik sommers
+                  </a>
+                  <p>
+                    writer
+                </div>
+                <div class="col-4">
+                  <a href="" class="movie-character">
+                    chris mckenna
+                  </a>
+                  <p>
+                    writer
+                </div>
               </div>
             </div>
           </div>
@@ -179,9 +242,9 @@
   <section class="card-actors my-5">
     <div class="container">
       <h2 class="text-capitalize pb-4">Top Billed Cast</h2>
-      <div class="row">
+      <div class="row movie-actors">
         <div class="col">
-          <div class="card">
+          <div class="card card-actor">
             <a href="" class="card-img">
               <img class="card-img-top"
                 src="https://www.themoviedb.org/t/p/w138_and_h175_face/2qhIDp44cAqP2clOgt2afQI07X8.jpg"
@@ -315,7 +378,7 @@
     </div>
   </section>
 
-  <div class="container collection-card  mb-3">
+  <!-- <div class="container collection-card  mb-3">
     <div class="card bg-dark text-white">
       <img class="card-img"
         src="https://www.themoviedb.org/t/p/w1440_and_h320_multi_faces/AvnqpRwlEaYNVL6wzC4RN94EdSd.jpg"
@@ -328,12 +391,12 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <section class="card-movies my-5">
     <div class="container">
       <h2 class="text-capitalize pb-4">Recommendations</h2>
-      <div class="row">
+      <div class="row movie-recommendations overflow-scroll">
         <div class="col">
           <div class="card">
             <a href="" class="card-img">

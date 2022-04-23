@@ -29,7 +29,7 @@ a {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(206, 206, 206);
+  background-color: #cecece;
   border-radius: 10px;
 }
 
@@ -71,7 +71,7 @@ a {
 }
 .card .card-img-overlay .threedot-btn .fa-ellipsis:hover {
   color: black;
-  background-color: rgb(0, 217, 255);
+  background-color: #00d9ff;
 }
 .card .card-body {
   padding: 8px 8px !important;
@@ -271,7 +271,7 @@ footer .row .footer__links .footer__btn {
   right: -1px;
   height: 100%;
   padding: 10px 26px;
-  background: linear-gradient(to right, rgb(30, 213, 169) 0%, rgb(1, 180, 228) 100%);
+  background: linear-gradient(to right, #1ed5a9 0%, #01b4e4 100%);
   font-size: 16px;
   font-weight: 600;
   border-radius: 30px;
@@ -337,15 +337,15 @@ p {
   background-color: transparent;
   padding: 5px 10px;
   border-radius: 45px;
-  outline: 1px solid rgb(105, 104, 104);
+  outline: 1px solid #696868;
   margin: 5px;
   display: inline-block;
   cursor: pointer;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .tag:hover {
-  background-color: rgb(89, 231, 249);
-  outline: 1px solid rgb(89, 231, 249);
+  background-color: #59e7f9;
+  outline: 1px solid #59e7f9;
   color: white;
 }
 
@@ -353,7 +353,7 @@ p {
   padding: 5px;
   border: none;
   border-radius: 5px;
-  background-color: rgb(214, 212, 212);
+  background-color: #d6d4d4;
 }
 #sort_by .select_item {
   border: none;
@@ -407,7 +407,7 @@ p {
 
 .header-movie {
   background-image: url("https://www.themoviedb.org/t/p/w1920_and_h800_multi_faces/iQFcwSGbZXMkeyKrxbPnwnRo5fl.jpg");
-  border-bottom: 1px solid rgb(2, 2, 88);
+  border-bottom: 1px solid #020258;
   background-position: right -200px top;
   background-size: cover;
   background-repeat: no-repeat;
@@ -416,7 +416,7 @@ p {
 .header-movie .custom-bg {
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(to right, rgb(32, 32, 32) 150px, rgba(32, 32, 32, 0.84) 100%);
+  background-image: linear-gradient(to right, #202020 150px, rgba(32, 32, 32, 0.84) 100%);
   z-index: 1;
 }
 .header-movie .movie-item {
@@ -435,7 +435,7 @@ p {
   text-transform: capitalize;
 }
 .header-movie .movie-item .col-8 .movie-title:hover {
-  color: rgb(189, 204, 216);
+  color: #bdccd8;
 }
 .header-movie .movie-item .col-8 .rating {
   display: flex;
@@ -487,11 +487,13 @@ p {
 .header-movie .movie-item .col-8 .rating ul li {
   margin-right: 20px;
 }
-.header-movie .movie-item .col-8 .rating ul li a {
-  text-decoration: none;
-  color: rgb(255, 255, 255);
+.header-movie .movie-item .col-8 .rating ul li button {
+  color: white;
+  background: none;
+  outline: none;
+  border: none;
 }
-.header-movie .movie-item .col-8 .rating ul li a i {
+.header-movie .movie-item .col-8 .rating ul li button i {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -501,8 +503,11 @@ p {
   background: #032440;
   margin-right: 5px;
 }
-.header-movie .movie-item .col-8 .rating ul li a [data-addlist=true], .header-movie .movie-item .col-8 .rating ul li [data-favlist=true], .header-movie .movie-item .col-8 .rating ul li [data-watchlist=true], .header-movie .movie-item .col-8 .rating ul li [data-addlist=true] {
-  color: rgb(190, 7, 7) !important;
+.header-movie .movie-item .col-8 .rating ul li a [data-addlist=true],
+.header-movie .movie-item .col-8 .rating ul li [data-favlist=true],
+.header-movie .movie-item .col-8 .rating ul li [data-watchlist=true],
+.header-movie .movie-item .col-8 .rating ul li [data-addlist=true] {
+  color: #be0707 !important;
 }
 .header-movie .movie-item .row .movie-character {
   color: #fff;
@@ -511,7 +516,7 @@ p {
   font-size: 1.2rem;
 }
 .header-movie .movie-item .row .movie-character:hover {
-  color: rgb(189, 204, 216);
+  color: #bdccd8;
 }
 .header-movie .movie-item .row p {
   margin-top: 10px;
@@ -527,7 +532,7 @@ p {
   height: 5px !important;
 }
 .card-actors .row::-webkit-scrollbar-thumb {
-  background-color: rgb(206, 206, 206);
+  background-color: #cecece;
   border-radius: 5px;
 }
 .card-actors .card {
@@ -602,7 +607,7 @@ p {
 }
 .collection-card .card .card-img-overlay .btn,
 .collection-card .card .card-img-overlay btn-dark {
-  background-color: rgb(22, 20, 20);
+  background-color: #161414;
   color: #fff;
   font-weight: bold;
   font-size: 1.2rem;
@@ -666,7 +671,7 @@ p {
 }
 
 .overflow-scroll::-webkit-scrollbar-thumb {
-  background-color: rgb(206, 206, 206);
+  background-color: #cecece;
   border-radius: 5px;
 }
 
@@ -675,6 +680,44 @@ p {
   font-style: italic;
   color: #fff;
   opacity: 0.8;
+}
+
+.star-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -60px;
+  width: 200px;
+  background-color: #032541;
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+}
+.star-box .removeAll {
+  font-size: 15px;
+  color: #ffffff;
+  cursor: pointer;
+  padding-right: 10px;
+  margin-bottom: 15px;
+}
+.star-box .star {
+  font-size: 32px;
+  color: #ffc107;
+  background-color: unset;
+  border: none;
+  outline: none;
+}
+.star-box .star:hover {
+  cursor: pointer;
+}
+
+li.Rating {
+  padding-top: 55px;
+}
+
+.onRating {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
 #person .person-social-links {

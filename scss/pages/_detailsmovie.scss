@@ -90,9 +90,11 @@
           align-items: center;
           li {
             margin-right: 20px;
-            a {
-              text-decoration: none;
+            button {
               color: rgb(255, 255, 255);
+              background: none;
+              outline: none;
+              border: none;
               i {
                 display: flex;
                 align-items: center;
@@ -104,8 +106,11 @@
                 margin-right: 5px;
               }
             }
-            a [data-addlist="true"],[ data-favlist="true"],[ data-watchlist="true"],[data-addlist="true"] {
-                color: rgb(190, 7, 7) !important;
+            a [data-addlist="true"],
+            [data-favlist="true"],
+            [data-watchlist="true"],
+            [data-addlist="true"] {
+              color: rgb(190, 7, 7) !important;
             }
           }
         }
@@ -304,4 +309,41 @@
   font-style: italic;
   color: #fff;
   opacity: 0.8;
+}
+
+.star-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -60px;
+  width: 200px;
+  background-color: #032541;
+  border-radius: 5px;
+  visibility: hidden;
+  opacity: 0;
+  .removeAll {
+    font-size: 15px;
+    color: #ffffff;
+    cursor: pointer;
+    padding-right: 10px;
+    margin-bottom: 15px;
+  }
+  .star {
+    font-size: 32px;
+    color: #ffc107;
+    background-color: unset;
+    border: none;
+    outline: none;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+li.Rating {
+  padding-top: 55px;
+}
+
+.onRating {
+  visibility: visible !important;
+  opacity: 1 !important;
 }

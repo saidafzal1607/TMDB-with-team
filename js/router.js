@@ -147,18 +147,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
         });
       });
       // Rating
-      // rateBtn.addEventListener("click", (e) => {
-      //   starBox.classList.toggle("onRating");
-      //  if (starBox.classList.contains('onRating')) {
-      //    let stars = document.querySelectorAll(".star");
-      //   movie.RateStars.then((data) => {
-      //    })
-      //   .catch((err) => {
-      //       console.log(err);
-      //   });
-         
-      //  }
-      // });
+      rateBtn.addEventListener("click", (e) => {
+        starBox.classList.toggle("onRating");
+        if (starBox.classList.contains("onRating")) {
+          let stars = document.querySelectorAll(".star");
+          movie.RateStars.then((data) => {}).catch((err) => {
+            console.log(err);
+          });
+        }
+      });
     });
     movie.getMovieActors(id).then((data) => {
       movie.displayMovieActors(data);
@@ -175,35 +172,47 @@ document.addEventListener("DOMContentLoaded", function (e) {
       movie.displayMovieRecommendations(data);
     });
 
-    watchBtn.addEventListener("click", (e) => {
-      movie.AddWatchlist((data) => {});
-    });
+    // watchBtn.addEventListener("click", (e) => {
+    //   movie.AddWatchlist((data) => {});
+    // });
   }
   if (
     location.pathname === "/popularmovie.html" ||
     location.pathname === "/popularmovie"
   ) {
-    const popMovForm = document.querySelector(".popularMovieSort");
-    popMovForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const query = Object.fromEntries(new FormData(popMovForm));
-
-      topmovies
-        .discoverPopularMovie(query)
-        .then((data) => {
-          topmovies.sortMovies(data);
-          const cardList = document.querySelectorAll(".card");
-          cardList.forEach((card) => {
-            card.addEventListener("click", (e) => {
-              const popid = card.dataset.id;
-              history.pushState({ popid }, null, `/movie.html`);
-              location.reload();
-            });
-          });
-        })
-        .catch((err) => {
-          console.log(err);
+    topmovies.getGenres().then((data) => {
+      topmovies.displayGenres(data, document);
+      const popMovForm = document.querySelector(".popularMovieSort");
+      const genres = document.querySelectorAll(`[name="with_genres"]`);
+      popMovForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(popMovForm);
+        const with_genres = [];
+        genres.forEach((genre) => {
+          if (genre.checked) {
+            with_genres.push(genre.value);
+          }
         });
+        formData.append("with_genres", with_genres);
+        const query = Object.fromEntries(formData);
+
+        topmovies
+          .discoverPopularMovie(query)
+          .then((data) => {
+            topmovies.sortMovies(data);
+            const cardList = document.querySelectorAll(".card");
+            cardList.forEach((card) => {
+              card.addEventListener("click", (e) => {
+                const popid = card.dataset.id;
+                history.pushState({ popid }, null, `/movie.html`);
+                location.reload();
+              });
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      });
     });
 
     topmovies
@@ -222,7 +231,5 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
-
-        
   }
 });

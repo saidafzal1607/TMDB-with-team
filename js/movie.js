@@ -459,33 +459,28 @@ export async function AddRate(id, rated) {
   return data;
 }
 
-
-// RateStar 
-export let RateStars = new Promise((resolve,reject)=>{
-  resolve(
-     function RateStar (stars,removeallbtn) {
-      let curStarLevel;
+// RateStar
+export let RateStars = new Promise((resolve, reject) => {
+  resolve(function RateStar(stars, removeallbtn) {
+    let curStarLevel;
+    stars.forEach((star, i) => {
+      star.onclick = (e) => {
+        curStarLevel = i + 1;
+        stars.forEach((star, j) => {
+          if (curStarLevel >= j + 1) {
+            star.innerHTML = "&#9733";
+          } else {
+            star.innerHTML = "&#9734";
+          }
+        });
+      };
+    });
+    removeallbtn.onclick = (e) => {
       stars.forEach((star, i) => {
-        star.onclick = (e) => {
-           curStarLevel = i + 1;
-          stars.forEach((star, j) => {
-            if (curStarLevel >= j + 1) {
-              star.innerHTML = "&#9733";
-            } else {
-              star.innerHTML = "&#9734";
-            }
-          });
-        };
+        star.innerHTML = "&#9734";
       });
-      removeallbtn.onclick = (e) => {
-       stars.forEach((star, i) => {
-         star.innerHTML = "&#9734";
-       });
-    }
+    };
     return curStarLevel;
-    }
-  )
-  reject('Something wrong')
-     
+  });
+  reject("Something wrong");
 });
-

@@ -147,9 +147,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
       movie.displayMovieRecommendations(data);
     });
 
-    // watchBtn.addEventListener("click", (e) => {
-    //   movie.AddWatchlist((data) => {});
-    // });
+    watchBtn.addEventListener("click", (e) => {
+      movie.AddWatchlist((data) => {});
+    });
 
     //  adit from popular movie
     // topmovies.getFavMovie(popid).then((data) => {
@@ -198,6 +198,15 @@ document.addEventListener("DOMContentLoaded", function (e) {
           console.log(err);
         });
     });
+
+
+    // **************************   FILTER   ******************************
+
+   
+
+    // **************************   FILTER   ******************************
+
+
     topmovies
       .getTopMovies()
       .then((data) => {
@@ -214,5 +223,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
+
+        
   }
 });

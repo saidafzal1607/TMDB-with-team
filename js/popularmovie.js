@@ -3,6 +3,18 @@ import moment from "../node_modules/moment/dist/moment.js";
 
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
+export async function getTopMovies(page = 1) {
+  try {
+    const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(url);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export function discoveryFilterHandler(query) {
   let url = `${BASE_URL}discover/movie?api_key=${API_KEY}`;
   for (const key in query) {
@@ -17,18 +29,6 @@ export async function discoverPopularMovie(query) {
   const res = await fetch(url);
   const data = await res.json();
   return data;
-}
-
-export async function getTopMovies(page = 1) {
-  try {
-    const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    console.log(url);
-    return data;
-  } catch (error) {
-    throw error;
-  }
 }
 
 
@@ -102,6 +102,135 @@ export function sortMovies(data) {
     topMovies.innerHTML = html;
   });
 }
+
+
+        // **********************************    FILTER     ************************************//
+     
+        
+
+        const SORT_URL = ` ${BASE_URL}discover/movie?sort_by=popularity.desc&api_key=${API_KEY}`;
+        
+       
+
+        const  genres = [
+          {
+            "id": 28,
+            "name": "Action"
+          },
+          {
+            "id": 12,
+            "name": "Adventure"
+          },
+          {
+            "id": 16,
+            "name": "Animation"
+          },
+          {
+            "id": 35,
+            "name": "Comedy"
+          },
+          {
+            "id": 80,
+            "name": "Crime"
+          },
+          {
+            "id": 99,
+            "name": "Documentary"
+          },
+          {
+            "id": 18,
+            "name": "Drama"
+          },
+          {
+            "id": 10751,
+            "name": "Family"
+          },
+          {
+            "id": 14,
+            "name": "Fantasy"
+          },
+          {
+            "id": 36,
+            "name": "History"
+          },
+          {
+            "id": 27,
+            "name": "Horror"
+          },
+          {
+            "id": 10402,
+            "name": "Music"
+          },
+          {
+            "id": 9648,
+            "name": "Mystery"
+          },
+          {
+            "id": 10749,
+            "name": "Romance"
+          },
+          {
+            "id": 878,
+            "name": "Science Fiction"
+          },
+          {
+            "id": 10770,
+            "name": "TV Movie"
+          },
+          {
+            "id": 53,
+            "name": "Thriller"
+          },
+          {
+            "id": 10752,
+            "name": "War"
+          },
+          {
+            "id": 37,
+            "name": "Western"
+          }
+        ]
+        
+        const tagEl = document.getElementById('tags');
+        
+        var selectedGenre = []
+        setGenre();
+        export  function setGenre(){
+          tagEl.innerHTML = '';
+          genres.forEach(genre => {
+            const t = document.createElement('div');
+            t.classList.add('tag');
+            t.id=genre.id;
+            t.innerText = genre.name;
+            tagEl.append(t);
+            t.addEventListener('click', ()=>{
+              if(selectedGenre.length == 0){
+                selectedGenre.push(genre.id);
+        
+              }else{
+                if(selectedGenre.includes(genre.id)){
+                  selectedGenre.forEach((id, idx) => {
+                    if(id == genre.id){
+                      selectedGenre.splice(idx, 1);
+        
+                    }
+                  })
+                }else{
+                  selectedGenre.push(genre.id);
+                }
+              }
+              console.log(selectedGenre)
+              // getTopMovies(SORT_URL + '&with_genres='+encodeURI(selectedGenre.join(',')))
+            })
+          })
+        }
+
+        
+        
+        
+        // **********************************    FILTER     ************************************//
+        
+
 
 export function displayTopMovies(data) {
   const { results } = data;
@@ -320,95 +449,5 @@ export function displayFavMovie(data) {
   movieContent.innerHTML = html;
 }
 
-export async function getFavMovieActors(movie_id) {
-  try {
-    const url = `${BASE_URL}movie/${movie_id}/credits?api_key=${API_KEY}&language=en-US`;
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-export  function displayFavMovieActors(data) {
-  const { cast } = data;
-    const personOfMovies = document.querySelector(".movie-actors");
-  let html = "";
-    cast.forEach((actors) => {
-        const { profile_path, name, id ,character} = actors;
-        const poster = profile_path
-            ? `${BASE_IMG_URL}${profile_path}`
-            : DEFAULT_IMG_URL;
-        html += `
-    <div class="col">
-    <div class="card"  data-id=${id}>
-    <a href="" class="card-img">
-    <img class="card-img-top"
-      src="${poster}" alt="${name}" />
-  </a>
-  <div class="card-body py-3">
-    <h5 class="card-title text-black"> ${name} </h5>
-    <p class="card-text text-capitalize">${character}</p>
-  </div>
-    </div>
-  </div>   
-    `;
-    });
-    personOfMovies.innerHTML = html;
-   
-}
-export async function getFavMovieRecommendations(movie_id) {
-  try {
-    const url = `${BASE_URL}movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US`;
-    const res = await fetch(url);
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    throw error;
-  }
-}
-export  function displayFavMovieRecommendations(data) {
-  const { results } = data;
-    const personOfMovies = document.querySelector(".movie-recommendations");
-  let html = "";
-    results.forEach((actors) => {
-        const { poster_path, title, id,vote_average,release_date} = actors;
-        const poster = poster_path
-            ? `${BASE_IMG_URL}${poster_path}`
-            : DEFAULT_IMG_URL;
-        html += `
-        <div class="col">
-        <div class="card" data-id="${id}" >
-          <a href="" class="card-img">
-            <img class="card-img-top"
-              src="${poster}" alt="${title}" />
-          </a>
-          <div class="card-img-overlay">
-            <div class="card-overlay">
-              <div class="movie-data">
-                <i class="fa-solid fa-calendar-days"></i>  ${moment(release_date).format('l')}
-              </div>
-              <div class="lists">
-                <a href="#" class="text-decoration-none pe-2">
-                  <i class="fa-solid fa-heart"></i>
-                </a>
-                <a href="#" class="text-decoration-none pe-2">
-                  <i class="fa-solid fa-list-ol"></i>
-                </a>
-                <a href="#" class="text-decoration-none">
-                  <i class="fa-solid fa-star"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title text-black text-capitalize">${title}</h5>
-            <p class="card-text">${Math.floor(vote_average * 10)} %</p>
-          </div>
-        </div>
-      </div>
-    `;
-    });
-    personOfMovies.innerHTML = html;
-   
-}
+        
+        

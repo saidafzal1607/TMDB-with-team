@@ -174,6 +174,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
     movie.getMovieRecommendations(id).then((data) => {
       movie.displayMovieRecommendations(data);
     });
+
+    watchBtn.addEventListener("click", (e) => {
+      movie.AddWatchlist((data) => {});
+    });
   }
   if (
     location.pathname === "/popularmovie.html" ||
@@ -201,6 +205,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
           console.log(err);
         });
     });
+
     topmovies
       .getTopMovies()
       .then((data) => {
@@ -217,5 +222,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
+
+        
   }
 });

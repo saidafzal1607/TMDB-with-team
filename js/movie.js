@@ -97,24 +97,34 @@ export async function displayMovie(data) {
               <h6 class="pb-4 mx-2">User Score</h6>
               <ul>
               <li>
-              <a href="#" class="addlistbtn"  data-addlist="false" title="Add to list">
+              <button class="addlistbtn"  data-addlist="false" title="Add to list">
               <i class="fa-solid fa-list"></i>
-              </a>
+              </button>
               </li>
               <li>
-              <a href="#" class="favbtn" data-favlist=${favorite} title="Mark as favorite">
+              <button class="favbtn" data-favlist=${favorite} title="Mark as favorite">
               <i class="fa-solid fa-heart"></i>
-              </a>
+              </button>
               </li>
               <li>
-              <a href="#"  class="watchbtn"  data-watchlist="false" title="Add to your wathclist">
+              <button  class="watchbtn"  data-watchlist=${watchlist} title="Add to your wathclist">
               <i class="fa-solid fa-clipboard-list"></i>
-              </a>
+              </button>
               </li>
-              <li>
-              <a href="#" title="Rate It">
+              <li  class="Rating">
+              <button href="#" class="ratebtn" title="Rate It">
               <i class="fa-solid fa-star"></i>
-              </a>
+              </button>
+              <div class="star-box">
+              <div class="star_rating">
+                <i class="fa-solid fa-circle-minus removeallbtn"></i>
+                <span class="star" data-rate=1>&#9734;</span>
+                <span class="star"data-rate=2>&#9734;</span>
+                <span class="star" data-rate=3>&#9734;</span>
+                <span class="star" data-rate=4>&#9734;</span>
+                <span class="star" data-rate=5>&#9734;</span>
+              </div>
+            </div>
               </li>
               </ul>
               
@@ -418,7 +428,7 @@ export async function AddWatchlist(id, watchlist) {
   const bodyData = {
     media_type: "movie",
     media_id: id,
-    watchlist,
+    watchlist: !watchlist,
   };
   const response = await fetch(addToWatchlistUrl, {
     method: "POST",
@@ -430,3 +440,52 @@ export async function AddWatchlist(id, watchlist) {
   const data = await response.json();
   return data;
 }
+
+export async function AddRate(id, rated) {
+  const addToRatedUrl = `${BASE_URL}account/${id}/rated/movies?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+  const bodyData = {
+    media_type: "movie",
+    media_id: id,
+    rated: !rated,
+  };
+  const response = await fetch(addToRatedUrl, {
+    method: "POST",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+  const data = await response.json();
+  return data;
+}
+
+
+// RateStar 
+export let RateStars = new Promise((resolve,reject)=>{
+  resolve(
+     function RateStar (stars,removeallbtn) {
+      let curStarLevel;
+      stars.forEach((star, i) => {
+        star.onclick = (e) => {
+           curStarLevel = i + 1;
+          stars.forEach((star, j) => {
+            if (curStarLevel >= j + 1) {
+              star.innerHTML = "&#9733";
+            } else {
+              star.innerHTML = "&#9734";
+            }
+          });
+        };
+      });
+      removeallbtn.onclick = (e) => {
+       stars.forEach((star, i) => {
+         star.innerHTML = "&#9734";
+       });
+    }
+    return curStarLevel;
+    }
+  )
+  reject('Something wrong')
+     
+});
+

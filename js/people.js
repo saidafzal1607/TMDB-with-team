@@ -1,17 +1,13 @@
 
 
 import configs from "../config.js";
-// import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 export async function getFavPerson(page = 1) {
   try {
-    // https://api.themoviedb.org/3/person/{person_id}?api_key=7014e2cdb739f65a296e51932f359f53&language=en-US
-    // https://api.themoviedb.org/3/credit/{credit_id}?api_key=7014e2cdb739f65a296e51932f359f53
     const url = `${BASE_URL}person/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     const res = await fetch(url);
     const data = await res.json();
-    // console.log(data);
     return data;
   } catch (error) {
     throw error;

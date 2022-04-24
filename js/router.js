@@ -114,15 +114,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
   if (location.pathname === "/movie.html" || location.pathname === "/movie") {
     const id = history.state.id;
-    const popid = history.state.popid;
-    const personMovieId = history.state.personMovieId;
     movie.getMovie(id).then((data) => {
       movie.displayMovie(data);
       const favBtn = document.querySelector(".favbtn");
       const watchBtn = document.querySelector(".watchbtn");
       const rateBtn = document.querySelector(".ratebtn");
-      const starBox = document.querySelector(".star-box");
-      const removeallbtn = document.querySelector(".removeallbtn");
+      const starRating = document.querySelector(".star-rating");
+      const removeBtn = document.querySelector(".removebtn");
       // favourite, watchlist and rating
       // favourite
       favBtn.addEventListener("click", (e) => {
@@ -148,11 +146,38 @@ document.addEventListener("DOMContentLoaded", function (e) {
       });
       // Rating
       rateBtn.addEventListener("click", (e) => {
-        starBox.classList.toggle("onRating");
-        if (starBox.classList.contains("onRating")) {
-          let stars = document.querySelectorAll(".star");
-          movie.RateStars.then((data) => {}).catch((err) => {
-            console.log(err);
+        const ratingBtn = e.target.closest(".ratebtn").dataset.rating;
+        starRating.classList.toggle("onRating");
+        if (starRating.classList.contains("onRating")) {
+          starRating.addEventListener('change', (e) => {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 3000,
+              background: '#5FB662',
+              iconColor: '#ffffff',
+              color: '#ffffff',
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'success',
+              title: `SUCCESS!
+              Your rating is ${e.target.value} has been saved `
+            })
+            const rating = e.target.value;
+            console.log(rating);
+            movie.AddRate(id, rating).then((data) => {
+              if (data.success) {
+                ratingBtn = rating;
+              }
+            });
+          })
+          removeBtn.addEventListener("click", function (e) {
+            starRating.querySelector("input[type=radio]:checked").checked = false;
           });
         }
       });

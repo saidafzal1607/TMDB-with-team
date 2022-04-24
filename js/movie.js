@@ -1,5 +1,6 @@
 import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
+
 const { API_KEY, SESSION_ID, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } =
   configs;
 
@@ -12,9 +13,13 @@ export async function getMovie(movie_id) {
     const data = await res.json();
     const accountStateData = await resAccountState.json();
     console.log(accountStateData, "isFav");
-    return { ...data, ...accountStateData };
+    const allData = { ...data, ...accountStateData };
+    if (allData.success === false) {
+      throw new Error(allData.status_message);
+    }
+    return allData;
   } catch (error) {
-    throw error;
+    throw new Error(error);
   }
 }
 

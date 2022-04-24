@@ -11,10 +11,24 @@ import * as topmovies from "./popularmovie.js";
 // });
 
 // switchOn(document);
+
 window.addEventListener("popstate", (e) => {
   location.reload();
 });
 document.addEventListener("DOMContentLoaded", function (e) {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 10000,
+    background: "#5FB662",
+    iconColor: "#ffffff",
+    color: "#ffffff",
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
   if (location.pathname === "/people.html" || location.pathname === "/people") {
     favpersons
       .getFavPerson()
@@ -65,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .getPopularMovies()
       .then((data) => {
         home.displayPopularMovies(data);
+
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -81,6 +96,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .getPopularTVMovies()
       .then((data) => {
         home.displayPopularTVMovies(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -93,6 +110,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
+    // Promise.all([
+    //   home.getPopularMovies(),
+    //   home.getPopularTVMovies(),
+    // ]).then((data) => {
+    //   home.displayPopularMovies(data[0]);
+    //   home.displayPopularTVMovies(data[1]);
+    //   const loading = document.querySelector(".lds-dual-ring");
+    //   document.body.removeChild(loading);
+
+    // });
     // home
     // .getLatestMovies()
     // .then((data) => {
@@ -114,74 +141,76 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
   if (location.pathname === "/movie.html" || location.pathname === "/movie") {
     const id = history.state.id;
-    movie.getMovie(id).then((data) => {
-      movie.displayMovie(data);
-      const favBtn = document.querySelector(".favbtn");
-      const watchBtn = document.querySelector(".watchbtn");
-      const rateBtn = document.querySelector(".ratebtn");
-      const starRating = document.querySelector(".star-rating");
-      const removeBtn = document.querySelector(".removebtn");
-      // favourite, watchlist and rating
-      // favourite
-      favBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const favoriteBtn = e.target.closest(".favbtn").dataset.favlist;
-        const favorite = favoriteBtn == "true" ? true : false;
-        movie.AddFavourite(id, favorite).then((data) => {
-          if (data.success) {
-            e.target.closest(".favbtn").dataset.favlist = !favorite;
-          }
-        });
-      });
-      // Watchlist
-      watchBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        const watchlistBtn = e.target.closest(".watchbtn").dataset.watchlist;
-        const watchlist = watchlistBtn == "true" ? true : false;
-        movie.AddWatchlist(id, watchlist).then((data) => {
-          if (data.success) {
-            e.target.closest(".watchbtn").dataset.watchlist = !watchlist;
-          }
-        });
-      });
-      // Rating
-      rateBtn.addEventListener("click", (e) => {
-        let ratingBtn = e.target.closest(".ratebtn").dataset.rating;
-        starRating.classList.toggle("onRating");
-        if (starRating.classList.contains("onRating")) {
-          starRating.addEventListener('change', (e) => {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000,
-              background: '#5FB662',
-              iconColor: '#ffffff',
-              color: '#ffffff',
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-            })
-            Toast.fire({
-              icon: 'success',
-              title: `SUCCESS!
-              Your rating is ${e.target.value} has been saved `
-            })
-            const rating = e.target.value;
-            console.log(rating, "rating value");
-            movie.AddRate(id, rating).then((data) => {
-              if (data.success) {
-                ratingBtn = rating;
-              }
-            });
-          })
-          removeBtn.addEventListener("click", function (e) {
-            starRating.querySelector("input[type=radio]:checked").checked = false;
+    movie
+      .getMovie(id)
+      .then((data) => {
+        console.log(data, "data from movie");
+        movie.displayMovie(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        const favBtn = document.querySelector(".favbtn");
+        const watchBtn = document.querySelector(".watchbtn");
+        const rateBtn = document.querySelector(".ratebtn");
+        const starRating = document.querySelector(".star-rating");
+        const removeBtn = document.querySelector(".removebtn");
+        // favourite, watchlist and rating
+        // favourite
+        favBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const favoriteBtn = e.target.closest(".favbtn").dataset.favlist;
+          const favorite = favoriteBtn == "true" ? true : false;
+          movie.AddFavourite(id, favorite).then((data) => {
+            if (data.success) {
+              e.target.closest(".favbtn").dataset.favlist = !favorite;
+            }
           });
-        }
+        });
+        // Watchlist
+        watchBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const watchlistBtn = e.target.closest(".watchbtn").dataset.watchlist;
+          const watchlist = watchlistBtn == "true" ? true : false;
+          movie.AddWatchlist(id, watchlist).then((data) => {
+            if (data.success) {
+              e.target.closest(".watchbtn").dataset.watchlist = !watchlist;
+            }
+          });
+        });
+        // Rating
+        rateBtn.addEventListener("click", (e) => {
+          let ratingBtn = e.target.closest(".ratebtn").dataset.rating;
+          starRating.classList.toggle("onRating");
+          if (starRating.classList.contains("onRating")) {
+            starRating.addEventListener("change", (e) => {
+              Toast.fire({
+                icon: "success",
+                title: `SUCCESS!
+              Your rating is ${e.target.value} has been saved `,
+              });
+              const rating = e.target.value;
+              console.log(rating, "rating value");
+              movie.AddRate(id, rating).then((data) => {
+                if (data.success) {
+                  ratingBtn = rating;
+                }
+              });
+            });
+            removeBtn.addEventListener("click", function (e) {
+              starRating.querySelector(
+                "input[type=radio]:checked"
+              ).checked = false;
+            });
+          }
+        });
+      })
+      .catch((err) => {
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        Toast.fire({
+          icon: "error",
+          title: `${err.message}`,
+        });
       });
-    });
     movie.getMovieActors(id).then((data) => {
       movie.displayMovieActors(data);
       const cardListActors = document.querySelectorAll(".card-actor");
@@ -256,8 +285,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     //   .catch((err) => {
     //     console.log(err);
     //   });
-      
-      topmovies
+
+    topmovies
       .getPopularFavMovies()
       .then((data) => {
         topmovies.displayPopularFavMovies(data);

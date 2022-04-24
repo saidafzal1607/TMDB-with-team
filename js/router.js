@@ -240,15 +240,32 @@ document.addEventListener("DOMContentLoaded", function (e) {
       });
     });
 
-    topmovies
-      .getTopMovies()
+    // topmovies
+    //   .getTopMovies()
+    //   .then((data) => {
+    //     topmovies.displayTopMovies(data);
+    //     const cardList = document.querySelectorAll(".card");
+    //     cardList.forEach((card) => {
+    //       card.addEventListener("click", (e) => {
+    //         const popid = card.dataset.id;
+    //         history.pushState({ popid }, null, `/movie.html`);
+    //         location.reload();
+    //       });
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+      
+      topmovies
+      .getPopularFavMovies()
       .then((data) => {
-        topmovies.displayTopMovies(data);
+        topmovies.displayPopularFavMovies(data);
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
-            const popid = card.dataset.id;
-            history.pushState({ popid }, null, `/movie.html`);
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
             location.reload();
           });
         });

@@ -146,7 +146,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
       });
       // Rating
       rateBtn.addEventListener("click", (e) => {
-        const ratingBtn = e.target.closest(".ratebtn").dataset.rating;
+        let ratingBtn = e.target.closest(".ratebtn").dataset.rating;
         starRating.classList.toggle("onRating");
         if (starRating.classList.contains("onRating")) {
           starRating.addEventListener('change', (e) => {
@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
               Your rating is ${e.target.value} has been saved `
             })
             const rating = e.target.value;
-            console.log(rating);
+            console.log(rating, "rating value");
             movie.AddRate(id, rating).then((data) => {
               if (data.success) {
                 ratingBtn = rating;

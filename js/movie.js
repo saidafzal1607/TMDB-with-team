@@ -115,16 +115,19 @@ export async function displayMovie(data) {
               <button href="#" class="ratebtn" title="Rate It">
               <i class="fa-solid fa-star"></i>
               </button>
-              <div class="star-box">
-              <div class="star_rating">
-                <i class="fa-solid fa-circle-minus removeallbtn"></i>
-                <span class="star" data-rate=1>&#9734;</span>
-                <span class="star"data-rate=2>&#9734;</span>
-                <span class="star" data-rate=3>&#9734;</span>
-                <span class="star" data-rate=4>&#9734;</span>
-                <span class="star" data-rate=5>&#9734;</span>
-              </div>
-            </div>
+              <div class="star-rating mt-1 px-1">
+                      <input type="radio" id="5-stars" name="rating" value="5" />
+                      <label for="5-stars" class="star">&#9733;</label>
+                      <input type="radio" id="4-stars" name="rating" value="4" />
+                      <label for="4-stars" class="star">&#9733;</label>
+                      <input type="radio" id="3-stars" name="rating" value="3" />
+                      <label for="3-stars" class="star">&#9733;</label>
+                      <input type="radio" id="2-stars" name="rating" value="2" />
+                      <label for="2-stars" class="star">&#9733;</label>
+                      <input type="radio" id="1-star" name="rating" value="1" />
+                      <label for="1-star" class="star">&#9733;</label>
+                      <i class="fa-solid fa-circle-minus removebtn my-2 px-1"></i>
+                    </div>
               </li>
               </ul>
               
@@ -442,7 +445,7 @@ export async function AddWatchlist(id, watchlist) {
 }
 
 export async function AddRate(id, rated) {
-  const addToRatedUrl = `${BASE_URL}account/${id}/rated/movies?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+  const addToRatedUrl = `${BASE_URL}movie/${id}/rating?api_key=${API_KEY}&session_id=${SESSION_ID}`;
   const bodyData = {
     media_type: "movie",
     media_id: id,
@@ -458,29 +461,3 @@ export async function AddRate(id, rated) {
   const data = await response.json();
   return data;
 }
-
-// RateStar
-export let RateStars = new Promise((resolve, reject) => {
-  resolve(function RateStar(stars, removeallbtn) {
-    let curStarLevel;
-    stars.forEach((star, i) => {
-      star.onclick = (e) => {
-        curStarLevel = i + 1;
-        stars.forEach((star, j) => {
-          if (curStarLevel >= j + 1) {
-            star.innerHTML = "&#9733";
-          } else {
-            star.innerHTML = "&#9734";
-          }
-        });
-      };
-    });
-    removeallbtn.onclick = (e) => {
-      stars.forEach((star, i) => {
-        star.innerHTML = "&#9734";
-      });
-    };
-    return curStarLevel;
-  });
-  reject("Something wrong");
-});

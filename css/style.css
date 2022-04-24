@@ -682,37 +682,47 @@ p {
   opacity: 0.8;
 }
 
-.star-box {
+.star-rating {
   display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
   margin-left: -60px;
-  width: 200px;
+  width: auto;
   background-color: #032541;
   border-radius: 5px;
   visibility: hidden;
   opacity: 0;
 }
-.star-box .removeAll {
-  font-size: 15px;
+.star-rating .removebtn {
+  font-size: 20px;
   color: #ffffff;
   cursor: pointer;
   padding-right: 10px;
   margin-bottom: 15px;
 }
-.star-box .star {
-  font-size: 32px;
-  color: #ffc107;
-  background-color: unset;
-  border: none;
-  outline: none;
+
+.star-rating input {
+  display: none;
 }
-.star-box .star:hover {
+
+.star-rating label {
+  color: #ccc;
   cursor: pointer;
+  font-size: 32px;
+}
+
+.star-rating :checked ~ label {
+  color: #f90;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #fc0;
 }
 
 li.Rating {
-  padding-top: 55px;
+  padding-top: 52px;
 }
 
 .onRating {

@@ -444,12 +444,10 @@ export async function AddWatchlist(id, watchlist) {
   return data;
 }
 
-export async function AddRate(id, rated) {
+export async function AddRate(id, value) {
   const addToRatedUrl = `${BASE_URL}movie/${id}/rating?api_key=${API_KEY}&session_id=${SESSION_ID}`;
   const bodyData = {
-    media_type: "movie",
-    media_id: id,
-    rated: !rated,
+    value,
   };
   const response = await fetch(addToRatedUrl, {
     method: "POST",

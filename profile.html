@@ -97,122 +97,317 @@
       </nav>
       <div class="hero">
         <div class="row">
-          <div class="col col-6" style="width: 200px; height: 200px; border-radius: 50%; background: #000;">
-          <img src="" alt=""></div>
+          <div class="col col-6" style="width: 200px; height: 200px; border-radius: 50%;">
+          <img style="width: 200px; height: 200px; border-radius: 50%;" src="./assets/images/persons_img/grey anatom.jpg" alt=""></div>
           <div class="col col-6">
   
-            <div class="row">
+            <div class="row  detail-account">
               <div class="col " style="display: flex; margin-top: 50px;">
                 <a class="h3" style="text-decoration: none; color: white;" href="#">Orziqul95</a>
                 <p class="h6" style="margin-top: 15px; padding-left: 10px; color:darkslategray;">Member since April 2022
                 </p>
               </div>
-              <div class="row">
-                <div class="circle-progressbar">
-                  <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+            </div>
+              <div class="row " style="margin-top: 40px;">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <div class="circle-progressbar">
+                        <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col">
+                      <h6>Average Movie Score</h6>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <div class="circle-progressbar">
+                        <div role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" style="--value: 88">
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col">
+                      <h6>Average Movie Score</h6>
+                    </div>
                   </div>
                 </div>
+              <div class="col"></div>
               </div>
-            </div>
           </div>
         </div>
       </div>
     </header>
     <section>
-      <ul class="nav justify-content-center">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            data-bs-hover="dropdown" aria-expanded="false" aria-current="page" href="#">Overview</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Popular</a></li>
-            <li><a class="dropdown-item" href="#">Now Playing</a></li>
-            <li><a class="dropdown-item" href="#">Upcoming</a></li>
-            <li><a class="dropdown-item" href="#">Top Rated</a></li>
-  
-  
-          </ul>
+      <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Overview</button>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Discussions</a>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Favourite Movies</button>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Lists</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            data-bs-hover="dropdown" aria-expanded="false" aria-current="page" href="#">Rating</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Popular</a></li>
-            <li><a class="dropdown-item" href="#">Now Playing</a></li>
-            <li><a class="dropdown-item" href="#">Upcoming</a></li>
-            <li><a class="dropdown-item" href="#">Top Rated</a></li>
-  
-  
-          </ul>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            data-bs-hover="dropdown" aria-expanded="false" aria-current="page" href="#">Watchlist</a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Popular</a></li>
-            <li><a class="dropdown-item" href="#">Now Playing</a></li>
-            <li><a class="dropdown-item" href="#">Upcoming</a></li>
-            <li><a class="dropdown-item" href="#">Top Rated</a></li>
-  
-  
-          </ul>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Ratins</button>
         </li>
       </ul>
-      <hr>
-      <div class="container">
-      <div class="row">
-        <div class="col">
-          <h5 class="h3">Stats</h5>
-        </div>
-        <div class="row">
-          <div class="col">
-            <p>Total Edits</p>
-            <p class="h1 text-muted">0</p>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab"><div class="container">
+          <div class="row">
+            <div class="col">
+              <h5 class="h3">Stats</h5>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>Total Edits</p>
+                <p class="h1 text-muted">0</p>
+              </div>
+              <div class="col">
+                <p>Total Ratings</p>
+                <p class="h1 text-muted">0</p>
+              </div>
+              <div class="col">
+                <p>Rating Overview</p>
+              </div>
+              <div class="col">
+                <p>Most Watched Genres</p>
+              </div>
+            </div>
           </div>
-          <div class="col">
-            <p>Total Ratings</p>
-            <p class="h1 text-muted">0</p>
+          <div class="row">
+            <div class="col">
+              <h5 class="h3" style="padding-top: 20px;">Upcoming Form Watchlist</h5>
+              <p>There are no upcoming movies on your watchlist.</p>
+            </div>
+            <div class="col">
+              <a style="text-decoration: none; float: right;" href="#">
+                Go to Watchlist
+              </a>
+            </div>
           </div>
-          <div class="col">
-            <p>Rating Overview</p>
-          </div>
-          <div class="col">
-            <p>Most Watched Genres</p>
-          </div>
-        </div>
+    <div class="row">
+      <div class="col" style="margin-top: 20px;">
+        <h5 class="h3">Recent Discussions</h5>
+              <input type="text" style="width: 100%; padding: 10px; border-radius: 5px;" disabled placeholder="You are not watching any discussions.">
       </div>
-      <div class="row">
-        <div class="col">
-          <h5 class="h3" style="padding-top: 20px;">Upcoming Form Watchlist</h5>
-          <p>There are no upcoming movies on your watchlist.</p>
-        </div>
-        <div class="col">
-          <a style="text-decoration: none; float: right;" href="#">
-            Go to Watchlist
-          </a>
-        </div>
-      </div>
-<div class="row">
-  <div class="col" style="margin-top: 20px;">
-    <h5 class="h3">Recent Discussions</h5>
-          <input type="text" style="width: 100%; padding: 10px; border-radius: 5px;" disabled placeholder="You are not watching any discussions.">
-  </div>
-</div>
-<div class="row pt-5 pb-5">
-  <div class="col ">
-    <h5 class="h3">Recent Activity</h5>
-    <p>You haven't made any recent edits.</p>
-  </div>
-  <div class="col">
-    <a style="float: right; text-decoration: none;" href="#"> View More</a>
-  </div>
-</div>
     </div>
+    <div class="row pt-5 pb-5">
+      <div class="col ">
+        <h5 class="h3">Recent Activity</h5>
+        <p>You haven't made any recent edits.</p>
+      </div>
+      <div class="col">
+        <a style="float: right; text-decoration: none;" href="#"> View More</a>
+      </div>
+    </div>
+        </div>
+      </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="row" style="display: flex; flex-direction: row;">
+            <div class="col">
+              <div class="container">
+                <div class="row overflow-scroll top-rated">
+                  <div class="col">
+                    <card class="card">
+                      <a href="#" class="card-img-btn">
+                        <img
+                          class="card-img img-fluid"
+                          src="./assets/images/halo movie.jpg"
+                          alt="something movie"
+                        />
+                      </a>
+                      <div class="card-img-overlay">
+                        <a class="threedot-btn">
+                          <i class="fa-solid fa-ellipsis"></i>
+                        </a>
+                      </div>
+                      <div class="card-body">
+                        <div class="card-click">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-list"></i>
+                                Add to list</a
+                              >
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-heart"></i>
+                                Favourite</a
+                              >
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                Watchlist
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-star"></i>
+                                Your rating</a
+                              >
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="circle-progressbar">
+                          <div
+                            role="progressbar"
+                            aria-valuenow="88"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="--value: 88"
+                          ></div>
+                        </div>
+                      </div>
+                    </card>
+                  </div>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <h4><a style="text-decoration: none;" href="#">The Twilight Saga: Eclipse</a></h4>
+                  <p class="text-muted">June 23, 2010</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="text-muted">Bella once again finds herself surrounded by danger as Seattle is ravaged by a string of mysterious killings and a malicious vampire continues her quest for revenge. In the midst of it all, she is forced to choose between her love for Edward and her friendship with Jacob, knowing that her decision has the potential to ignite the ageless struggle between vampire and werewolf. With her graduation quickly approaching, Bella is confronted with the most important decision of her life.</p>
+                  <ul>
+                    <li>
+                      <a href="#" title="Add to list">
+                        <i class="fa-solid fa-list"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" title="Mark as favorite">
+                        <i class="fa-solid fa-heart"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" title="Mark as favorite">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" title="Rate It">
+                        <i class="fa-solid fa-star"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+          <div class="row" style="display: flex; flex-direction: row;">
+            <div class="col">
+              <div class="container">
+                <div class="row overflow-scroll top-rated">
+                  <div class="col">
+                    <card class="card">
+                      <a href="#" class="card-img-btn">
+                        <img
+                          class="card-img img-fluid"
+                          src="./assets/images/halo movie.jpg"
+                          alt="something movie"
+                        />
+                      </a>
+                      <div class="card-img-overlay">
+                        <a class="threedot-btn">
+                          <i class="fa-solid fa-ellipsis"></i>
+                        </a>
+                      </div>
+                      <div class="card-body">
+                        <div class="card-click">
+                          <ul>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-list"></i>
+                                Add to list</a
+                              >
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-heart"></i>
+                                Favourite</a
+                              >
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-clipboard-list"></i>
+                                Watchlist
+                              </a>
+                            </li>
+                            <li>
+                              <a href="#">
+                                <i class="fa-solid fa-star"></i>
+                                Your rating</a
+                              >
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="circle-progressbar">
+                          <div
+                            role="progressbar"
+                            aria-valuenow="88"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            style="--value: 88"
+                          ></div>
+                        </div>
+                      </div>
+                    </card>
+                  </div>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col">
+                  <h4><a style="text-decoration: none;" href="#">The Twilight Saga: Eclipse</a></h4>
+                  <p class="text-muted">June 23, 2010</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="text-muted">Bella once again finds herself surrounded by danger as Seattle is ravaged by a string of mysterious killings and a malicious vampire continues her quest for revenge. In the midst of it all, she is forced to choose between her love for Edward and her friendship with Jacob, knowing that her decision has the potential to ignite the ageless struggle between vampire and werewolf. With her graduation quickly approaching, Bella is confronted with the most important decision of her life.</p>
+                  <ul>
+                    <li>
+                      <a href="#" title="Add to list">
+                        <i class="fa-solid fa-list"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" title="Mark as favorite">
+                        <i class="fa-solid fa-heart"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" title="Mark as favorite">
+                        <i class="fa-solid fa-clipboard-list"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#" title="Rate It">
+                        <i class="fa-solid fa-star"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      
 
     </section>
     <footer id="footer">
@@ -313,6 +508,7 @@
         </div>
       </div>
     </footer>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <script src="node_modules/chart.js/dist/chart.js"></script>
  
   </body>

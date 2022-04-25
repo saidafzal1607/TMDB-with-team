@@ -3,6 +3,7 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
+// import * as modalVideo from "../node_modules/modal-video/js/modal-video";
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
 // );
@@ -93,6 +94,39 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
+      home
+      .getLatestTrailer()
+      .then((data) => {
+        home.displayLatestTrailer(data);
+        const cardTrailers = document.querySelectorAll(".card");
+        cardTrailers.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+            $(".js-modal-btn").modalVideo({channel:'vimeo'});
+          });
+        });
+      })
+      .catch((err) =>{
+        console.log(err)
+      })
+      home 
+      .getTopRated()
+      .then((data) => {
+        home.displayTopRated(data);
+        const topRated = document.querySelectorAll(".card");
+        topRated.forEach((card) => {
+          card.addEventListener("click", (e) =>{
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload()
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     // home
     // .getLatestMovies()
     // .then((data) => {

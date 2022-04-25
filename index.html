@@ -163,7 +163,7 @@
           <h3 class="" style="display: inline-block; padding-right: 20px">
             What's Popular
           </h3>
-          <div
+          <!-- <div
             class="card"
             style="
               width: 384px;
@@ -172,7 +172,7 @@
               border: 1px solid;
               border-radius: 20px;
             "
-          >
+          > -->
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
               <li class="nav-item" role="presentation">
                 <button
@@ -328,7 +328,66 @@
             role="tabpanel"
             aria-labelledby="pills-profile-tab"
           >
-          
+          <div class="container">
+            <div class="row overflow-scroll popular-onTV-movies">
+              <div class="col">
+                <card class="card">
+                  <a href="#" class="card-img-btn">
+                    <img
+                      class="card-img img-fluid"
+                      src="./assets/images/halo movie.jpg"
+                      alt="something movie"
+                    />
+                  </a>
+                  <div class="card-img-overlay">
+                    <a class="threedot-btn">
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <div class="card-click">
+                      <ul>
+                        <li>
+                          <a href="#">
+                            <i class="fa-solid fa-list"></i>
+                            Add to list</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="fa-solid fa-heart"></i>
+                            Favourite</a
+                          >
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="fa-solid fa-clipboard-list"></i>
+                            Watchlist
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="fa-solid fa-star"></i>
+                            Your rating</a
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="circle-progressbar">
+                      <div
+                        role="progressbar"
+                        aria-valuenow="88"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                        style="--value: 88"
+                      ></div>
+                    </div>
+                    <a href="#" class="card-title"> Halo </a>
+                    <p class="card-text">Mar 24, 2022</p>
+                  </div>
+                </card>
+              </div>
+          </div>
           </div>
           <div
             class="tab-pane fade"
@@ -336,9 +395,17 @@
             role="tabpanel"
             aria-labelledby="pills-contact-tab"
           >
-            ...
+          
           </div>
         </div>
+        <div
+            class="tab-pane fade"
+            id="pills-contact"
+            role="tabpanel"
+            aria-labelledby="pills-contact-tab"
+          >
+          
+          </div>
     </section>
       <section>
         <div class="container">
@@ -346,7 +413,7 @@
             <h3 class="" style="display: inline-block; padding-right: 20px">
               Free To Watch
             </h3>
-            <div
+            <!-- <div
               class="card"
               style="
                 width: 200px;
@@ -355,7 +422,7 @@
                 border: 1px solid;
                 border-radius: 20px;
               "
-            >
+            > -->
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                   <button
@@ -476,7 +543,7 @@
             <h3 class="" style="display: inline-block; padding-right: 20px">
               Latest Trailers
             </h3>
-            <div
+            <!-- <div
               class="card"
               style="
                 width: 384px;
@@ -485,7 +552,7 @@
                 border: 1px solid;
                 border-radius: 20px;
               "
-            >
+            > -->
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                   <button
@@ -644,7 +711,7 @@
             <h3 class="" style=" display: inline-block; padding-right: 20px">
               Trending
             </h3>
-            <div
+            <!-- <div
               class="card"
               style="
                 width: 200px;
@@ -653,7 +720,7 @@
                 border: 1px solid;
                 border-radius: 20px;
               "
-            >
+            > -->
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                   <button
@@ -961,6 +1028,7 @@
       </div>
     </footer>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./node_modules/modal-video/css/modal-video.min.css"></script>
     <script type="module" src="./js/router.js"></script>
   </body>

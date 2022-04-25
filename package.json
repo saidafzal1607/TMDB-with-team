@@ -24,6 +24,6 @@
     "modal-video": "^2.4.6",
     "moment": "^2.29.2",
     "postcss-cli": "^9.1.0",
-    "yarn": "^1.22.18"
+    "sweetalert2": "^11.4.9"
   }
 }

@@ -1,5 +1,6 @@
 import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
+
 const { API_KEY, SESSION_ID, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } =
   configs;
 
@@ -12,9 +13,13 @@ export async function getMovie(movie_id) {
     const data = await res.json();
     const accountStateData = await resAccountState.json();
     console.log(accountStateData, "isFav");
-    return { ...data, ...accountStateData };
+    const allData = { ...data, ...accountStateData };
+    if (allData.success === false) {
+      throw new Error(allData.status_message);
+    }
+    return allData;
   } catch (error) {
-    throw error;
+    throw new Error(error);
   }
 }
 
@@ -97,24 +102,37 @@ export async function displayMovie(data) {
               <h6 class="pb-4 mx-2">User Score</h6>
               <ul>
               <li>
-              <a href="#" class="addlistbtn"  data-addlist="false" title="Add to list">
+              <button class="addlistbtn"  data-addlist="false" title="Add to list">
               <i class="fa-solid fa-list"></i>
-              </a>
+              </button>
               </li>
               <li>
-              <a href="#" class="favbtn" data-favlist=${favorite} title="Mark as favorite">
+              <button class="favbtn" data-favlist=${favorite} title="Mark as favorite">
               <i class="fa-solid fa-heart"></i>
-              </a>
+              </button>
               </li>
               <li>
-              <a href="#"  class="watchbtn"  data-watchlist="false" title="Add to your wathclist">
+              <button  class="watchbtn"  data-watchlist=${watchlist} title="Add to your wathclist">
               <i class="fa-solid fa-clipboard-list"></i>
-              </a>
+              </button>
               </li>
-              <li>
-              <a href="#" title="Rate It">
+              <li  class="Rating">
+              <button href="#" class="ratebtn" title="Rate It">
               <i class="fa-solid fa-star"></i>
-              </a>
+              </button>
+              <div class="star-rating mt-1 px-1">
+                      <input type="radio" id="5-stars" name="rating" value="5" />
+                      <label for="5-stars" class="star">&#9733;</label>
+                      <input type="radio" id="4-stars" name="rating" value="4" />
+                      <label for="4-stars" class="star">&#9733;</label>
+                      <input type="radio" id="3-stars" name="rating" value="3" />
+                      <label for="3-stars" class="star">&#9733;</label>
+                      <input type="radio" id="2-stars" name="rating" value="2" />
+                      <label for="2-stars" class="star">&#9733;</label>
+                      <input type="radio" id="1-star" name="rating" value="1" />
+                      <label for="1-star" class="star">&#9733;</label>
+                      <i class="fa-solid fa-circle-minus removebtn my-2 px-1"></i>
+                    </div>
               </li>
               </ul>
               
@@ -418,9 +436,25 @@ export async function AddWatchlist(id, watchlist) {
   const bodyData = {
     media_type: "movie",
     media_id: id,
-    watchlist,
+    watchlist: !watchlist,
   };
   const response = await fetch(addToWatchlistUrl, {
+    method: "POST",
+    headers: {
+      "content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+  const data = await response.json();
+  return data;
+}
+
+export async function AddRate(id, value) {
+  const addToRatedUrl = `${BASE_URL}movie/${id}/rating?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+  const bodyData = {
+    value,
+  };
+  const response = await fetch(addToRatedUrl, {
     method: "POST",
     headers: {
       "content-Type": "application/json",

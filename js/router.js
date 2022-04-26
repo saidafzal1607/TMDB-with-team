@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .getFavPerson()
       .then((data) => {
         favpersons.displayFavPerson(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
         const cardPersons = document.querySelectorAll(".card");
         cardPersons.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -52,6 +54,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const actorId = history.state.actorId;
     person.getPerson(personid).then((data) => {
       person.displayPerson(data);
+      const loading = document.querySelector(".lds-dual-ring");
+      document.body.removeChild(loading);
       const cardListMovies = document.querySelectorAll(".card");
       cardListMovies.forEach((card) => {
         card.addEventListener("click", (e) => {
@@ -79,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .getPopularMovies()
       .then((data) => {
         home.displayPopularMovies(data);
-
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -290,6 +293,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .getPopularFavMovies()
       .then((data) => {
         topmovies.displayPopularFavMovies(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {

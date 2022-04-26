@@ -153,7 +153,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         const watchBtn = document.querySelector(".watchbtn");
         const rateBtn = document.querySelector(".ratebtn");
         const starRating = document.querySelector(".star-rating");
-        const Stars = document.querySelectorAll(".star");
+        let Stars = document.querySelectorAll(".star");
         const removeBtn = document.querySelector(".removebtn");
         // favourite, watchlist and rating
         // favourite
@@ -182,8 +182,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
         let {
           rated: { value },
         } = data;
+        let StarsArr = Array.from(Stars);
+        let StarsArrSort = StarsArr.reverse();
         for (let i = 0; i < value; i++) {
-          Stars[i].classList.add("checked");
+          StarsArrSort[i].classList.add("checked");
         }
         rateBtn.addEventListener("click", (e) => {
           starRating.classList.toggle("onRating");
@@ -211,8 +213,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
         });
       })
       .catch((err) => {
-        const loading = document.querySelector(".lds-dual-ring");
-        document.body.removeChild(loading);
+        // const loading = document.querySelector(".lds-dual-ring");
+        // document.body.removeChild(loading);
         Toast.fire({
           icon: "error",
           title: `${err.message}`,

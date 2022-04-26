@@ -2,6 +2,40 @@ import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
+//  ===================================     SEARCH     ================================
+
+
+
+// https://api.themoviedb.org/3/search/company?api_key=a585ab7667d107d8a1091777c0f7eba2&query=hard&page=1
+
+export async function getSearchMovies( query = [] , page = 1) {
+  try {
+    const url = `${BASE_URL}search/company?api_key=${API_KEY}&query=${query}&page=${page}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const { results } = data;
+    console.log(data);
+    return results;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//  ===================================     SEARCH     ================================
+
+
+
 export async function getPopularMovies(page = 1) {
   try {
     const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
@@ -17,6 +51,7 @@ export async function getPopularTVMovies(page = 1) {
   try {
     const url = `${BASE_URL}tv/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     const res = await fetch(url);
+    // console.log(url);
     const data = await res.json();
     return data;
   } catch (error) {
@@ -26,10 +61,10 @@ export async function getPopularTVMovies(page = 1) {
 
 export function displayPopularTVMovies(data) {
   const { results } = data;
-  const popularONTvMovies = document.querySelector(".popular-onTV-movies");
+  const popularONTvMovies = document.querySelector(".popular-ontv-movies");
   let html = "";
   results.forEach((OnTVmovie) => {
-    const { title, poster_path, release_date, vote_average, id } = OnTVmovie;
+    const { original_name, poster_path, release_date, vote_average, id } = OnTVmovie;
     const poster = poster_path
       ? `${BASE_IMG_URL}${poster_path}`
       : DEFAULT_IMG_URL;
@@ -84,7 +119,7 @@ export function displayPopularTVMovies(data) {
             style="--value: ${vote_average * 10}"
           ></div>
         </div>
-        <a href="/detailsmovie.html?id=${id}" class="card-title">${title}</a>
+        <a href="movie.html" class="card-title">${original_name}</a>
         <p class="card-text">${moment(release_date).format("ll")}</p>
       </div>
       </card>
@@ -236,12 +271,162 @@ export function displayPopularMovies(data) {
             style="--value: ${vote_average * 10}"
           ></div>
         </div>
-        <a href="/detailsmovie.html?id=${id}" class="card-title">${title}</a>
+        <a href="movie.html" class="card-title">${title}</a>
         <p class="card-text">${moment(release_date).format("ll")}</p>
       </div>
       </card>
     </div>
     `;
     popularTvMovies.innerHTML = html;
+  });
+}
+
+export async function getLatestTrailer(page = 1) {
+  try {
+    const url = `${BASE_URL}movie/now_playing?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export function displayLatestTrailer(data) {
+  const { results } = data;
+  const latestTrailer = document.querySelector(".latest-trailer");
+  let html = "";
+  results.forEach((LatestTrailer) => {
+    const { title, poster_path,  id } = LatestTrailer;
+    const poster = poster_path
+      ? `${BASE_IMG_URL}${poster_path}`
+      : DEFAULT_IMG_URL;
+
+    html += `
+    <div class="col">
+      <card data-id=${id} class="card">
+      <a href="#" class="card-img-btn">
+        <img
+          class="card-img img-fluid"
+          src="${poster}"
+          alt="something movie"
+        />
+      </a>
+      <div class="card-img-overlay">
+        <a class="threedot-btn">
+          <i class="fa-solid fa-ellipsis"></i>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-click">
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-list"></i>
+                Add to list</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-heart"></i>
+                Favourite</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Watchlist
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-star"></i>
+                Your rating</a
+              >
+            </li>
+          </ul>
+        </div>
+        <button class="js-modal-btn" data-video-id="7TUOI23spt0">Open Video</button>
+        <a href="/detailsmovie.html?id=${id}" class="card-title">${title}</a>
+      </div>
+      </card>
+    </div>
+    `;
+    latestTrailer.innerHTML = html;
+  });
+}
+
+export async function getTopRated(page = 1) {
+  try {
+    const url = `${BASE_URL}movie/top_rated?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export function displayTopRated(data) {
+  const { results } = data;
+  const topRated = document.querySelector(".top-rated");
+  let html = "";
+  results.forEach((LatestTrailer) => {
+    const { title, poster_path, release_date, id } = LatestTrailer;
+    const poster = poster_path
+      ? `${BASE_IMG_URL}${poster_path}`
+      : DEFAULT_IMG_URL;
+
+    html += `
+    <div class="col">
+      <card data-id=${id} class="card">
+      <a href="#" class="card-img-btn">
+        <img
+          class="card-img img-fluid"
+          src="${poster}"
+          alt="something movie"
+        />
+      </a>
+      <div class="card-img-overlay">
+        <a class="threedot-btn">
+          <i class="fa-solid fa-ellipsis"></i>
+        </a>
+      </div>
+      <div class="card-body">
+        <div class="card-click">
+          <ul>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-list"></i>
+                Add to list</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-heart"></i>
+                Favourite</a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Watchlist
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-star"></i>
+                Your rating</a
+              >
+            </li>
+          </ul>
+        </div>
+        <a href="/detailsmovie.html?id=${id}" class="card-title">${title}</a>
+        <p class="card-text">${moment(release_date).format("ll")}</p>
+        </div>
+      </card>
+    </div>
+    `;
+    topRated.innerHTML = html;
   });
 }

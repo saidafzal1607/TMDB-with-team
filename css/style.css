@@ -454,26 +454,26 @@ p {
 .header-movie .movie-item {
   padding: 52px;
 }
-.header-movie .movie-item .col-4 img {
+.header-movie .movie-item .col-md-4 img {
   height: 500px;
   object-fit: cover;
 }
-.header-movie .movie-item .col-8 {
+.header-movie .movie-item .col-md-8 {
   color: #ffffff;
 }
-.header-movie .movie-item .col-8 .movie-title {
+.header-movie .movie-item .col-md-8 .movie-title {
   color: #fff;
   text-decoration: none;
   text-transform: capitalize;
 }
-.header-movie .movie-item .col-8 .movie-title:hover {
+.header-movie .movie-item .col-md-8 .movie-title:hover {
   color: rgb(189, 204, 216);
 }
-.header-movie .movie-item .col-8 .rating {
+.header-movie .movie-item .col-md-8 .rating {
   display: flex;
   align-items: center;
 }
-.header-movie .movie-item .col-8 .rating .circle-progressbar {
+.header-movie .movie-item .col-md-8 .rating .circle-progressbar {
   position: relative;
   margin-top: -30px;
 }
@@ -486,13 +486,13 @@ p {
   }
 }
 @property --pgPercentage {
-  .header-movie .movie-item .col-8 .rating .circle-progressbar {
+  .header-movie .movie-item .col-md-8 .rating .circle-progressbar {
     syntax: "<number>";
     inherits: false;
     initial-value: 0;
   }
 }
-.header-movie .movie-item .col-8 .rating .circle-progressbar div[role=progressbar] {
+.header-movie .movie-item .col-md-8 .rating .circle-progressbar div[role=progressbar] {
   --size: 3.8rem;
   --bg: #081c22;
   --fg: rgba(20, 193, 20, 0.757);
@@ -508,24 +508,24 @@ p {
   font-size: calc(var(--size) / 3.5);
   color: white;
 }
-.header-movie .movie-item .col-8 .rating .circle-progressbar div[role=progressbar]::before {
+.header-movie .movie-item .col-md-8 .rating .circle-progressbar div[role=progressbar]::before {
   counter-reset: percentage var(--value);
   content: counter(percentage) "%";
 }
-.header-movie .movie-item .col-8 .rating ul {
+.header-movie .movie-item .col-md-8 .rating ul {
   display: flex;
   align-items: center;
 }
-.header-movie .movie-item .col-8 .rating ul li {
+.header-movie .movie-item .col-md-8 .rating ul li {
   margin-right: 20px;
 }
-.header-movie .movie-item .col-8 .rating ul li button {
+.header-movie .movie-item .col-md-8 .rating ul li button {
   color: rgb(255, 255, 255);
   background: none;
   outline: none;
   border: none;
 }
-.header-movie .movie-item .col-8 .rating ul li button i {
+.header-movie .movie-item .col-md-8 .rating ul li button i {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -535,10 +535,10 @@ p {
   background: #032440;
   margin-right: 5px;
 }
-.header-movie .movie-item .col-8 .rating ul li a [data-addlist=true],
-.header-movie .movie-item .col-8 .rating ul li [data-favlist=true],
-.header-movie .movie-item .col-8 .rating ul li [data-watchlist=true],
-.header-movie .movie-item .col-8 .rating ul li [data-addlist=true] {
+.header-movie .movie-item .col-md-8 .rating ul li a [data-addlist=true],
+.header-movie .movie-item .col-md-8 .rating ul li [data-favlist=true],
+.header-movie .movie-item .col-md-8 .rating ul li [data-watchlist=true],
+.header-movie .movie-item .col-md-8 .rating ul li [data-addlist=true] {
   color: rgb(190, 7, 7) !important;
 }
 .header-movie .movie-item .row .movie-character {
@@ -746,6 +746,10 @@ p {
 
 .star-rating :checked ~ label {
   color: #f90;
+}
+
+.checked {
+  color: #f90 !important;
 }
 
 .star-rating label:hover,

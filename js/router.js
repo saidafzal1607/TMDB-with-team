@@ -3,6 +3,7 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
+import * as card from "./card.js";
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
 // );
@@ -10,12 +11,11 @@ import * as topmovies from "./popularmovie.js";
 //   return new bootstrap.Popover(popoverTriggerEl);
 // });
 
-// switchOn(document);
-
 window.addEventListener("popstate", (e) => {
   location.reload();
 });
 document.addEventListener("DOMContentLoaded", function (e) {
+  // card.switchOn(document);
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const actorId = history.state.actorId;
     person.getPerson(personid).then((data) => {
       person.displayPerson(data);
+      const loading = document.querySelector(".lds-dual-ring");
+      document.body.removeChild(loading);
       const cardListMovies = document.querySelectorAll(".card");
       cardListMovies.forEach((card) => {
         card.addEventListener("click", (e) => {
@@ -144,7 +146,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     movie
       .getMovie(id)
       .then((data) => {
-        console.log(data, "data from movie");
         movie.displayMovie(data);
         const loading = document.querySelector(".lds-dual-ring");
         document.body.removeChild(loading);
@@ -152,6 +153,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         const watchBtn = document.querySelector(".watchbtn");
         const rateBtn = document.querySelector(".ratebtn");
         const starRating = document.querySelector(".star-rating");
+        const Stars = document.querySelectorAll(".star");
         const removeBtn = document.querySelector(".removebtn");
         // favourite, watchlist and rating
         // favourite
@@ -177,21 +179,26 @@ document.addEventListener("DOMContentLoaded", function (e) {
           });
         });
         // Rating
+        let {
+          rated: { value },
+        } = data;
+        for (let i = 0; i < value; i++) {
+          Stars[i].classList.add("checked");
+        }
         rateBtn.addEventListener("click", (e) => {
-          let ratingBtn = e.target.closest(".ratebtn").dataset.rating;
           starRating.classList.toggle("onRating");
           if (starRating.classList.contains("onRating")) {
             starRating.addEventListener("change", (e) => {
+              const rating = e.target.value;
               Toast.fire({
                 icon: "success",
                 title: `SUCCESS!
-              Your rating is ${e.target.value} has been saved `,
+              Your rating is ${rating} has been saved `,
               });
-              const rating = e.target.value;
               console.log(rating, "rating value");
               movie.AddRate(id, rating).then((data) => {
                 if (data.success) {
-                  ratingBtn = rating;
+                  value = rating;
                 }
               });
             });
@@ -225,10 +232,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
     movie.getMovieRecommendations(id).then((data) => {
       movie.displayMovieRecommendations(data);
     });
-
-    // watchBtn.addEventListener("click", (e) => {
-    //   movie.AddWatchlist((data) => {});
-    // });
   }
   if (
     location.pathname === "/popularmovie.html" ||

@@ -17,13 +17,13 @@
   }
   .movie-item {
     padding: 52px;
-    .col-4 {
+    .col-md-4 {
       img {
         height: 500px;
         object-fit: cover;
       }
     }
-    .col-8 {
+    .col-md-8 {
       color: #ffffff;
       .movie-title {
         color: #fff;
@@ -342,6 +342,9 @@
 
 .star-rating :checked ~ label {
   color: #f90;
+}
+.checked{
+  color: #f90 !important;
 }
 
 .star-rating label:hover,

@@ -75,16 +75,15 @@ export async function displayMovie(data) {
    <div class="custom-bg">
      <div class="container">
         <div class="row movie-item">
-  <div class="col-4">
+  <div class="col-12 col-md-4">
   <a href="" class="movie-posterimg">
   <img class="img-fluid "
   src="${poster}" alt="brand" />
   </a>
   </div>
-  <div class="col-8">
-  <a href="#" class="movie-title my-2">
+  <div class="col-12 col-md-8">
+  <a href="" class="movie-title my-2">
   <h1>
-  
   ${title}(${release_date.split("-")[0]})
               </h1>
               </a>

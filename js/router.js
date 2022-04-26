@@ -3,6 +3,8 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
+import * as profile from "./profile.js"
+// import * as modalVideo from "../node_modules/modal-video/js/modal-video";
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
 // );
@@ -113,16 +115,39 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
-    // Promise.all([
-    //   home.getPopularMovies(),
-    //   home.getPopularTVMovies(),
-    // ]).then((data) => {
-    //   home.displayPopularMovies(data[0]);
-    //   home.displayPopularTVMovies(data[1]);
-    //   const loading = document.querySelector(".lds-dual-ring");
-    //   document.body.removeChild(loading);
-
-    // });
+      home
+      .getLatestTrailer()
+      .then((data) => {
+        home.displayLatestTrailer(data);
+        const cardTrailers = document.querySelectorAll(".card");
+        cardTrailers.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+            $(".js-modal-btn").modalVideo({channel:'vimeo'});
+          });
+        });
+      })
+      .catch((err) =>{
+        console.log(err)
+      })
+      home 
+      .getTopRated()
+      .then((data) => {
+        home.displayTopRated(data);
+        const topRated = document.querySelectorAll(".card");
+        topRated.forEach((card) => {
+          card.addEventListener("click", (e) =>{
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload()
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
     // home
     // .getLatestMovies()
     // .then((data) => {
@@ -233,6 +258,73 @@ document.addEventListener("DOMContentLoaded", function (e) {
     //   movie.AddWatchlist((data) => {});
     // });
   }
+  if(location.pathname === "/profile.html" ||
+      location.pathname === "profile"){
+        profile.getDetailAccount()
+        .then((data) =>{
+          profile.displayDetailAccount(data);
+        //   const cardList = document.querySelectorAll(".card");
+        // cardList.forEach((card) => {
+        //   card.addEventListener("click", (e) => {
+        //     const id = card.dataset.id;
+        //     history.pushState({ id }, null, `/movie.html`);
+        //     location.reload();
+        //   });
+        // });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    profile.getFavMovieAccount()
+    .then((data) => {
+      profile.displayFavMovieAccount(data);
+      const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      profile.getRating()
+      .then((data) => {
+        profile.displayRating(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      profile.getLists()
+      .then((data) => {
+        profile.displayLists(data);
+        const cardList = document.querySelector(".list");
+        cardList.forEach((list) => {
+          list.addEventListener("click", (e) => {
+            const id = list.dataset.id;
+            history.pushState({ id }, null, `/profile.html`);
+            location.reload();
+          });
+        });
+
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+      }
   if (
     location.pathname === "/popularmovie.html" ||
     location.pathname === "/popularmovie"

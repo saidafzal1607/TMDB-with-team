@@ -14,10 +14,10 @@ export async function getDetailAccount() {
     }
   }
   export function displayDetailAccount(data) {
-    const { gravatar } = data;
+    const { avatar } = data;
     const detailAccount = document.querySelector(".detail-account");
     let html = "";
-     gravatar.forEach((DetailAccount) => {
+     avatar.forEach((DetailAccount) => {
       const { poster_path, username } = DetailAccount;
       const poster = poster_path
         ? `${BASE_IMG_URL}${poster_path}`
@@ -31,6 +31,40 @@ export async function getDetailAccount() {
               </div>
       `;
       detailAccount.innerHTML = html;
+    });
+  }
+  export async function getLists() {
+    try {
+      const url = `${BASE_URL}account/{account_id}/lists?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+      console.log(url);
+      const res = await fetch(url);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  export function displayLists(data) {
+    const { results } = data;
+    const detailLists = document.querySelector(".lists");
+    let html = "";
+     results.forEach((DetailAccount) => {
+      const { poster_path, total_results, total_pages } = DetailAccount;
+      const poster = poster_path
+        ? `${BASE_IMG_URL}${poster_path}`
+        : DEFAULT_IMG_URL;
+  
+      html += `
+      div class="col">
+      <p>Total Edits</p>
+      <p class="h1 text-muted">${total_pages}</p>
+    </div>
+    <div class="col">
+      <p>Total Ratings</p>
+      <p class="h1 text-muted">${total_results}</p>
+    </div>
+      `;
+      detailLists.innerHTML = html;
     });
   }
 

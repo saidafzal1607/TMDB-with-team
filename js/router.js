@@ -290,6 +290,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       profile.getRating()
       .then((data) => {
         profile.displayRating(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -298,6 +300,25 @@ document.addEventListener("DOMContentLoaded", function (e) {
             location.reload();
           });
         });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+      profile.getLists()
+      .then((data) => {
+        profile.displayLists(data);
+        const cardList = document.querySelector(".list");
+        cardList.forEach((list) => {
+          list.addEventListener("click", (e) => {
+            const id = list.dataset.id;
+            history.pushState({ id }, null, `/profile.html`);
+            location.reload();
+          });
+        });
+
+      })
+      .catch((err) => {
+        console.log(err);
       })
 
       }

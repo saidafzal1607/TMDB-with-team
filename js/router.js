@@ -3,6 +3,21 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
+
+import {
+  displaySearchResults,
+  fetchSearchMovie,
+} from "./search.js";
+
+
+      // ======================   SEARCH   ======================
+      
+      
+
+
+      
+      // ======================   SEARCH   ======================
+
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
 // );
@@ -83,6 +98,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .getPopularMovies()
       .then((data) => {
         home.displayPopularMovies(data);
+        home.searchMovieHandler(location, history);
+
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -95,6 +112,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
+
+
     home
       .getPopularTVMovies()
       .then((data) => {
@@ -147,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     movie
       .getMovie(id)
       .then((data) => {
+
         console.log(data, "data from movie");
         movie.displayMovie(data);
         const loading = document.querySelector(".lds-dual-ring");
@@ -292,6 +312,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     topmovies
       .getPopularFavMovies()
       .then((data) => {
+        topmovies.searchHandler();
+
         topmovies.displayPopularFavMovies(data);
         const loading = document.querySelector(".lds-dual-ring");
         document.body.removeChild(loading);
@@ -308,4 +330,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
         console.log(err);
       });
   }
+  if (location.pathname === "/search.html") {
+    const loading = document.querySelector(".lds-dual-ring");
+    document.body.removeChild(loading);
+    console.log(history.state, "salom");
+    fetchSearchMovie(history.state.query, history.state?.page).then((data) => {
+      console.log(data, "Search");
+      displaySearchResults(data);
+    });
+
+
+
+  }
 });
+

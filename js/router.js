@@ -3,7 +3,7 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
-<<<<<<< HEAD
+
 
 import {
   displaySearchResults,
@@ -11,18 +11,9 @@ import {
 } from "./search.js";
 
 
-      // ======================   SEARCH   ======================
-      
-      
 
-
-      
-      // ======================   SEARCH   ======================
-
-=======
 import * as profile from "./profile.js"
 // import * as modalVideo from "../node_modules/modal-video/js/modal-video";
->>>>>>> 8534ba416a9124505b3b8ea506d92f01e7cb14a0
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
 // );

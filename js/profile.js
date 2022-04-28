@@ -5,7 +5,6 @@ const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL, SESSION_ID, USER_IMG_U
 export async function getDetailAccount() {
     try {
       const url = `${BASE_URL}account?api_key=${API_KEY}&session_id=${SESSION_ID}`;
-      console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -39,11 +38,7 @@ export async function getDetailAccount() {
              </div>
             </div>
           </div>
-        </div>
-
-          
-              
-            
+        </div>     
       `;
       
   }
@@ -52,7 +47,6 @@ export async function getDetailAccount() {
   export async function getFavMovieAccount(page = 1) {
     try {
       const url = `${BASE_URL}account/{account_id}/favorite/movies?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&${page}`;
-      console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -125,7 +119,7 @@ export async function getDetailAccount() {
   export async function getRating(page = 1) {
     try {
       const url = `${BASE_URL}account/{account_id}/watchlist/movies?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&${page}`;
-      console.log(url);
+      
       const res = await fetch(url);
       const data = await res.json();
       return data;

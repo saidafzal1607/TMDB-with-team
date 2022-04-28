@@ -12,7 +12,6 @@ export async function getMovie(movie_id) {
     const resAccountState = await fetch(accountStateUrl);
     const data = await res.json();
     const accountStateData = await resAccountState.json();
-    console.log(accountStateData, "isFav");
     const allData = { ...data, ...accountStateData };
     if (allData.success === false) {
       throw new Error(allData.status_message);
@@ -24,7 +23,6 @@ export async function getMovie(movie_id) {
 }
 
 export async function getMovieActors(movie_id) {
-  console.log(movie_id, "salom");
   try {
     const url = `${BASE_URL}movie/${movie_id}/credits?api_key=${API_KEY}&language=en-US`;
     const res = await fetch(url);

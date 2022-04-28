@@ -1,42 +1,24 @@
 import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
-
-//  ===================================     SEARCH     ================================
-
+import { fetchSearchMovie } from "./search.js";
 
 
-// https://api.themoviedb.org/3/search/company?api_key=a585ab7667d107d8a1091777c0f7eba2&query=hard&page=1
-
-export async function getSearchMovies( query = [] , page = 1) {
-  try {
-    const url = `${BASE_URL}search/company?api_key=${API_KEY}&query=${query}&page=${page}`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const { results } = data;
-    console.log(data);
-    return results;
-  } catch (error) {
-    throw new Error(error);
-  }
+export function searchMovieHandler(location, history) {
+  const input = document.querySelector(".search__form");
+  input.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log(input.query.value, "chiqar");
+    history.pushState({ query: input.query.value }, "search", "/search.html");
+    location.assign("/search.html");
+  });
 }
 
-
-
-
-
-
-
-
-
-
-
-
 //  ===================================     SEARCH     ================================
-
 
 
 export async function getPopularTVMovies(page = 1) {
+
   try {
     const url = `${BASE_URL}tv/on_the_air?api_key=${API_KEY}&language=en-US&page=${page}`;
     const res = await fetch(url);

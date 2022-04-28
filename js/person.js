@@ -1,15 +1,18 @@
 import configs from "../config.js";
 // import moment from "../node_modules/moment/dist/moment.js";
-const { API_KEY,SESSION_ID, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
+const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 export async function getPerson(person_id) {
   try {
     const url = `${BASE_URL}person/${person_id}?api_key=${API_KEY}&language=en-US`;
     const res = await fetch(url);
     const data = await res.json();
+    if (data.success === false) {
+      throw new Error(data.status_message);
+    }
     return data;
   } catch (error) {
-    throw error;
+    throw new Error(error);
   }
 }
 

@@ -3,7 +3,7 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
-import * as profile from "./profile.js"
+import * as profile from "./profile.js";
 // import * as modalVideo from "../node_modules/modal-video/js/modal-video";
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
@@ -53,49 +53,27 @@ document.addEventListener("DOMContentLoaded", function (e) {
   if (location.pathname === "/person.html" || location.pathname === "/person") {
     const personid = history.state.personid;
     const actorId = history.state.actorId;
-    person.getPerson(personid).then((data) => {
+    person
+    .getPerson(personid?personid:actorId)
+    .then((data) => {
       person.displayPerson(data);
       const loading = document.querySelector(".lds-dual-ring");
       document.body.removeChild(loading);
-      const cardListMovies = document.querySelectorAll(".card");
-      cardListMovies.forEach((card) => {
-        card.addEventListener("click", (e) => {
-          const personMovieId = card.dataset.id;
-          history.pushState({ personMovieId }, null, `/movie.html`);
-          location.reload();
-        });
+     })
+     .catch((err) => {
+      const loading = document.querySelector(".lds-dual-ring");
+      document.body.removeChild(loading);
+      Toast.fire({
+        icon: "error",
+        title: `${err.message}`,
       });
     });
     // get Person of movies
-    person.getPersonOfMovies(personid).then((data) => {
+    person.getPersonOfMovies(personid?personid:actorId).then((data) => {
       person.displayPersonOfMovies(data);
-    });
-
-    movie.getMoviePerson(actorId).then((data) => {
-      movie.displayMoviePerson(data);
-    });
-    // get Person of movies
-    movie.getMoviePersonOfMovies(actorId).then((data) => {
-      movie.displayMoviePersonOfMovies(data);
     });
   }
   if (location.pathname === "/index.html" || location.pathname === "/") {
-    home
-      .getPopularMovies()
-      .then((data) => {
-        home.displayPopularMovies(data);
-        const cardList = document.querySelectorAll(".card");
-        cardList.forEach((card) => {
-          card.addEventListener("click", (e) => {
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
-            location.reload();
-          });
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
     home
       .getPopularTVMovies()
       .then((data) => {
@@ -115,56 +93,53 @@ document.addEventListener("DOMContentLoaded", function (e) {
         console.log(err);
       });
       home
-      .getLatestTrailer()
+      .getPopularTheatres()
       .then((data) => {
-        home.displayLatestTrailer(data);
-        const cardTrailers = document.querySelectorAll(".card");
-        cardTrailers.forEach((card) => {
+        home.displayPopularTheatres(data);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
             const id = card.dataset.id;
             history.pushState({ id }, null, `/movie.html`);
             location.reload();
-            $(".js-modal-btn").modalVideo({channel:'vimeo'});
-          });
-        });
-      })
-      .catch((err) =>{
-        console.log(err)
-      })
-      home 
-      .getTopRated()
-      .then((data) => {
-        home.displayTopRated(data);
-        const topRated = document.querySelectorAll(".card");
-        topRated.forEach((card) => {
-          card.addEventListener("click", (e) =>{
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
-            location.reload()
           });
         });
       })
       .catch((err) => {
         console.log(err);
+      });
+    home
+      .getTopRated()
+      .then((data) => {
+        home.displayTopRated(data);
+        const topRated = document.querySelectorAll(".card");
+        topRated.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
       })
-    // home
-    // .getLatestMovies()
-    // .then((data) => {
-    //   console.log("salom");
-    //   home.displayLatestMovies(data);
-    //   const cardList = document.querySelectorAll(".card");
-    //   console.log(cardList, "topilmadi");
-    //   cardList.forEach((card) => {
-    //     card.addEventListener("click", (e) => {
-    //       const id = card.dataset.id;
-    //       history.pushState({ id }, null, `/movie.html`);
-    //       location.reload();
-    //     });
-    //   });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+      .catch((err) => {
+        console.log(err);
+      });
+    home
+      .getPopularMovies()
+      .then((data) => {
+        home.displayPopularMovies(data);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   if (location.pathname === "/movie.html" || location.pathname === "/movie") {
     const id = history.state.id;
@@ -238,12 +213,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
         });
       })
       .catch((err) => {
-        // const loading = document.querySelector(".lds-dual-ring");
-        // document.body.removeChild(loading);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
         Toast.fire({
           icon: "error",
           title: `${err.message}`,
         });
+
       });
     movie.getMovieActors(id).then((data) => {
       movie.displayMovieActors(data);
@@ -260,11 +236,14 @@ document.addEventListener("DOMContentLoaded", function (e) {
       movie.displayMovieRecommendations(data);
     });
   }
-  if(location.pathname === "/profile.html" ||
-      location.pathname === "profile"){
-        profile.getDetailAccount()
-        .then((data) =>{
-          profile.displayDetailAccount(data);
+  if (
+    location.pathname === "/profile.html" ||
+    location.pathname === "profile"
+  ) {
+    profile
+      .getDetailAccount()
+      .then((data) => {
+        profile.displayDetailAccount(data);
         //   const cardList = document.querySelectorAll(".card");
         // cardList.forEach((card) => {
         //   card.addEventListener("click", (e) => {
@@ -277,10 +256,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
-    profile.getFavMovieAccount()
-    .then((data) => {
-      profile.displayFavMovieAccount(data);
-      const cardList = document.querySelectorAll(".card");
+    profile
+      .getFavMovieAccount()
+      .then((data) => {
+        profile.displayFavMovieAccount(data);
+        const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
             const id = card.dataset.id;
@@ -292,7 +272,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
-      profile.getRating()
+    profile
+      .getRating()
       .then((data) => {
         profile.displayRating(data);
         const loading = document.querySelector(".lds-dual-ring");
@@ -309,7 +290,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
-      profile.getLists()
+    profile
+      .getLists()
       .then((data) => {
         profile.displayLists(data);
         const cardList = document.querySelector(".list");
@@ -320,13 +302,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
             location.reload();
           });
         });
-
       })
       .catch((err) => {
         console.log(err);
-      })
-
-      }
+      });
+  }
   if (
     location.pathname === "/popularmovie.html" ||
     location.pathname === "/popularmovie"

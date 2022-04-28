@@ -209,24 +209,22 @@ a {
   }
 }
 footer {
-  height: 326px;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
   background: #031e36;
   padding: 12px 0px 12px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   color: white;
 }
 footer .row {
-  display: flex;
-  justify-content: center;
+  padding: 20px 0px 20px 0px;
 }
 footer .row .footer__links {
   width: 165px;
 }
 footer .row .footer__links .footer__logo {
   width: 130px;
-  margin-top: -33px;
 }
 footer .row .footer__links .footer__title {
   margin-bottom: 2px;

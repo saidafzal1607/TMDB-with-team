@@ -14,6 +14,23 @@ export async function getPopularFavMovies(page = 1) {
   }
 }
 
+
+export async function searchHandler() {
+  const form = document.querySelector(".popularMovieSort");
+  const formData = new FormData(form);
+  const params = new URLSearchParams();
+  for (let pair of formData.entries()) {
+    params.append(pair[0], pair[1]);
+  }
+  console.log(params.toString(), "malumot");
+  searchPopularMovieReq(params.toString()).then((data) => {
+    console.log(data);
+    displaySearchResult(data);
+  });
+}
+export async function displaySearchResult(data) {}
+
+
 export function displayPopularFavMovies(data) {
   const { results } = data;
   const popularTvMovies = document.querySelector(".popular-tv-movies");

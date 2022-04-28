@@ -1,11 +1,10 @@
 import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
-const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL, SESSION_ID } = configs;
+const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL, SESSION_ID, USER_IMG_URL } = configs;
 
 export async function getDetailAccount() {
     try {
       const url = `${BASE_URL}account?api_key=${API_KEY}&session_id=${SESSION_ID}`;
-      console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -14,64 +13,40 @@ export async function getDetailAccount() {
     }
   }
   export function displayDetailAccount(data) {
-    const { avatar } = data;
-    const detailAccount = document.querySelector(".detail-account");
-    let html = "";
-     avatar.forEach((DetailAccount) => {
-      const { poster_path, username } = DetailAccount;
-      const poster = poster_path
-        ? `${BASE_IMG_URL}${poster_path}`
-        : DEFAULT_IMG_URL;
+    const { avatar,username, name,   } = data;
+    const detailAccount = document.querySelector( ".account-img");
+      const poster = avatar?.tmdb?.avatar_path
+        ? `${BASE_IMG_URL}${avatar?.tmdb?.avatar_path}`
+        : USER_IMG_URL;
   
-      html += `
+        detailAccount.innerHTML = `
+        <div class="row ">
+          <div class="col col-6" style="width: 200px; height: 200px; border-radius: 50%;">
+          <img  style="width: 200px; height: 200px; border-radius: 50%;" src="${poster}" alt=""></div>
+          <div class="col col-6">
+  
+            <div class="row  detail-account" style="padding-left: 20px;">
               <div class="col " style="display: flex; margin-top: 50px;">
                 <a class="h3" style="text-decoration: none; color: white;" href="#">${username}</a>
                 <p class="h6" style="margin-top: 15px; padding-left: 10px; color:darkslategray;">Member since April 2022
                 </p>
               </div>
+            </div>
+            <div class="row" style="padding-left: 20px;">
+             <div class="col">
+               <h5 style="color:darkslategray;">${name}</h5>
+             </div>
+            </div>
+          </div>
+        </div>     
       `;
-      detailAccount.innerHTML = html;
-    });
+      
   }
-  export async function getLists() {
-    try {
-      const url = `${BASE_URL}account/{account_id}/lists?api_key=${API_KEY}&session_id=${SESSION_ID}`;
-      console.log(url);
-      const res = await fetch(url);
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      throw error;
-    }
-  }
-  export function displayLists(data) {
-    const { results } = data;
-    const detailLists = document.querySelector(".lists");
-    let html = "";
-     results.forEach((DetailAccount) => {
-      const { poster_path, total_results, total_pages } = DetailAccount;
-      const poster = poster_path
-        ? `${BASE_IMG_URL}${poster_path}`
-        : DEFAULT_IMG_URL;
   
-      html += `
-      div class="col">
-      <p>Total Edits</p>
-      <p class="h1 text-muted">${total_pages}</p>
-    </div>
-    <div class="col">
-      <p>Total Ratings</p>
-      <p class="h1 text-muted">${total_results}</p>
-    </div>
-      `;
-      detailLists.innerHTML = html;
-    });
-  }
 
   export async function getFavMovieAccount(page = 1) {
     try {
       const url = `${BASE_URL}account/{account_id}/favorite/movies?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&${page}`;
-      console.log(url);
       const res = await fetch(url);
       const data = await res.json();
       return data;
@@ -144,7 +119,7 @@ export async function getDetailAccount() {
   export async function getRating(page = 1) {
     try {
       const url = `${BASE_URL}account/{account_id}/watchlist/movies?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&${page}`;
-      console.log(url);
+      
       const res = await fetch(url);
       const data = await res.json();
       return data;

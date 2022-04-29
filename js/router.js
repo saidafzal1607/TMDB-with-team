@@ -3,6 +3,9 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
+import { displaySearchResults, fetchSearchMovie } from "./search.js";
+import * as profile from "./profile.js";
+// import * as modalVideo from "../node_modules/modal-video/js/modal-video";
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
 // );
@@ -10,12 +13,11 @@ import * as topmovies from "./popularmovie.js";
 //   return new bootstrap.Popover(popoverTriggerEl);
 // });
 
-// switchOn(document);
-
 window.addEventListener("popstate", (e) => {
   location.reload();
 });
 document.addEventListener("DOMContentLoaded", function (e) {
+  // card.switchOn(document);
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -34,6 +36,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .getFavPerson()
       .then((data) => {
         favpersons.displayFavPerson(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
         const cardPersons = document.querySelectorAll(".card");
         cardPersons.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -50,101 +54,67 @@ document.addEventListener("DOMContentLoaded", function (e) {
   if (location.pathname === "/person.html" || location.pathname === "/person") {
     const personid = history.state.personid;
     const actorId = history.state.actorId;
-    person.getPerson(personid).then((data) => {
-      person.displayPerson(data);
-      const cardListMovies = document.querySelectorAll(".card");
-      cardListMovies.forEach((card) => {
-        card.addEventListener("click", (e) => {
-          const personMovieId = card.dataset.id;
-          history.pushState({ personMovieId }, null, `/movie.html`);
-          location.reload();
+    person
+      .getPerson(personid ? personid : actorId)
+      .then((data) => {
+        person.displayPerson(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+      })
+      .catch((err) => {
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        Toast.fire({
+          icon: "error",
+          title: `${err.message}`,
         });
       });
-    });
     // get Person of movies
-    person.getPersonOfMovies(personid).then((data) => {
+    person.getPersonOfMovies(personid ? personid : actorId).then((data) => {
       person.displayPersonOfMovies(data);
-    });
-
-    movie.getMoviePerson(actorId).then((data) => {
-      movie.displayMoviePerson(data);
-    });
-    // get Person of movies
-    movie.getMoviePersonOfMovies(actorId).then((data) => {
-      movie.displayMoviePersonOfMovies(data);
     });
   }
   if (location.pathname === "/index.html" || location.pathname === "/") {
-    home
-      .getPopularMovies()
+    Promise.all([
+      home.getPopularTVMovies(),
+      home.getPopularTheatres(),
+      home.getPopularMovies(),
+      home.getTopRated(),
+    ])
       .then((data) => {
-        home.displayPopularMovies(data);
-
-        const cardList = document.querySelectorAll(".card");
-        cardList.forEach((card) => {
-          card.addEventListener("click", (e) => {
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
-            location.reload();
-          });
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    home
-      .getPopularTVMovies()
-      .then((data) => {
-        home.displayPopularTVMovies(data);
+        home.displayPopularTVMovies(data[0]);
+        home.displayPopularTheatres(data[1]);
+        home.displayPopularMovies(data[2]);
+        home.displayTopRated(data[3]);
         const loading = document.querySelector(".lds-dual-ring");
         document.body.removeChild(loading);
-        const cardList = document.querySelectorAll(".card");
-        cardList.forEach((card) => {
-          card.addEventListener("click", (e) => {
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
+        home.searchMovieHandler(location, history);
+        const movieList = document.querySelectorAll(`[data-click="true"]`);
+        movieList.forEach((movieCard) => {
+          movieCard.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = e.target.closest(".card").dataset.id;
+            const category =
+              e.target.closest("[data-category]").dataset.category;
+            history.pushState({ id, category }, null, `/movie.html`);
             location.reload();
           });
         });
       })
       .catch((err) => {
-        console.log(err);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        Toast.fire({
+          icon: "error",
+          title: `${err.message}`,
+        });
       });
-    // Promise.all([
-    //   home.getPopularMovies(),
-    //   home.getPopularTVMovies(),
-    // ]).then((data) => {
-    //   home.displayPopularMovies(data[0]);
-    //   home.displayPopularTVMovies(data[1]);
-    //   const loading = document.querySelector(".lds-dual-ring");
-    //   document.body.removeChild(loading);
-
-    // });
-    // home
-    // .getLatestMovies()
-    // .then((data) => {
-    //   console.log("salom");
-    //   home.displayLatestMovies(data);
-    //   const cardList = document.querySelectorAll(".card");
-    //   console.log(cardList, "topilmadi");
-    //   cardList.forEach((card) => {
-    //     card.addEventListener("click", (e) => {
-    //       const id = card.dataset.id;
-    //       history.pushState({ id }, null, `/movie.html`);
-    //       location.reload();
-    //     });
-    //   });
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
   }
   if (location.pathname === "/movie.html" || location.pathname === "/movie") {
     const id = history.state.id;
     movie
       .getMovie(id)
       .then((data) => {
-        console.log(data, "data from movie");
         movie.displayMovie(data);
         const loading = document.querySelector(".lds-dual-ring");
         document.body.removeChild(loading);
@@ -152,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         const watchBtn = document.querySelector(".watchbtn");
         const rateBtn = document.querySelector(".ratebtn");
         const starRating = document.querySelector(".star-rating");
+        let Stars = document.querySelectorAll(".star");
         const removeBtn = document.querySelector(".removebtn");
         // favourite, watchlist and rating
         // favourite
@@ -177,21 +148,27 @@ document.addEventListener("DOMContentLoaded", function (e) {
           });
         });
         // Rating
+        let {
+          rated: { value },
+        } = data;
+        let StarsArr = Array.from(Stars);
+        let StarsArrSort = StarsArr.reverse();
+        for (let i = 0; i < value; i++) {
+          StarsArrSort[i].classList.add("checked");
+        }
         rateBtn.addEventListener("click", (e) => {
-          let ratingBtn = e.target.closest(".ratebtn").dataset.rating;
           starRating.classList.toggle("onRating");
           if (starRating.classList.contains("onRating")) {
             starRating.addEventListener("change", (e) => {
+              const rating = e.target.value;
               Toast.fire({
                 icon: "success",
                 title: `SUCCESS!
-              Your rating is ${e.target.value} has been saved `,
+              Your rating is ${rating} has been saved `,
               });
-              const rating = e.target.value;
-              console.log(rating, "rating value");
               movie.AddRate(id, rating).then((data) => {
                 if (data.success) {
-                  ratingBtn = rating;
+                  value = rating;
                 }
               });
             });
@@ -225,10 +202,61 @@ document.addEventListener("DOMContentLoaded", function (e) {
     movie.getMovieRecommendations(id).then((data) => {
       movie.displayMovieRecommendations(data);
     });
-
-    // watchBtn.addEventListener("click", (e) => {
-    //   movie.AddWatchlist((data) => {});
-    // });
+  }
+  if (
+    location.pathname === "/profile.html" ||
+    location.pathname === "profile"
+  ) {
+    profile
+      .getDetailAccount()
+      .then((data) => {
+        profile.displayDetailAccount(data);
+        //   const cardList = document.querySelectorAll(".card");
+        // cardList.forEach((card) => {
+        //   card.addEventListener("click", (e) => {
+        //     const id = card.dataset.id;
+        //     history.pushState({ id }, null, `/movie.html`);
+        //     location.reload();
+        //   });
+        // });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    profile
+      .getFavMovieAccount()
+      .then((data) => {
+        profile.displayFavMovieAccount(data);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    profile
+      .getRating()
+      .then((data) => {
+        profile.displayRating(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        const cardList = document.querySelectorAll(".card");
+        cardList.forEach((card) => {
+          card.addEventListener("click", (e) => {
+            const id = card.dataset.id;
+            history.pushState({ id }, null, `/movie.html`);
+            location.reload();
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
   if (
     location.pathname === "/popularmovie.html" ||
@@ -238,8 +266,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
       topmovies.displayGenres(data, document);
       const popMovForm = document.querySelector(".popularMovieSort");
       const genres = document.querySelectorAll(`[name="with_genres"]`);
+      const keywords = document.querySelector(`.with_key`);
+      const logger = async () => {
+        if (!keywords.value) {
+          return;
+        }
+        const keywordRespone = await fetch(
+          `https://api.themoviedb.org/3/search/keyword?api_key=a585ab7667d107d8a1091777c0f7eba2&query=${keywords.value}&page=1`
+        );
+        const keywordData = await keywordRespone.json();
+        console.log(keywordData, "keyword");
+      };
+      keywords.addEventListener("keyup", _.debounce(logger, [1000]));
+
       popMovForm.addEventListener("submit", (e) => {
         e.preventDefault();
+
         const formData = new FormData(popMovForm);
         const with_genres = [];
         genres.forEach((genre) => {
@@ -289,7 +331,11 @@ document.addEventListener("DOMContentLoaded", function (e) {
     topmovies
       .getPopularFavMovies()
       .then((data) => {
+        topmovies.searchHandler();
+
         topmovies.displayPopularFavMovies(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
         const cardList = document.querySelectorAll(".card");
         cardList.forEach((card) => {
           card.addEventListener("click", (e) => {
@@ -302,5 +348,12 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
+  }
+  if (location.pathname === "/search.html") {
+    const loading = document.querySelector(".lds-dual-ring");
+    document.body.removeChild(loading);
+    fetchSearchMovie(history.state.query, history.state?.page).then((data) => {
+      displaySearchResults(data);
+    });
   }
 });

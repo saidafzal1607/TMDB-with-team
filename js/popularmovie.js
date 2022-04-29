@@ -14,6 +14,19 @@ export async function getPopularFavMovies(page = 1) {
   }
 }
 
+export async function searchHandler() {
+  const form = document.querySelector(".popularMovieSort");
+  const formData = new FormData(form);
+  const params = new URLSearchParams();
+  for (let pair of formData.entries()) {
+    params.append(pair[0], pair[1]);
+  }
+  // searchPopularMovieReq(params.toString()).then((data) => {
+  //   displaySearchResult(data);
+  // });
+}
+export async function displaySearchResult(data) {}
+
 export function displayPopularFavMovies(data) {
   const { results } = data;
   const popularTvMovies = document.querySelector(".popular-tv-movies");
@@ -86,7 +99,6 @@ export function displayPopularFavMovies(data) {
 
 export function discoveryFilterHandler(query) {
   let url = `${BASE_URL}discover/movie?api_key=${API_KEY}`;
-  console.log(url, "******** discoveryFilterHandler Query ****************");
   for (const key in query) {
     if (query[key]) {
       url += `&${key}=${query[key]}`;
@@ -208,7 +220,6 @@ export function displayGenres(genres = [], document) {
 
 // **********************************    FILTER     ************************************//
 
-
 export async function getFavMovie(movie_id) {
   try {
     const url = `${BASE_URL}movie/${movie_id}?api_key=${API_KEY}&language=en-US`;
@@ -219,5 +230,3 @@ export async function getFavMovie(movie_id) {
     throw error;
   }
 }
-
-

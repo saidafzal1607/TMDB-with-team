@@ -17,14 +17,21 @@
       href="./node_modules/@fortawesome/fontawesome-free/css/all.min.css"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+    <!-- <script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
     <link
       href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css"
       rel="stylesheet"
+    /> -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.3.0/jquery.flexdatalist.min.css"
     />
     <style>
       .chosen-container.chosen-container-multi {
         width: 100% !important;
+      }
+      .with_key {
+        outline: none;
       }
     </style>
   </head>
@@ -424,24 +431,25 @@
                 </select>
                 <hr />
                 <p>Keywords</p>
-                <input type="text" class="with_key" name="with_key" />
-                <!-- <select
-                  width="500"
-                  data-placeholder="Begin typing a name to filter..."
-                  multiple
-                  class="chosen-select"
+                <input
+                  type="text"
+                  class="with_key flexdatalist"
+                  multiple="multiple"
+                  list="languages"
                   name="with_key"
-                >
-                  <option value=""></option>
-                  <option>American Black Bear</option>
-                  <option>Asiatic Black Bear</option>
-                  <option>Brown Bear</option>
-                  <option>Giant Panda</option>
-                  <option>Sloth Bear</option>
-                  <option>Sun Bear</option>
-                  <option>Polar Bear</option>
-                  <option>Spectacled Bear</option>
-                </select> -->
+                />
+                <datalist id="languages">
+                  <option value="PHP">PHP</option>
+                  <option value="JavaScript">JavaScript</option>
+                  <option value="Cobol">Cobol</option>
+                  <option value="C#">C#</option>
+                  <option value="C++">C++</option>
+                  <option value="Java">Java</option>
+                  <option value="Pascal">Pascal</option>
+                  <option value="FORTRAN">FORTRAN</option>
+                  <option value="Lisp">Lisp</option>
+                  <option value="Swift">Swift</option>
+                </datalist>
               </div>
             </div>
 
@@ -656,7 +664,14 @@
         </div>
       </div>
     </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-flexdatalist/2.3.0/jquery.flexdatalist.min.js"></script>
+    <script>
+      $(".with_key").flexdatalist({
+        minLength: 2,
+        searchByWord: true,
+        searchDelay: 1700,
+      });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>

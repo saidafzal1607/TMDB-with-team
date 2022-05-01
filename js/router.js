@@ -5,6 +5,8 @@ import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
 import { displaySearchResults, fetchSearchMovie } from "./search.js";
 import * as profile from "./profile.js";
+import configs from "../config.js";
+const { BASE_URL, API_KEY } = configs;
 // import * as modalVideo from "../node_modules/modal-video/js/modal-video";
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
@@ -277,24 +279,38 @@ document.addEventListener("DOMContentLoaded", function (e) {
       topmovies.displayGenres(data, document);
       const popMovForm = document.querySelector(".popularMovieSort");
       const genres = document.querySelectorAll(`[name="with_genres"]`);
-      const keywords = document.querySelector(`.with_key`);
-      const logger = async () => {
+      const keywords = document.querySelector(`#flex0`);
+      const handleKeywordInput = async () => {
         if (!keywords.value) {
           return;
         }
         const keywordRespone = await fetch(
-          `https://api.themoviedb.org/3/search/keyword?api_key=a585ab7667d107d8a1091777c0f7eba2&query=${keywords.value}&page=1`
+          `${BASE_URL}/search/keyword?api_key=${API_KEY}&query=${keywords.value}&page=1`
         );
         const keywordData = await keywordRespone.json();
         console.log(keywordData, "keyword");
+        const optionsWrapper = document.querySelector("#languages");
+        let optionContent = "";
+        keywordData?.results.forEach((keyword) => {
+          optionContent += `<option id=${keyword.id} value="${keyword.id}">${keyword.name}</option>`;
+        });
+        optionsWrapper.innerHTML = optionContent;
+        // displayKeywords(keywordData);
       };
-      keywords.addEventListener("keyup", _.debounce(logger, [1000]));
+      keywords.addEventListener("keyup", _.debounce(handleKeywordInput, [500]));
 
       popMovForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
+        console.log($(".with_key").flexdatalist('value'), "sjdbhjshdjhs");
+        // const keywordInputList = document.querySelectorAll("#languages option");
         const formData = new FormData(popMovForm);
+        // keywordInputList.forEach((keyword) => {
+        //   if (keyword.selected) {
+        //     console.log(keyword.value);
+        //   }
+        // });
         const with_genres = [];
+        const with_key = [];
         genres.forEach((genre) => {
           if (genre.checked) {
             with_genres.push(genre.value);

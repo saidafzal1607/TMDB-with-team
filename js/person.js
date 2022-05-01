@@ -27,7 +27,6 @@ export async function getPersonOfMovies(person_id) {
   }
 }
 
-
 export function displayPerson(data) {
   const personContent = document.querySelector(".main-person");
   let html = "";
@@ -82,7 +81,9 @@ export function displayPerson(data) {
   </p>
   <p class="py-1">
     <strong class="fw-bold">Birthday</strong> <br />
-   ${birthday} (${Math.floor(nowDate.getFullYear()-birthday.split('-')[0])} years old)
+   ${birthday} (${Math.floor(
+    nowDate.getFullYear() - birthday.split("-")[0]
+  )} years old)
   </p>
   <p class="py-1">
     <strong class="fw-bold">Place of Birth</strong> <br />
@@ -90,7 +91,7 @@ export function displayPerson(data) {
   </p>
   <p class="py-1">
     <strong class="fw-bold">Also Known As</strong> <br />
-    ${also_known_as.map((item) =>  `${item}<br /> `)}
+    ${also_known_as.map((item) => `${item}<br /> `)}
   </p>
 </div>
 <div class="col-sm-5 col-md-8 py-1">
@@ -115,16 +116,15 @@ export function displayPerson(data) {
 }
 
 export function displayPersonOfMovies(data) {
-  console.log(data);
   const { cast } = data;
-    const personOfMovies = document.querySelector(".personOfMovies");
+  const personOfMovies = document.querySelector(".personOfMovies");
   let html = "";
-    cast.forEach((person) => {
-        const { poster_path, title, id } = person;
-        const poster = poster_path
-            ? `${BASE_IMG_URL}${poster_path}`
-            : DEFAULT_IMG_URL;
-        html += `
+  cast.forEach((person) => {
+    const { poster_path, title, id } = person;
+    const poster = poster_path
+      ? `${BASE_IMG_URL}${poster_path}`
+      : DEFAULT_IMG_URL;
+    html += `
     <div class="col">
     <div class="card"  data-id=${id}>
       <a href="" class="card-img">
@@ -140,7 +140,6 @@ export function displayPersonOfMovies(data) {
     </div>
   </div>   
     `;
-    });
-    personOfMovies.innerHTML = html;
-   
+  });
+  personOfMovies.innerHTML = html;
 }

@@ -6,6 +6,7 @@ const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 export async function getPopularFavMovies(page = 1) {
   try {
     const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+    
     const res = await fetch(url);
     const data = await res.json();
     return data;
@@ -14,7 +15,6 @@ export async function getPopularFavMovies(page = 1) {
   }
 }
 
-
 export async function searchHandler() {
   const form = document.querySelector(".popularMovieSort");
   const formData = new FormData(form);
@@ -22,14 +22,11 @@ export async function searchHandler() {
   for (let pair of formData.entries()) {
     params.append(pair[0], pair[1]);
   }
-  console.log(params.toString(), "malumot");
-  searchPopularMovieReq(params.toString()).then((data) => {
-    console.log(data);
-    displaySearchResult(data);
-  });
+  // searchPopularMovieReq(params.toString()).then((data) => {
+  //   displaySearchResult(data);
+  // });
 }
 export async function displaySearchResult(data) {}
-
 
 export function displayPopularFavMovies(data) {
   const { results } = data;
@@ -103,7 +100,6 @@ export function displayPopularFavMovies(data) {
 
 export function discoveryFilterHandler(query) {
   let url = `${BASE_URL}discover/movie?api_key=${API_KEY}`;
-  console.log(url, "******** discoveryFilterHandler Query ****************");
   for (const key in query) {
     if (query[key]) {
       url += `&${key}=${query[key]}`;
@@ -225,7 +221,6 @@ export function displayGenres(genres = [], document) {
 
 // **********************************    FILTER     ************************************//
 
-
 export async function getFavMovie(movie_id) {
   try {
     const url = `${BASE_URL}movie/${movie_id}?api_key=${API_KEY}&language=en-US`;
@@ -236,5 +231,3 @@ export async function getFavMovie(movie_id) {
     throw error;
   }
 }
-
-

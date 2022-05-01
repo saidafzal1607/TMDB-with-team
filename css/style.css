@@ -54,30 +54,31 @@ a {
   border-radius: 8px;
   width: 160px;
 }
-.card .card-img-overlay .threedot-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: space-evenly;
-  text-decoration: none;
+.card .card-img-overlay {
+  width: 0px;
+  height: 0px;
 }
-.card .card-img-overlay .threedot-btn .fa-ellipsis {
+.card .threedot-btn {
+  padding-left: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.card .threedot-btn .fa-ellipsis {
   font-size: 20px;
   background-color: #fff;
   padding: 5px;
   border-radius: 50%;
   color: rgba(0, 0, 0, 0.5);
-  cursor: pointer;
 }
-.card .card-img-overlay .threedot-btn .fa-ellipsis:hover {
+.card .threedot-btn .fa-ellipsis:hover {
   color: black;
   background-color: rgb(0, 217, 255);
 }
 .card .card-body {
   padding: 8px 8px !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 .card .card-body .circle-progressbar {
   position: relative;
@@ -133,6 +134,9 @@ a {
   display: none;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
@@ -142,6 +146,7 @@ a {
   z-index: 5;
   transition: linear 0.1s;
   opacity: 0;
+  visibility: hidden;
 }
 .card .card-click ul {
   position: relative;
@@ -157,23 +162,50 @@ a {
 .card .card-click ul li {
   border-bottom: 1px solid rgba(33, 37, 41, 0.15);
   padding: 10px;
+  display: flex;
+  cursor: pointer;
 }
 .card .card-click ul li:hover {
   background-color: #081c22;
-  border-radius: 3px;
 }
-.card .card-click ul li:hover a {
+.card .card-click ul li:hover button {
   color: #fff;
 }
 .card .card-click ul li:last-child {
   border-bottom: none;
 }
-.card .card-click ul li a {
+.card .card-click ul li button {
+  background: transparent;
+  border: none;
   color: #000;
   text-decoration: none;
+  display: flex;
+  text-align: center;
+}
+.card .card-click ul li button .fa-solid {
+  padding-right: 10px;
+}
+.card .card-click ul li button[data-addlist=true],
+.card .card-click ul li [data-favlist=true],
+.card .card-click ul li [data-watchlist=true],
+.card .card-click ul li [data-addlist=true] i {
+  color: rgb(190, 7, 7) !important;
+}
+.card .card-click ul li .star-rating-card {
+  margin-left: -88px !important;
+  margin-top: 25px !important;
 }
 .card .on {
   display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: 290px !important;
+  z-index: 10000 !important;
+}
+.card .onOverlay {
+  padding-left: 0px !important;
+  width: 100% !important;
+  z-index: 5000 !important;
 }
 
 .lds-dual-ring {
@@ -210,7 +242,6 @@ a {
 }
 footer {
   width: 100%;
-  height: 100%;
   display: grid;
   place-content: center;
   background: #031e36;

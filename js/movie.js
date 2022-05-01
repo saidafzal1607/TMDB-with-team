@@ -12,8 +12,8 @@ export async function getMovie(movie_id) {
     const resAccountState = await fetch(accountStateUrl);
     const data = await res.json();
     const accountStateData = await resAccountState.json();
-    console.log(accountStateData, "isFav");
     const allData = { ...data, ...accountStateData };
+    console.log( allData);
     if (allData.success === false) {
       throw new Error(allData.status_message);
     }
@@ -24,7 +24,6 @@ export async function getMovie(movie_id) {
 }
 
 export async function getMovieActors(movie_id) {
-  console.log(movie_id, "salom");
   try {
     const url = `${BASE_URL}movie/${movie_id}/credits?api_key=${API_KEY}&language=en-US`;
     const res = await fetch(url);
@@ -116,7 +115,7 @@ export async function displayMovie(data) {
               </button>
               </li>
               <li  class="Rating">
-              <button href="#" class="ratebtn" title="Rate It">
+              <button  class="ratebtn" title="Rate It">
               <i class="fa-solid fa-star"></i>
               </button>
               <div class="star-rating mt-1 px-1">

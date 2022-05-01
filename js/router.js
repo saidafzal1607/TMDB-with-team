@@ -3,16 +3,8 @@ import * as movie from "./movie.js";
 import * as person from "./person.js";
 import * as favpersons from "./people.js";
 import * as topmovies from "./popularmovie.js";
-
-
-import {
-  displaySearchResults,
-  fetchSearchMovie,
-} from "./search.js";
-
-
-
-import * as profile from "./profile.js"
+import { displaySearchResults, fetchSearchMovie } from "./search.js";
+import * as profile from "./profile.js";
 // import * as modalVideo from "../node_modules/modal-video/js/modal-video";
 // var popoverTriggerList = [].slice.call(
 //   document.querySelectorAll('[data-bs-toggle="popover"]')
@@ -63,91 +55,70 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const personid = history.state.personid;
     const actorId = history.state.actorId;
     person
-    .getPerson(personid?personid:actorId)
-    .then((data) => {
-      person.displayPerson(data);
-      const loading = document.querySelector(".lds-dual-ring");
-      document.body.removeChild(loading);
-     })
-     .catch((err) => {
-      const loading = document.querySelector(".lds-dual-ring");
-      document.body.removeChild(loading);
-      Toast.fire({
-        icon: "error",
-        title: `${err.message}`,
+      .getPerson(personid ? personid : actorId)
+      .then((data) => {
+        person.displayPerson(data);
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+      })
+      .catch((err) => {
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        Toast.fire({
+          icon: "error",
+          title: `${err.message}`,
+        });
       });
-    });
     // get Person of movies
-    person.getPersonOfMovies(personid?personid:actorId).then((data) => {
+    person.getPersonOfMovies(personid ? personid : actorId).then((data) => {
       person.displayPersonOfMovies(data);
     });
   }
   if (location.pathname === "/index.html" || location.pathname === "/") {
-    home
-      .getPopularTVMovies()
+    Promise.all([
+      home.getPopularTVMovies(),
+      home.getPopularTheatres(),
+      home.getPopularMovies(),
+      home.getTopRated(),
+    ])
       .then((data) => {
-        home.displayPopularTVMovies(data);
+        home.displayPopularTVMovies(data[0]);
+        home.displayPopularTheatres(data[1]);
+        home.displayPopularMovies(data[2]);
+        home.displayTopRated(data[3]);
         const loading = document.querySelector(".lds-dual-ring");
         document.body.removeChild(loading);
-        const cardList = document.querySelectorAll(".card");
-        cardList.forEach((card) => {
-          card.addEventListener("click", (e) => {
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
+        home.searchMovieHandler(location, history);
+        const movieList = document.querySelectorAll(`[data-click="true"]`);
+        movieList.forEach((movieCard) => {
+          movieCard.addEventListener("click", (e) => {
+            e.preventDefault();
+            const id = e.target.closest(".card").dataset.id;
+            const category =e.target.closest("[data-category]").dataset.category;
+            history.pushState({ id, category }, null, `/movie.html`);
             location.reload();
           });
         });
+        let circleBtn = document.querySelectorAll(".threedot-btn");
+        const CircleBtnArr = Array.from(circleBtn);
+         CircleBtnArr.forEach((item)=>{
+             item.addEventListener('click', function(e){
+                 let CardClick = e.target.parentNode.parentNode.nextElementSibling.firstElementChild;
+                 if (!CardClick.classList.contains("on")){
+                     CardClick.classList.add("on");
+                 }
+             })
+         })
+        
+         
       })
       .catch((err) => {
-        console.log(err);
-      });
-      home
-      .getPopularTheatres()
-      .then((data) => {
-        home.displayPopularTheatres(data);
-        const cardList = document.querySelectorAll(".card");
-        cardList.forEach((card) => {
-          card.addEventListener("click", (e) => {
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
-            location.reload();
-          });
+        const loading = document.querySelector(".lds-dual-ring");
+        document.body.removeChild(loading);
+        Toast.fire({
+          icon: "error",
+          title: `${err.message}`,
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    home
-      .getTopRated()
-      .then((data) => {
-        home.displayTopRated(data);
-        const topRated = document.querySelectorAll(".card");
-        topRated.forEach((card) => {
-          card.addEventListener("click", (e) => {
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
-            location.reload();
-          });
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    home
-      .getPopularMovies()
-      .then((data) => {
-        home.displayPopularMovies(data);
-        const cardList = document.querySelectorAll(".card");
-        cardList.forEach((card) => {
-          card.addEventListener("click", (e) => {
-            const id = card.dataset.id;
-            history.pushState({ id }, null, `/movie.html`);
-            location.reload();
-          });
-        });
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
   if (location.pathname === "/movie.html" || location.pathname === "/movie") {
@@ -206,7 +177,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 title: `SUCCESS!
               Your rating is ${rating} has been saved `,
               });
-              console.log(rating, "rating value");
               movie.AddRate(id, rating).then((data) => {
                 if (data.success) {
                   value = rating;
@@ -228,7 +198,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
           icon: "error",
           title: `${err.message}`,
         });
-
       });
     movie.getMovieActors(id).then((data) => {
       movie.displayMovieActors(data);
@@ -299,22 +268,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
       .catch((err) => {
         console.log(err);
       });
-    profile
-      .getLists()
-      .then((data) => {
-        profile.displayLists(data);
-        const cardList = document.querySelector(".list");
-        cardList.forEach((list) => {
-          list.addEventListener("click", (e) => {
-            const id = list.dataset.id;
-            history.pushState({ id }, null, `/profile.html`);
-            location.reload();
-          });
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
   if (
     location.pathname === "/popularmovie.html" ||
@@ -324,8 +277,22 @@ document.addEventListener("DOMContentLoaded", function (e) {
       topmovies.displayGenres(data, document);
       const popMovForm = document.querySelector(".popularMovieSort");
       const genres = document.querySelectorAll(`[name="with_genres"]`);
+      const keywords = document.querySelector(`.with_key`);
+      const logger = async () => {
+        if (!keywords.value) {
+          return;
+        }
+        const keywordRespone = await fetch(
+          `https://api.themoviedb.org/3/search/keyword?api_key=a585ab7667d107d8a1091777c0f7eba2&query=${keywords.value}&page=1`
+        );
+        const keywordData = await keywordRespone.json();
+        console.log(keywordData, "keyword");
+      };
+      keywords.addEventListener("keyup", _.debounce(logger, [1000]));
+
       popMovForm.addEventListener("submit", (e) => {
         e.preventDefault();
+
         const formData = new FormData(popMovForm);
         const with_genres = [];
         genres.forEach((genre) => {
@@ -396,14 +363,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
   if (location.pathname === "/search.html") {
     const loading = document.querySelector(".lds-dual-ring");
     document.body.removeChild(loading);
-    console.log(history.state, "salom");
     fetchSearchMovie(history.state.query, history.state?.page).then((data) => {
-      console.log(data, "Search");
       displaySearchResults(data);
     });
-
-
-
   }
 });
-

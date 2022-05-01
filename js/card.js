@@ -1,4 +1,4 @@
-export  function switchOn(doc) { 
+export async function switchOn(doc) { 
    let circleBtn = doc.getElementsByClassName("threedot-btn");
    let cardList = doc.getElementsByClassName("card-click");
    let body = doc.body;

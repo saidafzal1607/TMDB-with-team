@@ -260,6 +260,67 @@ document.addEventListener("DOMContentLoaded", function (e) {
             location.reload();
           });
         });
+        const favBtn = document.querySelector(".favbtn");
+        const watchBtn = document.querySelector(".watchbtn");
+        const rateBtn = document.querySelector(".ratebtn");
+        const starRating = document.querySelector(".star-rating");
+        let Stars = document.querySelectorAll(".star");
+        const removeBtn = document.querySelector(".removebtn");
+        // favourite, watchlist and rating
+        // favourite
+        favBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const favoriteBtn = e.target.closest(".favbtn").dataset.favlist;
+          const favorite = favoriteBtn == "true" ? true : false;
+          movie.AddFavourite(id, favorite).then((data) => {
+            if (data.success) {
+              e.target.closest(".favbtn").dataset.favlist = !favorite;
+            }
+          });
+        });
+        // Watchlist
+        watchBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const watchlistBtn = e.target.closest(".watchbtn").dataset.watchlist;
+          const watchlist = watchlistBtn == "true" ? true : false;
+          movie.AddWatchlist(id, watchlist).then((data) => {
+            if (data.success) {
+              e.target.closest(".watchbtn").dataset.watchlist = !watchlist;
+            }
+          });
+        });
+        // Rating
+        let {
+          rated: { value },
+        } = data;
+        let StarsArr = Array.from(Stars);
+        let StarsArrSort = StarsArr.reverse();
+        for (let i = 0; i < value; i++) {
+          StarsArrSort[i].classList.add("checked");
+        }
+        rateBtn.addEventListener("click", (e) => {
+          starRating.classList.toggle("onRating");
+          if (starRating.classList.contains("onRating")) {
+            starRating.addEventListener("change", (e) => {
+              const rating = e.target.value;
+              Toast.fire({
+                icon: "success",
+                title: `SUCCESS!
+              Your rating is ${rating} has been saved `,
+              });
+              movie.AddRate(id, rating).then((data) => {
+                if (data.success) {
+                  value = rating;
+                }
+              });
+            });
+            removeBtn.addEventListener("click", function (e) {
+              starRating.querySelector(
+                "input[type=radio]:checked"
+              ).checked = false;
+            });
+          }
+        });
       })
       .catch((err) => {
         console.log(err);

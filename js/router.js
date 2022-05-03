@@ -7,19 +7,11 @@ import { displaySearchResults, fetchSearchMovie } from "./search.js";
 import * as profile from "./profile.js";
 import configs from "../config.js";
 const { BASE_URL, API_KEY } = configs;
-// import * as modalVideo from "../node_modules/modal-video/js/modal-video";
-// var popoverTriggerList = [].slice.call(
-//   document.querySelectorAll('[data-bs-toggle="popover"]')
-// );
-// var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-//   return new bootstrap.Popover(popoverTriggerEl);
-// });
 
 window.addEventListener("popstate", (e) => {
   location.reload();
 });
 document.addEventListener("DOMContentLoaded", function (e) {
-  // card.switchOn(document);
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -57,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     const personid = history.state.personid;
     const actorId = history.state.actorId;
     person
-      .getPerson(personid ? personid : actorId)
+      .getPerson(personid || actorId)
       .then((data) => {
         person.displayPerson(data);
         const loading = document.querySelector(".lds-dual-ring");
@@ -72,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         });
       });
     // get Person of movies
-    person.getPersonOfMovies(personid ? personid : actorId).then((data) => {
+    person.getPersonOfMovies(personid || actorId).then((data) => {
       person.displayPersonOfMovies(data);
     });
   }
@@ -82,15 +74,17 @@ document.addEventListener("DOMContentLoaded", function (e) {
       home.getPopularTheatres(),
       home.getPopularMovies(),
       home.getTopRated(),
+      home.getAccaountTvState(),
+      home.getAccountMovieState(),
     ])
       .then((data) => {
-        home.displayPopularTVMovies(data[0]);
+        home.displayPopularTVMovies(data[0], data[4]);
         home.displayPopularTheatres(data[1]);
         home.displayPopularMovies(data[2]);
         home.displayTopRated(data[3]);
+        home.searchMovieHandler(location, history);
         const loading = document.querySelector(".lds-dual-ring");
         document.body.removeChild(loading);
-        home.searchMovieHandler(location, history);
         const movieList = document.querySelectorAll(`[data-click="true"]`);
         movieList.forEach((movieCard) => {
           movieCard.addEventListener("click", (e) => {
@@ -111,8 +105,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                  }
              })
          })
-        
-         
+
       })
       .catch((err) => {
         const loading = document.querySelector(".lds-dual-ring");
@@ -124,9 +117,10 @@ document.addEventListener("DOMContentLoaded", function (e) {
       });
   }
   if (location.pathname === "/movie.html" || location.pathname === "/movie") {
-    const id = history.state.id;
+    let id = history.state.id;
+    let category = history.state.category;
     movie
-      .getMovie(id)
+      .getMovie(id, category)
       .then((data) => {
         movie.displayMovie(data);
         const loading = document.querySelector(".lds-dual-ring");
@@ -143,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
           e.preventDefault();
           const favoriteBtn = e.target.closest(".favbtn").dataset.favlist;
           const favorite = favoriteBtn == "true" ? true : false;
-          movie.AddFavourite(id, favorite).then((data) => {
+          movie.AddFavourite(id, category,favorite).then((data) => {
             if (data.success) {
               e.target.closest(".favbtn").dataset.favlist = !favorite;
             }
@@ -154,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
           e.preventDefault();
           const watchlistBtn = e.target.closest(".watchbtn").dataset.watchlist;
           const watchlist = watchlistBtn == "true" ? true : false;
-          movie.AddWatchlist(id, watchlist).then((data) => {
+          movie.AddWatchlist(id, category,watchlist).then((data) => {
             if (data.success) {
               e.target.closest(".watchbtn").dataset.watchlist = !watchlist;
             }
@@ -179,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 title: `SUCCESS!
               Your rating is ${rating} has been saved `,
               });
-              movie.AddRate(id, rating).then((data) => {
+              movie.AddRate(id,category ,rating).then((data) => {
                 if (data.success) {
                   value = rating;
                 }
@@ -201,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
           title: `${err.message}`,
         });
       });
-    movie.getMovieActors(id).then((data) => {
+    movie.getMovieActors(id,category).then((data) => {
       movie.displayMovieActors(data);
       const cardListActors = document.querySelectorAll(".card-actor");
       cardListActors.forEach((card) => {
@@ -212,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         });
       });
     });
-    movie.getMovieRecommendations(id).then((data) => {
+    movie.getMovieRecommendations(id,category).then((data) => {
       movie.displayMovieRecommendations(data);
     });
   }

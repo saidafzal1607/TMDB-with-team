@@ -1,6 +1,7 @@
 import configs from "../config.js";
 import moment from "../node_modules/moment/dist/moment.js";
-const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
+const { API_KEY, SESSION_ID, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } =
+  configs;
 import { fetchSearchMovie } from "./search.js";
 
 export function searchMovieHandler(location, history) {
@@ -12,14 +13,38 @@ export function searchMovieHandler(location, history) {
   });
 }
 
-//  ===================================     SEARCH     ================================
+export async function getAccaountTvState(page = 1) {
+  let favUrl = `${BASE_URL}account/{account_id}/favorite/tv?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&page=${page}`;
+  let watchUrl = `${BASE_URL}account/{account_id}/watchlist/tv?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&page=${page}`;
+  let ratedUrl = `${BASE_URL}account/{account_id}/rated/tv?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&page=${page}`;
+  let favRes = await fetch(favUrl);
+  let watchRes = await fetch(watchUrl);
+  let ratedRes = await fetch(ratedUrl);
+  let favData = await favRes.json();
+  let watchData = await watchRes.json();
+  let ratedData = await ratedRes.json();
+  let allData = { favData, watchData, ratedData };
+  return allData;
+}
+export async function getAccountMovieState(page = 1) {
+  let favUrl = `${BASE_URL}account/{account_id}/favorite/movie?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&page=${page}`;
+  let watchUrl = `${BASE_URL}account/{account_id}/watchlist/movie?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&page=${page}`;
+  let ratedUrl = `${BASE_URL}account/{account_id}/rated/movie?api_key=${API_KEY}&session_id=${SESSION_ID}&language=en-US&sort_by=created_at.asc&page=${page}`;
+  let favRes = await fetch(favUrl);
+  let watchRes = await fetch(watchUrl);
+  let ratedRes = await fetch(ratedUrl);
+  let favData = await favRes.json();
+  let watchData = await watchRes.json();
+  let ratedData = await ratedRes.json();
+  let allData = { favData, watchData, ratedData };
+  return allData;
+}
 
 export async function getPopularTVMovies(page = 1) {
   try {
-    const url = `${BASE_URL}movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const url = `${BASE_URL}tv/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
     return data;
   } catch (error) {
     throw error;
@@ -28,7 +53,7 @@ export async function getPopularTVMovies(page = 1) {
 
 export async function getPopularTheatres(page = 2) {
   try {
-    const url = `${BASE_URL}movie/upcoming?api_key=${API_KEY}&language=en-US&page=${page}`;
+    const url = `${BASE_URL}tv/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
     const res = await fetch(url);
     const data = await res.json();
     return data;
@@ -59,18 +84,34 @@ export async function getPopularMovies(page = 1) {
   }
 }
 
-export function displayPopularTVMovies(data) {
+export function displayPopularTVMovies(data, allData) {
+  let { favData, watchData, ratedData } = allData;
+  let favDatas = favData.results;
+  let watchDatas = watchData.results;
+  let ratedDatas = ratedData.results;
+  let isfav = function(data,id){
+    for(let i=0;i<data.length;i++){
+      if(data[i].id == id){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
   const { results } = data;
   const popularONTvMovies = document.querySelector(".popular-ontv-movies");
   let html = "";
   results.forEach((OnTVmovie) => {
-    const { title, poster_path, release_date, vote_average, id } = OnTVmovie;
+    const { name, poster_path, release_date, vote_average, id } = OnTVmovie;
     const poster = poster_path
       ? `${BASE_IMG_URL}${poster_path}`
       : DEFAULT_IMG_URL;
-
+    const fav = isfav(favDatas,id);
+    const watch = isfav(watchDatas,id);
+    console.log(fav);
     html += `
-    <div class="col" data-category="TV">
+    <div class="col" data-category="tv">
                 <card  data-id=${id} class="card">
                   <a href="movie.html" data-click="true" class="card-img-btn">
                     <img
@@ -93,12 +134,12 @@ export function displayPopularTVMovies(data) {
                             Add to list</button>
                         </li>
                         <li>
-                          <button class="favbtn" data-favlist="false">
+                          <button class="favbtn" data-favlist=${isfav}>
                             <i class="fa-solid fa-heart"></i>
                             Favourite</button>
                         </li>
                         <li>
-                          <button  class="watchbtn" data-watchlist="false">
+                          <button  class="watchbtn" data-watchlist=${watch}>
                             <i class="fa-solid fa-clipboard-list"></i>
                             Watchlist
                           </button>
@@ -133,8 +174,10 @@ export function displayPopularTVMovies(data) {
                         style="--value: ${vote_average * 10}"
                       ></div>
                     </div>
-                    <a href="movie.html" data-click="true" class="card-title"> ${title} </a>
-                    <p class="card-text">${moment(release_date).format("ll")}</p>
+                    <a href="movie.html" data-click="true" class="card-title"> ${name} </a>
+                    <p class="card-text">${moment(release_date).format(
+                      "ll"
+                    )}</p>
                   </div>
                 </card>
               </div>
@@ -148,13 +191,13 @@ export function displayPopularTheatres(data) {
   const popularONTvMovies = document.querySelector(".popular-intheatres");
   let html = "";
   results.forEach((OnTVmovie) => {
-    const { title, poster_path, release_date, vote_average, id } = OnTVmovie;
+    const { name, poster_path, release_date, vote_average, id } = OnTVmovie;
     const poster = poster_path
       ? `${BASE_IMG_URL}${poster_path}`
       : DEFAULT_IMG_URL;
 
     html += `
-    <div class="col" data-category="TV">
+    <div class="col" data-category="tv">
     <card  data-id=${id} class="card">
       <a href="movie.html" data-click="true" class="card-img-btn">
         <img
@@ -217,7 +260,7 @@ export function displayPopularTheatres(data) {
             style="--value: ${vote_average * 10}"
           ></div>
         </div>
-        <a href="movie.html" data-click="true" class="card-title"> ${title} </a>
+        <a href="movie.html" data-click="true" class="card-title"> ${name} </a>
         <p class="card-text">${moment(release_date).format("ll")}</p>
       </div>
     </card>
@@ -239,7 +282,7 @@ export function displayTopRated(data) {
       : DEFAULT_IMG_URL;
 
     html += `
-    <div class="col" data-category="TV">
+    <div class="col" data-category="movie">
     <card  data-id=${id} class="card">
       <a href="movie.html" data-click="true" class="card-img-btn">
         <img
@@ -323,7 +366,7 @@ export function displayPopularMovies(data) {
       : DEFAULT_IMG_URL;
 
     html += `
-    <div class="col" data-category="TV">
+    <div class="col" data-category="movie">
                 <card  data-id=${id} class="card">
                   <a href="movie.html" data-click="true" class="card-img-btn">
                     <img
@@ -387,7 +430,9 @@ export function displayPopularMovies(data) {
                       ></div>
                     </div>
                     <a href="movie.html" data-click="true" class="card-title"> ${title} </a>
-                    <p class="card-text">${moment(release_date).format("ll")}</p>
+                    <p class="card-text">${moment(release_date).format(
+                      "ll"
+                    )}</p>
                   </div>
                 </card>
               </div>

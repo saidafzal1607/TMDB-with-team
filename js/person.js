@@ -1,5 +1,4 @@
 import configs from "../config.js";
-// import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 
 export async function getPerson(person_id) {
@@ -46,7 +45,7 @@ export function displayPerson(data) {
   const nowDate = new Date();
   html += `
   <div class="col-sm-7 col-md-4">
-  <a href="" class="movie-posterimg">
+  <a href="person.html" class="movie-posterimg">
     <img
       class="img-fluid"
       src="${poster}"
@@ -126,7 +125,7 @@ export function displayPersonOfMovies(data) {
       : DEFAULT_IMG_URL;
     html += `
     <div class="col">
-    <div class="card"  data-id=${id}>
+    <div class="card card-movies"  data-id=${id}>
       <a href="" class="card-img">
         <img class="card-img-top"
           src="${poster}"
@@ -140,6 +139,6 @@ export function displayPersonOfMovies(data) {
     </div>
   </div>   
     `;
-  });
-  personOfMovies.innerHTML = html;
+  })
+  personOfMovies.innerHTML = html;   
 }

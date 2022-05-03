@@ -501,6 +501,7 @@ p {
 .header-movie .movie-item .col-md-8 .rating {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .header-movie .movie-item .col-md-8 .rating .circle-progressbar {
   position: relative;
@@ -544,6 +545,7 @@ p {
 .header-movie .movie-item .col-md-8 .rating ul {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 .header-movie .movie-item .col-md-8 .rating ul li {
   margin-right: 20px;

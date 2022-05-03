@@ -121,9 +121,8 @@
           method="GET"
           accept-charset="utf-8"
         >
-          <label for="search__movie">
-            <input type="text" name="query" style="width: 1000px; padding: 20px; height: 50px; border-radius: 25px; border: none;" placeholder="Search for a movie, tv show, person......">
-            
+          <label for="search__movie" style="display: flex;">
+            <input type="text" name="query" style="width: 100%; outline: none; padding: 20px; height: 50px; border-radius: 25px; border: none;" placeholder="Search for a movie, tv show, person......">
               <input class="submit__btn" type="submit"  value="search" />
           </label>
         </form>
@@ -179,9 +178,9 @@
           >
           <div class="container">
             <div class="row overflow-scroll popular-ontv-movies ">
-              <div class="col">
-                <card class="card">
-                  <a href="#" class="card-img-btn">
+              <div class="col" data-category="TV">
+                <card  data-id='' class="card">
+                  <a href="movie.html" data-click="true" class="card-img-btn">
                     <img
                       class="card-img img-fluid"
                       src="./assets/images/halo movie.jpg"
@@ -194,32 +193,43 @@
                     </a>
                   </div>
                   <div class="card-body">
-                    <div class="card-click">
+                    <div class="card-click" onclick="this.classList.toggle('on')">
                       <ul>
                         <li>
-                          <a href="#">
+                          <button class="addlistbtn" data-addlist="false">
                             <i class="fa-solid fa-list"></i>
-                            Add to list</a
-                          >
+                            Add to list</button>
                         </li>
                         <li>
-                          <a href="#">
+                          <button class="favbtn" data-favlist="false">
                             <i class="fa-solid fa-heart"></i>
-                            Favourite</a
-                          >
+                            Favourite</button>
                         </li>
                         <li>
-                          <a href="#">
+                          <button  class="watchbtn" data-watchlist="false">
                             <i class="fa-solid fa-clipboard-list"></i>
                             Watchlist
-                          </a>
+                          </button>
                         </li>
-                        <li>
-                          <a href="#">
-                            <i class="fa-solid fa-star"></i>
-                            Your rating</a
-                          >
-                        </li>
+                        <li  class="Rating">
+                          <button class="ratebtn" title="Rate It">
+                          <i class="fa-solid fa-star"></i>
+                          Rate
+                          </button>
+                          <div class="star-rating star-rating-card mt-1 px-1">
+                                  <input type="radio" id="5-stars" name="rating" value="5" />
+                                  <label for="5-stars" class="star">&#9733;</label>
+                                  <input type="radio" id="4-stars" name="rating" value="4" />
+                                  <label for="4-stars" class="star">&#9733;</label>
+                                  <input type="radio" id="3-stars" name="rating" value="3" />
+                                  <label for="3-stars" class="star">&#9733;</label>
+                                  <input type="radio" id="2-stars" name="rating" value="2" />
+                                  <label for="2-stars" class="star">&#9733;</label>
+                                  <input type="radio" id="1-star" name="rating" value="1" />
+                                  <label for="1-star" class="star">&#9733;</label>
+                                  <i class="fa-solid fa-circle-minus removebtn my-2 px-1"></i>
+                                </div>
+                          </li>
                       </ul>
                     </div>
                     <div class="circle-progressbar">
@@ -231,8 +241,8 @@
                         style="--value: 88"
                       ></div>
                     </div>
-                    <a href="#" class="card-title"> Halo </a>
-                    <p class="card-text">Mar 24, 2022</p>
+                    <a href="movie.html" data-click="true" class="card-title"> Halo </a>
+                    <p class="card-text">Mar 25, 2022</p>
                   </div>
                 </card>
               </div>

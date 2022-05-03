@@ -6,6 +6,7 @@ const { API_KEY, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } = configs;
 export async function getPopularFavMovies(page = 1) {
   try {
     const url = `${BASE_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`;
+    
     const res = await fetch(url);
     const data = await res.json();
     return data;

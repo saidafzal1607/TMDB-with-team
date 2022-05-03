@@ -4,10 +4,10 @@ import moment from "../node_modules/moment/dist/moment.js";
 const { API_KEY, SESSION_ID, BASE_URL, DEFAULT_IMG_URL, BASE_IMG_URL } =
   configs;
 
-export async function getMovie(movie_id) {
+export async function getMovie(movie_id,category) {
   try {
-    const url = `${BASE_URL}movie/${movie_id}?api_key=${API_KEY}&language=en-US`;
-    const accountStateUrl = `${BASE_URL}movie/${movie_id}/account_states?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+    const url = `${BASE_URL}${category}/${movie_id}?api_key=${API_KEY}&language=en-US`;
+    const accountStateUrl = `${BASE_URL}${category}/${movie_id}/account_states?api_key=${API_KEY}&session_id=${SESSION_ID}`;
     const res = await fetch(url);
     const resAccountState = await fetch(accountStateUrl);
     const data = await res.json();
@@ -22,9 +22,9 @@ export async function getMovie(movie_id) {
   }
 }
 
-export async function getMovieActors(movie_id) {
+export async function getMovieActors(movie_id,category) {
   try {
-    const url = `${BASE_URL}movie/${movie_id}/credits?api_key=${API_KEY}&language=en-US`;
+    const url = `${BASE_URL}${category}/${movie_id}/credits?api_key=${API_KEY}&language=en-US`;
     const res = await fetch(url);
     const data = await res.json();
     return data;
@@ -33,9 +33,9 @@ export async function getMovieActors(movie_id) {
   }
 }
 
-export async function getMovieRecommendations(movie_id) {
+export async function getMovieRecommendations(movie_id,category) {
   try {
-    const url = `${BASE_URL}movie/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US`;
+    const url = `${BASE_URL}${category}/${movie_id}/recommendations?api_key=${API_KEY}&language=en-US`;
     const res = await fetch(url);
     const data = await res.json();
     return data;
@@ -47,7 +47,7 @@ export async function getMovieRecommendations(movie_id) {
 export async function displayMovie(data) {
   const movieContent = document.querySelector(".main-movie");
   let html = "";
-  const {
+  let {
     title,
     poster_path,
     backdrop_path,
@@ -61,6 +61,11 @@ export async function displayMovie(data) {
     release_date,
     vote_average,
   } = data;
+    let {
+      name,
+      episode_run_time,
+      first_air_date,
+    }= data
   const poster = poster_path
     ? `${BASE_IMG_URL}${poster_path}`
     : DEFAULT_IMG_URL;
@@ -82,13 +87,13 @@ export async function displayMovie(data) {
   <div class="col-12 col-md-8">
   <a href="" class="movie-title my-2">
   <h1>
-  ${title}(${release_date.split("-")[0]})
+  ${title||name}(${release_date||first_air_date.split("-")[0]})
               </h1>
               </a>
               <p class="my-2">
-               ${moment(release_date).format("L")}
+               ${moment(release_date || first_air_date).format("L")}
               ${genres.map((genre) => genre.name).join(", ")}
-              ${Math.floor(runtime / 60)}h ${runtime % 60}min
+              ${Math.floor(runtime || episode_run_time / 60)}h ${runtime || episode_run_time % 60}min
               
               </p>
               <div class="rating mt-5">
@@ -114,7 +119,7 @@ export async function displayMovie(data) {
               </button>
               </li>
               <li  class="Rating">
-              <button href="#" class="ratebtn" title="Rate It">
+              <button  class="ratebtn" title="Rate It">
               <i class="fa-solid fa-star"></i>
               </button>
               <div class="star-rating mt-1 px-1">
@@ -270,10 +275,10 @@ export function displayMovieRecommendations(data) {
 
 // Favorite List
 
-export async function AddFavourite(id, favorite) {
+export async function AddFavourite(id, category,favorite) {
   const FavouriteUrl = `${BASE_URL}account/${id}/favorite?api_key=${API_KEY}&session_id=${SESSION_ID}`;
   const bodyData = {
-    media_type: "movie",
+    media_type: `${category}`,
     media_id: id,
     favorite: !favorite,
   };
@@ -288,10 +293,10 @@ export async function AddFavourite(id, favorite) {
   return data;
 }
 
-export async function AddWatchlist(id, watchlist) {
+export async function AddWatchlist(id,category,watchlist) {
   const addToWatchlistUrl = `${BASE_URL}account/${id}/watchlist?api_key=${API_KEY}&session_id=${SESSION_ID}`;
   const bodyData = {
-    media_type: "movie",
+    media_type: `${category}`,
     media_id: id,
     watchlist: !watchlist,
   };
@@ -306,8 +311,8 @@ export async function AddWatchlist(id, watchlist) {
   return data;
 }
 
-export async function AddRate(id, value) {
-  const addToRatedUrl = `${BASE_URL}movie/${id}/rating?api_key=${API_KEY}&session_id=${SESSION_ID}`;
+export async function AddRate(id, category ,value) {
+  const addToRatedUrl = `${BASE_URL}${category}/${id}/rating?api_key=${API_KEY}&session_id=${SESSION_ID}`;
   const bodyData = {
     value,
   };
